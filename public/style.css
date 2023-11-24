@@ -37,39 +37,80 @@ html {
   position: static;
   justify-content: center;
 }
+/*
+CSS for all the clinician info below here 
+*/
+.ClinicianInfoPage {
+  display: flex;
+  background-color: rgb(228, 232, 160);
+  flex-grow: 2;
+  top: 100px;
+  bottom: 30px;
+  position: static;
+  justify-content: center;
+}
+.info {
+  width: calc(100% - 10px);
+  padding: 8px;
+  margin-bottom: 15px;
+  border: 1px solid #1c87c9;
+  outline: none;
+  flex: 1;
+}
+.clinicianButton {
+  width: calc(100% - 10px);
+  padding: 10px;
+  border: none;
+  background: #1c87c9;
+  font-size: 30px;
+  font-weight: 400;
+  color: #fff;
+  height: 100px;
+}
+/*
+CSS for all the clinician info above here ^^^
+*/
 
 /* 
 CSS for all the TicketForms below here
 */
 .ticketFormPage {
+  display: flex;
   background-color: rgb(0, 255, 0);
-
+  flex-grow: 2;
+  top: 100px;
+  bottom: 30px;
+  position: static;
+  justify-content: center;
   font-family: Roboto, Arial, sans-serif;
   font-size: 14px;
 }
-.main-block {
-  background: #28e1e1;
-}
+
 .formHeader {
   margin: 0 0 20px;
   font-weight: 400;
   color: #000000;
 }
 .ticketForm {
+  display: flex;
+  flex-direction: column;
   padding: 25px;
   margin: 250px;
   box-shadow: 0 2px 5px #f5f5f5;
-  background: #f5f5f5;
+  background-color: #e9c1c1;
+  width: 1000px;
+  height: 400px;
 }
 
 .summary,
 .selectRequestType,
 .description {
-  width: calc(100% - 18px);
+  width: calc(100% - 10px);
   padding: 8px;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
   border: 1px solid #1c87c9;
   outline: none;
+  flex: 1;
 }
 
 .summary::placeholder {
@@ -80,13 +121,14 @@ CSS for all the TicketForms below here
 }
 
 .TicketFormBtn {
-  width: 100%;
+  width: calc(100% - 10px);
   padding: 10px;
   border: none;
   background: #1c87c9;
-  font-size: 16px;
+  font-size: 30px;
   font-weight: 400;
   color: #fff;
+  height: 100px;
 }
 .TicketFormBtn:hover {
   background: #2371a0;
