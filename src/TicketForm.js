@@ -1,6 +1,10 @@
 import React from 'react';
+import HelpContext from './context/HelpContext';
+import { useContext } from 'react';
 
 const TicketForm = () => {
+  const { phoneNumber, setPhoneNumber } = useContext(HelpContext);
+  console.log('here is the phone number' + phoneNumber);
   return (
     <div className="ticketFormPage">
       <form className="ticketForm" action="/">
