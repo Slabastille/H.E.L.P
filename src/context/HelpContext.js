@@ -5,8 +5,13 @@ const HelpContext = createContext();
 
 export const HelpProvider = ({ children }) => {
   const [phoneNumber, setPhoneNumber] = useState('');
+  const [requestType, setRequestType] = useState('');
+  const [summary, setSummary] = useState('');
+  const [description, setDescription] = useState('');
   return (
-    <HelpContext.Provider value={{ phoneNumber, setPhoneNumber }}>
+    <HelpContext.Provider
+      value={{ phoneNumber, setPhoneNumber, requestType, setRequestType }}
+    >
       {children}
     </HelpContext.Provider>
   );
