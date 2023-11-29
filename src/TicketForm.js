@@ -1,6 +1,7 @@
 import React from 'react';
 import HelpContext from './context/HelpContext';
 import { useContext } from 'react';
+import { useHistory } from 'react-router-dom';
 
 const TicketForm = () => {
   const { phoneNumber, setPhoneNumber } = useContext(HelpContext);
@@ -18,13 +19,6 @@ const TicketForm = () => {
             placeholder="Summary"
           />
 
-          <select className="selectRequestType">
-            {/* Will need an onchange here to change the selector color later */}
-            <option> Choose a Request Type</option>
-            <option>Support Request</option>
-            <option>Supply Request</option>
-          </select>
-
           <div>
             <textarea
               className="description"
@@ -35,7 +29,7 @@ const TicketForm = () => {
         </div>
 
         <button className="TicketFormBtn" type="submit" href="/">
-          Submit
+          Next
         </button>
       </form>
     </div>

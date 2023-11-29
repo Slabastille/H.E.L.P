@@ -136,3 +136,7 @@ CSS for all the TicketForms below here
 /* 
 CSS for all the TicketForms above here
 */
+
+#requestError {
+  color: red;
+}
