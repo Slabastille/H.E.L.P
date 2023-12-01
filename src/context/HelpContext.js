@@ -10,7 +10,16 @@ export const HelpProvider = ({ children }) => {
   const [description, setDescription] = useState('');
   return (
     <HelpContext.Provider
-      value={{ phoneNumber, setPhoneNumber, requestType, setRequestType }}
+      value={{
+        phoneNumber,
+        setPhoneNumber,
+        requestType,
+        setRequestType,
+        summary,
+        setSummary,
+        description,
+        setDescription,
+      }}
     >
       {children}
     </HelpContext.Provider>

@@ -24,13 +24,13 @@ const SupplyForm = () => {
             ></textarea>
           </div>
 
-          <select multiple size="6">
-            <option value="American">American flamingo</option>{' '}
-            <option value="Andean">Andean flamingo</option>{' '}
-            <option value="Chilean">Chilean flamingo</option>{' '}
-            <option value="Greater">Greater flamingo</option>{' '}
-            <option value="James's">James's flamingo</option>{' '}
-            <option value="Lesser">Lesser flamingo</option>{' '}
+          <select multiple size="6" className="selectRequestType">
+            <option value="American">Lightning to USB-A</option>{' '}
+            <option value="Andean">Lightning to USB-C</option>{' '}
+            <option value="Chilean">Car Charger</option>{' '}
+            <option value="Greater">Wall Charger</option>{' '}
+            <option value="James's">iPad Case/Keyboard</option>{' '}
+            <option value="Lesser">iPad Only</option>{' '}
           </select>
         </div>
 
