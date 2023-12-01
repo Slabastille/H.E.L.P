@@ -14,6 +14,7 @@ Web App built to help the Mobile Support team
   - Email
 - See the preview with all the ticket info before creating
 
+
 # Bonus Features
 - Create a ticket with the user's name
 - Create a ticket with the user's email
@@ -21,6 +22,7 @@ Web App built to help the Mobile Support team
 - Create an AR ticket for orders
 - Link tickets
 - Create tickets that automatically link to a previous ticket
+- Show clinicians status before creating ticket
 
 
 
