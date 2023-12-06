@@ -1,5 +1,6 @@
 # H.E.L.P
-# Highly Engineered Platform (Needs work)
+# Highly Engineered Limitless Platform
+# Official Name will be the "Mobile Support App"
 
 Web App built to help the Mobile Support team
 # Basic Features (MVP)
@@ -22,7 +23,7 @@ Web App built to help the Mobile Support team
 - Create an AR ticket for orders
 - Link tickets
 - Create tickets that automatically link to a previous ticket
-- Show clinicians status before creating ticket
+- Show clinician's status before creating the ticket
 
 
 
