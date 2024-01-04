@@ -14,11 +14,11 @@ app.post('/createJiraIssue', async (req, res) => {
   let data = JSON.stringify({
     fields: {
       project: {
-        key: 'MS',
+        key: 'TI',
       },
       summary: req.body.summary,
       issuetype: {
-        name: 'Support Request',
+        name: 'Service Request',
       },
       description: req.body.description,
     },
@@ -30,7 +30,7 @@ app.post('/createJiraIssue', async (req, res) => {
     url: 'https://jira.signifyhealth.com/rest/api/2/issue/',
     headers: {
       'Content-Type': 'application/json',
-      Authorization: 'Bearer OTk1MDA0ODY1NDMxOpuOAUgiGKyA7hF05i9twFp2hzqq',
+      Authorization: 'Bearer ODA3NDc3NTQyMjg1OmxrUbya5gfF5baBvg7uMlXqBYwh',
     },
     data: data,
   };
