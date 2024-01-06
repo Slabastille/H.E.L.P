@@ -9,9 +9,10 @@ const ClinicianInfo = () => {
   const { requestType, setRequestType } = useContext(HelpContext);
   const history = useHistory();
 
+  //Automatically updates the phone number in state
   const handleChange = (event) => {
-    // console.log('current phone number');
-    // console.log(event.target.value);
+    console.log('current phone number');
+    console.log(event.target.value);
     setPhoneNumber(event.target.value);
   };
 

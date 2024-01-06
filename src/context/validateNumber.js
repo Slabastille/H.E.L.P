@@ -1,3 +1,5 @@
+//This function is used to validate phone numbers
+
 function Validate(M) {
   // Length of given String
   let len = M.length;
