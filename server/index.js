@@ -30,7 +30,7 @@ app.post('/createJiraIssue', async (req, res) => {
     url: 'https://jira.signifyhealth.com/rest/api/2/issue/',
     headers: {
       'Content-Type': 'application/json',
-      Authorization: 'Bearer ODA3NDc3NTQyMjg1OmxrUbya5gfF5baBvg7uMlXqBYwh',
+      Authorization: 'Bearer NTY2MjYxOTcwNDc2OvY2qdD5dLkN4DmI66rvUVBzO0s9',
     },
     data: data,
   };

@@ -5,19 +5,19 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { HelpProvider } from './context/HelpContext';
 import SupplyForm from './SupplyForm';
+import Header from './Components/Header';
+import Landing from './Landing';
 
 const App = () => {
   return (
     <HelpProvider>
+      <div>
+        <Header />
+      </div>
       <Router>
         <div id="container">
-          <div className="header">
-            <Link to="/">
-              <h1>Mobile Support App *fix header later</h1>
-            </Link>
-          </div>
           <Switch>
-            <Route exact path="/" component={ClinicianInfo} />
+            <Route exact path="/" component={Landing} />
             <Route exact path="/clinicianInfo" component={ClinicianInfo} />
             <Route exact path="/ticketForm" component={TicketForm} />
             <Route exact path="/supplyForm" component={SupplyForm} />
