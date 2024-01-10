@@ -96,7 +96,7 @@ html {
 }
 .landingContainer {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: space-around;
   padding: 20px;
   background-color: yellow;
@@ -105,7 +105,7 @@ html {
 .landingLeft {
   display: flex;
   background-color: #1c87c9;
-  width: 49%;
+  width: 100%;
   flex-direction: column;
   height: 100%;
   border-radius: 3px;
@@ -239,6 +239,23 @@ CSS for all the TicketForms below here
 CSS for all the TicketForms above here
 */
 
+/* 
+CSS for all the AssignedToMe form below here
+*/
+.assignedHeader,
+.assignedRow {
+  display: flex;
+}
+.assignedRow {
+  flex: 1;
+}
+.col {
+  padding: 5px;
+}
+/* 
+CSS for all the AssignedToMe form above here
+*/
+
 #requestError {
   color: red;
 }
@@ -249,4 +266,13 @@ CSS for all the TicketForms above here
   padding: 10px;
   border-radius: 10px;
   font-size: 20px;
+}
+table {
+  border-collapse: separate;
+  border-spacing: 3px;
+}
+
+td,
+th {
+  padding: 5px;
 }
