@@ -5,7 +5,7 @@ import { BrowserRouter } from 'react-router-dom';
 
 render(
   <BrowserRouter>
-    <App />,
+    <App />
   </BrowserRouter>,
-  document.querySelector('#root')
+  document.body
 );
