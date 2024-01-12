@@ -3,8 +3,8 @@ const axios = require('axios');
 const app = express();
 const port = 3001;
 const cors = require('cors');
-require('dotenv').config();
-const authToken = process.env.AUTH_TOKEN;
+// const authToken = process.env.AUTH_TOKEN
+const authToken = 'MzU5NTgxNTg5NjUzOh/YB7q/JK7v5/1Fkt4xl/ohpT0l';
 
 app.use(cors());
 app.use(express.json());
@@ -49,11 +49,11 @@ app.post('/createJiraIssue', async (req, res) => {
   }
 });
 
-app.post('/findAssigned', async (req, res) => {
+app.post('/findTickets', async (req, res) => {
   let data = JSON.stringify({
-    jql: "assignee = 'slabastille@signifyhealth.com' AND status not in (Canceled, Closed, Done, Resolved, 'Task Complete', 'Task Verified (Accepted)')",
+    jql: req.body.jql,
     startAt: 0,
-    maxResults: 3,
+    maxResults: 10,
 
     fields: ['key', 'summary', 'reporter', 'status', 'created', 'updated'],
   });
@@ -71,8 +71,9 @@ app.post('/findAssigned', async (req, res) => {
 
   try {
     console.log('Checking now......');
-    console.log(config);
-    console.log('after config');
+    console.log('Here is the token: ' + authToken);
+    //console.log(config);
+    //console.log('after config');
     const response = await axios.request(config);
 
     console.log(response.data.issues);
@@ -81,5 +82,3 @@ app.post('/findAssigned', async (req, res) => {
     console.log(error);
   }
 });
-
-//OTk1MDA0ODY1NDMxOpuOAUgiGKyA7hF05i9twFp2hzqq

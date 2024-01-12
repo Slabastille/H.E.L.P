@@ -1,5 +1,6 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
+//const webpack = require('webpack');
 
 module.exports = {
   entry: './src/index.js',
@@ -34,5 +35,6 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: path.join(__dirname, 'public', 'index.html'),
     }),
+    //new webpack.EnvironmentPlugin(['AUTH_TOKEN']),
   ],
 };
