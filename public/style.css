@@ -3,60 +3,40 @@ html {
   height: 100%;
   margin: 0;
   padding: 0;
-  background: linear-gradient(-45deg, #0052529f, #add4019f);
 }
-
-
+#container {
+  color: #000000;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: violet;
+}
 .header {
-  background-color: #ffffff; /* Set the header background color to white */
-  border-bottom: 1px solid #e7e7e7; /* Add a thin black line at the bottom */
+  background-color: rgb(232, 160, 160);
   height: 100px;
 }
 
-
-/* Styling for form elements */
-.container {
-flex: 1;
+.footer {
   display: flex;
-  align-items: center;
+  position: relative;
+  background-color: rgb(181, 181, 239);
+  height: 30px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+.tempBody {
+  display: flex;
+  background-color: rgb(228, 232, 160);
+  flex-grow: 2;
+  top: 100px;
+  bottom: 30px;
+  position: static;
   justify-content: center;
-  margin-top: 150px;
 }
-
-.hovering-form {
-  background-color: #ffffff;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 1);
-  padding: 20px;
-  border-radius: 10px;
-  text-align: center; /* Center content in the form */
-  font-size: 150%;
-  width: 90%;
-  max-width: 500px;
-  transition: transform 0.8s ease;
-}
-
-.hovering-form:hover {
-  transform: scale(1.1);
-}
-
-form {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-label {
-  margin-bottom: 8px;
-}
-
-input,
-textarea,
-button {
-  margin-bottom: 20px;
-}
-/* End of styling for form elements */
-
-
 /*
 CSS for all the clinician info below here 
 */
