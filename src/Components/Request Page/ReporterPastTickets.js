@@ -30,7 +30,7 @@ const ReporterPastTickets = () => {
 
   const retrieveIssues = async () => {
     //e.preventDefault();
-    const reporter = 'anaula@signifyhealth.com';
+    const reporter = 'ijohnson@signifyhealth.com';
     setLoading(true);
     try {
       const response = await axios.post('http://localhost:3001/findTickets', {

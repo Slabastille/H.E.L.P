@@ -4,7 +4,7 @@ const app = express();
 const port = 3001;
 const cors = require('cors');
 // const authToken = process.env.AUTH_TOKEN
-const authToken = 'INSERT_TOKEN_HERE';
+const authToken = '';
 
 app.use(cors());
 app.use(express.json());

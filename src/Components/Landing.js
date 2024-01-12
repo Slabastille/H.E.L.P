@@ -5,15 +5,15 @@ import ReporterPastTickets from './Request Page/ReporterPastTickets';
 const Landing = () => {
   return (
     <div className="landing">
-      {/* <div className="assignedToMe">
+      <div className="assignedToMe">
         <h1>Assigned to Me</h1>
         <div className="landingFirst">
           <AssignedMs />
         </div>
       </div>
 
-      <div className="landingSecond">Box2</div> */}
-      <ReporterPastTickets />
+      <div className="landingSecond">Box2</div>
+      {/* <ReporterPastTickets /> */}
     </div>
   );
 };
