@@ -8,6 +8,8 @@ export const HelpProvider = ({ children }) => {
   const [requestType, setRequestType] = useState('');
   const [summary, setSummary] = useState('');
   const [description, setDescription] = useState('');
+  const [modal, setModal] = useState(false);
+  const [assignedIssues, setAssignedIssues] = useState([]);
   return (
     <HelpContext.Provider
       value={{
@@ -19,6 +21,10 @@ export const HelpProvider = ({ children }) => {
         setSummary,
         description,
         setDescription,
+        modal,
+        setModal,
+        assignedIssues,
+        setAssignedIssues,
       }}
     >
       {children}
