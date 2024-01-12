@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import { HelpProvider } from './context/HelpContext';
 import SupplyForm from './SupplyForm';
 import Header from './Components/Header';
-import Landing from './Landing';
+import Landing from './Components/Landing';
 
 const App = () => {
   return (

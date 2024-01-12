@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import React, { useState, useEffect, useContext } from 'react';
-import HelpContext from './context/HelpContext';
+import HelpContext from '../../context/HelpContext';
 
 const createTableRows = (arr) => {
   return arr.map((value) => (
@@ -24,15 +24,18 @@ const createTableRows = (arr) => {
   ));
 };
 
-const AssignedMs = () => {
+const ReporterPastTickets = () => {
   const [loading, setLoading] = useState(false);
   const { assignedIssues, setAssignedIssues } = useContext(HelpContext);
 
   const retrieveIssues = async () => {
     //e.preventDefault();
+    const reporter = 'anaula@signifyhealth.com';
     setLoading(true);
     try {
-      const response = await axios.post('http://localhost:3001/findAssigned');
+      const response = await axios.post('http://localhost:3001/findTickets', {
+        jql: `reporter = '${reporter}' AND project = 'Desktop Support' AND status not in (Canceled, Closed, Done, Resolved, 'Task Complete', 'Task Verified (Accepted)')`,
+      });
       setAssignedIssues(response.data);
     } catch (error) {
       console.error('Error retrieving tickets:', error);
@@ -74,4 +77,4 @@ const AssignedMs = () => {
   );
 };
 
-export default AssignedMs;
+export default ReporterPastTickets;
