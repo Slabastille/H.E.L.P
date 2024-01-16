@@ -23,11 +23,13 @@ const Header = () => {
             alt="image"
           />
         </Link>
-        <h1 className="appTitle">IT Support App</h1>
+        <div className="appTitle">
+          <h1>IT Support App</h1>
+        </div>
       </div>
 
       <div className="headerRight">
-        <div className="headerElement">
+        <div className="headerButtonContainer">
           <button onClick={toggleModal} className="headerButton">
             Create a Ticket
           </button>
@@ -45,7 +47,8 @@ const Header = () => {
             </div>
           )}
         </div>
-        <div className="headerElement">
+
+        <div className="headerLoginLogoContainer">
           <img
             className="loginLogo"
             src="https://cdn-icons-png.flaticon.com/512/6681/6681204.png"
@@ -58,3 +61,13 @@ const Header = () => {
 };
 
 export default Header;
+
+/*
+
+
+
+
+
+
+
+*/

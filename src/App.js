@@ -7,7 +7,7 @@ import { HelpProvider } from './context/HelpContext';
 import SupplyForm from './SupplyForm';
 import Header from './Components/Header';
 import Landing from './Components/Landing';
-
+import MSRequestPage from './Components/Request Page/MobileSupport/serviceRequest';
 const App = () => {
   return (
     <HelpProvider>
@@ -17,7 +17,7 @@ const App = () => {
       <Router>
         <div id="container">
           <Switch>
-            <Route exact path="/" component={Landing} />
+            <Route exact path="/" component={MSRequestPage} />
             <Route exact path="/clinicianInfo" component={ClinicianInfo} />
             <Route exact path="/ticketForm" component={TicketForm} />
             <Route exact path="/supplyForm" component={SupplyForm} />
