@@ -7,7 +7,7 @@ const TicketForm = () => {
   const history = useHistory();
   const { phoneNumber, setPhoneNumber } = useContext(HelpContext);
   const { summary, setSummary } = useContext(HelpContext);
-  const { requestType } = useContext(HelpContext);
+  const { requestType, setRequestType } = useContext(HelpContext);
   const { description, setDescription } = useContext(HelpContext);
 
   const handleSubmit = async (e) => {
@@ -28,7 +28,10 @@ const TicketForm = () => {
     }
   };
 
-  //Addedd ^^^^^^^
+  const selectChange = (event) => {
+    console.log(event.target.value);
+    setRequestType(event.target.value);
+  };
 
   const summaryChange = (event) => {
     setSummary(event.target.value);
@@ -39,20 +42,25 @@ const TicketForm = () => {
 
   return (
     <div className="ticketFormPage">
+      <div className="formHeader">
+        <h1>Enter Ticket Information</h1>
+      </div>
       <form className="ticketForm" action="/">
-        <h1 className="formHeader">Enter Ticket Information</h1>
-
         <div className="formBody">
-          <input
-            className="summary"
-            type="text"
-            name="name"
-            value={summary}
-            placeholder="Summary"
-            onChange={summaryChange}
-          />
+          <div>
+            <h3>Summary</h3>
+            <input
+              className="summary"
+              type="text"
+              name="name"
+              value={summary}
+              placeholder="Summary"
+              onChange={summaryChange}
+            />
+          </div>
 
           <div>
+            <h3>Description</h3>
             <textarea
               className="description"
               placeholder="Description"
@@ -60,6 +68,18 @@ const TicketForm = () => {
               rows="6"
               onChange={descriptionChange}
             ></textarea>
+          </div>
+          <div>
+            <h3>Request Type</h3>
+            <select
+              className="selectRequestType"
+              onChange={selectChange}
+              type="select"
+            >
+              <option>Choose a Request Type</option>
+              <option value={'Support Request'}>Support Request</option>
+              <option value={'Supply Request'}>Supply Request</option>
+            </select>
           </div>
         </div>
 

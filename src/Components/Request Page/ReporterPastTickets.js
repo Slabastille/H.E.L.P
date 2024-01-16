@@ -30,7 +30,7 @@ const ReporterPastTickets = () => {
 
   const retrieveIssues = async () => {
     //e.preventDefault();
-    const reporter = 'ijohnson@signifyhealth.com';
+    const reporter = 'careconsult@signifyhealth.com';
     setLoading(true);
     try {
       const response = await axios.post('http://localhost:3001/findTickets', {
@@ -58,21 +58,27 @@ const ReporterPastTickets = () => {
     return <div>Loading...</div>;
   }
   return (
-    <div>
-      <table>
-        <thead>
-          <tr>
-            <th>Key</th>
-            <th>Summary</th>
-            <th>Reporter</th>
-            <th>Status</th>
-            <th>Created</th>
-            <th>Updated</th>
-          </tr>
-        </thead>
+    <div className="reporter-pastTickets">
+      <div className="request-bottom-right-header">
+        <h1>Reporter Past Tickets</h1>
+      </div>
 
-        <tbody>{createTableRows(assignedIssues)}</tbody>
-      </table>
+      <div className="past-ticket-table">
+        <table>
+          <thead>
+            <tr>
+              <th>Key</th>
+              <th>Summary</th>
+              <th>Reporter</th>
+              <th>Status</th>
+              <th>Created</th>
+              <th>Updated</th>
+            </tr>
+          </thead>
+
+          <tbody>{createTableRows(assignedIssues)}</tbody>
+        </table>
+      </div>
     </div>
   );
 };

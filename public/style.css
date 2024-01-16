@@ -1,58 +1,71 @@
 * {
   box-sizing: border-box;
 }
+
 body,
 #root {
+  /* background: linear-gradient(-45deg, #0052529f, #add4019f); */
   height: 100%;
   margin: 0;
   padding: 0;
   overflow: hidden;
+  position: static;
 }
 
 /* Header information below */
 .headerContainer {
+  width: 100%;
+  height: 7%;
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  max-width: 100%;
-  height: 80px;
+  flex: 1;
   color: rgb(100, 89, 245);
-  position: relative;
   box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.08), 0 2px 4px 0 rgba(0, 0, 0, 0.12);
+  /* background-color: white; */
+}
+.headerLeft {
+  height: 100%;
+  width: 50%;
+  display: flex;
+  flex: 1;
+  flex-direction: row;
+  text-decoration: none;
 }
 .headerLogo {
-  height: 60px;
+  height: 100%;
   padding-left: 50px;
   padding-right: 40px;
 }
 .appTitle {
-  text-decoration: none;
-}
-.headerLeft {
-  display: flex;
-  align-items: center;
+  height: 100%;
   text-decoration: none;
 }
 .headerRight {
-  padding-right: 50px;
+  height: 100%;
+  width: 50%;
   display: flex;
   align-items: center;
+  justify-content: flex-end;
 }
-.headerElement {
-  padding-left: 20px;
+.headerButtonContainer {
+  padding-top: 10px;
+  height: 100%;
+}
+.headerLoginLogoContainer {
+  height: 100%;
   padding-right: 20px;
-  text-decoration: none;
+  padding-left: 20px;
 }
+
 .headerButton {
+  height: 80%;
   color: white;
   background-color: rgb(100, 89, 245);
   padding: 10px;
   border-radius: 10px;
   font-size: 20px;
-  position: relative;
 }
 .loginLogo {
-  height: 60px;
+  height: 100%;
 }
 .modal,
 .overlay {
@@ -89,20 +102,16 @@ body,
 
 /* Body information below */
 #container {
-  height: calc(100vh - 80px); /*80 is the height of the header*/
-  border-color: pink;
-  border-style: solid;
-  border-width: thick;
+  height: 93%;
+  max-width: 100%;
 }
 /* Body information above */
 
 /* Landing page information below */
 .landing {
-  max-width: 100%;
   height: 100%;
   max-height: max-content;
   padding: 30px;
-  background-color: red;
   justify-content: center;
   align-items: center;
   display: flex;
@@ -111,7 +120,6 @@ body,
 .assignedToMe {
   display: flex;
   align-items: center;
-  background-color: yellow;
   border-radius: 3px;
   height: 50%;
   padding: 20px;
@@ -120,12 +128,10 @@ body,
   flex-direction: column;
 }
 .landingFirst {
-  background-color: #1c87c9;
   width: 100%;
   border-radius: 3px;
 }
 .landingSecond {
-  background-color: green;
   width: 100%;
   border-radius: 3px;
   height: 50%;
@@ -182,31 +188,39 @@ CSS for all the clinician info above here ^^^
 CSS for all the TicketForms below here
 */
 .ticketFormPage {
-  display: flex;
-  background-color: rgb(0, 255, 0);
-  flex-grow: 2;
-  top: 100px;
-  bottom: 30px;
-  position: static;
-  justify-content: center;
   font-family: Roboto, Arial, sans-serif;
   font-size: 14px;
+
+  width: 100%;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid #ccc;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
+  height: 100%;
+  background-color: rosybrown;
+}
+.temp11 {
+  padding: 5px;
 }
 
 .formHeader {
-  margin: 0 0 20px;
+  width: 100%;
+  padding-left: 10px;
   font-weight: 400;
   color: #000000;
+  display: flex;
+  justify-content: flex-start;
 }
 .ticketForm {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   padding: 25px;
-  margin: 250px;
-  box-shadow: 0 2px 5px #f5f5f5;
-  background-color: #e9c1c1;
-  width: 1000px;
-  height: 400px;
+  align-items: center;
+  height: 100%;
+  width: 100%;
 }
 
 .summary,
@@ -281,3 +295,158 @@ td,
 th {
   padding: 5px;
 }
+
+/* Styling for form elements */
+.container {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 150px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+label {
+  margin-bottom: 8px;
+}
+
+input,
+textarea,
+button {
+  margin-bottom: 20px;
+}
+/* End of styling for form elements */
+
+/*Styling for the Request page below*/
+.request-container {
+  /*Style for left and right box container*/
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  height: 100%;
+  max-height: max-content;
+  padding: 15px;
+  max-width: 100%;
+  /* border: 10px solid black; 1px wide, solid style, black color */
+}
+
+.request-left-box {
+  width: 50%; /* Set the width to half of the viewport width */
+  height: 100%;
+  min-width: 50%;
+  min-height: 100%;
+  max-width: 50%;
+  max-height: 100%;
+  position: static;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid rgb(0, 0, 0); /* 1px wide, solid style, black color */
+  position: static;
+  overflow: hidden;
+}
+.request-left-box-container {
+  padding: 5px;
+  min-height: 100%;
+  max-height: 100%;
+  position: static;
+  overflow: hidden;
+  border: 1px solid rgb(0, 0, 0); /* 1px wide, solid style, black color */
+}
+
+.request-right-box {
+  width: 50%; /* Set the width to half of the viewport width */
+  height: 100%;
+  min-width: 50%;
+  min-height: 100%;
+  max-width: 50%;
+  max-height: 100%;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid rgb(0, 0, 0); /* 1px wide, solid style, black color */
+  position: static;
+  overflow: hidden;
+}
+.request-top-right-box {
+  padding: 5px;
+  flex: 1;
+  min-height: 20%;
+  max-height: 20%;
+  border: 1px solid rgb(0, 0, 0); /* 1px wide, solid style, black color */
+  position: static;
+  overflow: hidden;
+}
+.request-bottom-right-box {
+  padding: 5px;
+  flex: 4;
+  display: flex;
+  flex-direction: column;
+  max-height: 80%;
+  align-items: center;
+  border: 1px solid rgb(0, 0, 0); /* 1px wide, solid style, black color */
+  position: static;
+  overflow: hidden;
+}
+.request-bottom-right-header {
+}
+.reporter-pastTickets {
+  width: 100%;
+  height: 100%;
+  border: 1px solid #ccc;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
+  padding: 5px;
+  display: flex;
+  flex-direction: column;
+}
+.request-bottom-right-header {
+  height: 10%;
+}
+.past-ticket-table {
+  height: 90%;
+  width: 100%;
+  table-layout: fixed;
+  overflow: auto;
+}
+
+.clinicianStatus {
+  width: 100%;
+  height: 100%;
+  padding: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid #ccc;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
+}
+.clinicianStatus > button {
+  padding: 10px;
+  border-radius: 10px;
+  font-size: 12px;
+  width: 18%;
+  height: 30%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.whiteLetter {
+  background-color: green;
+  color: white;
+}
+.blackLetter {
+  background-color: orange;
+  color: black;
+}
+.black {
+  color: whitesmoke;
+  background-color: black;
+}
+.greenLetter {
+  background-color: white;
+  color: green;
+}
+/*Request page styling above*/

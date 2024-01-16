@@ -53,7 +53,7 @@ app.post('/findTickets', async (req, res) => {
   let data = JSON.stringify({
     jql: req.body.jql,
     startAt: 0,
-    maxResults: 10,
+    maxResults: 20,
 
     fields: ['key', 'summary', 'reporter', 'status', 'created', 'updated'],
   });
