@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import HelpContext from '../../../context/HelpContext';
+import HelpContext from '../../context/HelpContext';
 
 const whiteLetter = ['Approved', 'Pending Training'];
 const greenLetter = [
