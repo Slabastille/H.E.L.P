@@ -1,7 +1,7 @@
 import React from 'react';
 import ReporterPastTickets from '../ReporterPastTickets';
-import ClinicianStatus from './ClinicianStatus';
-import TicketForm from '../../../TicketForm';
+import ClinicianStatus from '../ClinicianStatus';
+import TicketForm from '../../CreateIssue Page/TicketForm';
 
 const MSRequestPage = () => (
   <div className="request-container">

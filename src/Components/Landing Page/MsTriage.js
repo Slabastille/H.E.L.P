@@ -1,7 +1,6 @@
-import { Link } from 'react-router-dom';
 import axios from 'axios';
 import React, { useState, useEffect, useContext } from 'react';
-import HelpContext from '../context/HelpContext';
+import HelpContext from '../../context/HelpContext';
 
 const createTableRows = (arr) => {
   return arr.map((value) => (
@@ -17,25 +16,25 @@ const createTableRows = (arr) => {
       </td>
       <td>{value.fields.summary}</td>
       <td>{value.fields.reporter.emailAddress}</td>
-      <td>{value.fields.status.name}</td>
+      {/* <td>{value.fields.status.name}</td>
       <td>{value.fields.created}</td>
-      <td>{value.fields.updated}</td>
+      <td>{value.fields.updated}</td> */}
     </tr>
   ));
 };
 
-const AssignedMs = () => {
+const MsTriage = () => {
   const [loading, setLoading] = useState(false);
-  const { assignedIssues, setAssignedIssues } = useContext(HelpContext);
+  const { msTriage, setMsTriage } = useContext(HelpContext);
 
   const retrieveIssues = async () => {
     //e.preventDefault();
     setLoading(true);
     try {
       const response = await axios.post('http://localhost:3001/findTickets', {
-        jql: "assignee = 'slabastille@signifyhealth.com' AND status not in (Canceled, Closed, Done, Resolved, 'Task Complete', 'Task Verified (Accepted)')",
+        jql: "project = TI AND status in (Open, 'Waiting For Support') AND labels = ServiceDesk AND assignee in (EMPTY) ",
       });
-      setAssignedIssues(response.data);
+      setMsTriage(response.data);
     } catch (error) {
       console.error('Error retrieving tickets:', error);
     } finally {
@@ -50,30 +49,36 @@ const AssignedMs = () => {
     fetchData();
   }, []);
   useEffect(() => {
-    console.log(assignedIssues);
-  }, [assignedIssues]);
+    console.log(msTriage);
+  }, [msTriage]);
 
   if (loading) {
     return <div>Loading...</div>;
   }
   return (
-    <div>
-      <table>
-        <thead>
-          <tr>
-            <th>Key</th>
-            <th>Summary</th>
-            <th>Reporter</th>
-            <th>Status</th>
-            <th>Created</th>
-            <th>Updated</th>
-          </tr>
-        </thead>
+    <div className="reporter-pastTickets">
+      <div className="request-bottom-right-header">
+        <h1>Reporter Past Tickets</h1>
+      </div>
 
-        <tbody>{createTableRows(assignedIssues)}</tbody>
-      </table>
+      <div className="past-ticket-table">
+        <table>
+          <thead>
+            <tr>
+              <th>Key</th>
+              <th>Summary</th>
+              <th>Reporter</th>
+              {/* <th>Status</th>
+              <th>Created</th>
+              <th>Updated</th> */}
+            </tr>
+          </thead>
+
+          <tbody>{createTableRows(msTriage)}</tbody>
+        </table>
+      </div>
     </div>
   );
 };
 
-export default AssignedMs;
+export default MsTriage;

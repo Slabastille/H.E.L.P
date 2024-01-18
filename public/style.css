@@ -15,57 +15,70 @@ body,
 /* Header information below */
 .headerContainer {
   width: 100%;
-  height: 7%;
+  height: 9%;
   display: flex;
+  flex-direction: column;
   flex: 1;
   color: rgb(100, 89, 245);
   box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.08), 0 2px 4px 0 rgba(0, 0, 0, 0.12);
-  /* background-color: white; */
 }
-.headerLeft {
+.headerTop {
+  height: 65%;
+  width: 100%;
+  display: flex;
+  flex: 1;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: solid 1px black;
+  box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.08), 0 2px 4px 0 rgba(0, 0, 0, 0.12);
+}
+
+.headerTopLeft {
   height: 100%;
   width: 50%;
   display: flex;
   flex: 1;
   flex-direction: row;
   text-decoration: none;
+  align-items: center;
 }
 .headerLogo {
-  height: 100%;
+  height: 80%;
   padding-left: 50px;
   padding-right: 40px;
 }
 .appTitle {
   height: 100%;
   text-decoration: none;
+  font-size: x-large;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
 }
-.headerRight {
+.headerTopRight {
   height: 100%;
   width: 50%;
   display: flex;
-  align-items: center;
+  flex: 1;
+  flex-direction: row;
   justify-content: flex-end;
-}
-.headerButtonContainer {
-  padding-top: 10px;
-  height: 100%;
-}
-.headerLoginLogoContainer {
-  height: 100%;
-  padding-right: 20px;
-  padding-left: 20px;
+  align-items: center;
 }
 
 .headerButton {
   height: 80%;
-  color: white;
+  color: #fff;
   background-color: rgb(100, 89, 245);
-  padding: 10px;
+  padding: 15px;
   border-radius: 10px;
   font-size: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .loginLogo {
-  height: 100%;
+  height: 80%;
 }
 .modal,
 .overlay {
@@ -98,43 +111,105 @@ body,
   right: 10px;
   padding: 5px 7px;
 }
+.headerBottom {
+  height: 35%;
+  width: 100%;
+  display: flex;
+  flex: 1;
+}
+.headerBottomContainer {
+  display: flex;
+  width: 30%;
+  justify-content: space-between;
+  align-content: flex-end;
+}
+.headerBottomContainer > div {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+.nav-link {
+  text-decoration: none;
+  color: inherit;
+}
 /* Header information above */
 
 /* Body information below */
 #container {
-  height: 93%;
+  height: 91%;
   max-width: 100%;
+  background-color: rosybrown;
 }
 /* Body information above */
 
 /* Landing page information below */
-.landing {
+.landingContainer {
   height: 100%;
-  max-height: max-content;
-  padding: 30px;
+  width: 100%;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+}
+.landingTopSection {
+  width: 100%;
+  height: 24%;
+  padding: 10px;
+  display: flex;
+}
+.landingStatsContainer {
+  width: 100%;
+  height: 100%;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
+}
+.landingMiddleSection {
+  width: 100%;
+  height: 38%;
+  padding: 10px;
+  display: flex;
+}
+.landingAssignedToMeContainer {
+  width: 100%;
+  height: 100%;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
+  padding: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.landingBottomSection {
+  width: 100%;
+  height: 38%;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+}
+.landingBottomLeftSection {
+  width: 49.75%;
+  height: 100%;
+  padding: 10px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
+  display: flex;
+}
+.landingBottomRightSection {
+  width: 49.75%;
+  height: 100%;
+  padding: 10px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
+  display: flex;
+}
+
+.landingStats {
+  display: flex;
   justify-content: center;
   align-items: center;
-  display: flex;
-  flex-direction: column;
-}
-.assignedToMe {
-  display: flex;
-  align-items: center;
-  border-radius: 3px;
-  height: 50%;
-  padding: 20px;
-  max-width: 100%;
   width: 100%;
-  flex-direction: column;
+  height: 100%;
+  /* background-color: rgb(225, 99, 56); */
 }
-.landingFirst {
-  width: 100%;
-  border-radius: 3px;
-}
-.landingSecond {
-  width: 100%;
-  border-radius: 3px;
-  height: 50%;
+.landingStatsChart {
+  height: 100px;
+  background-color: pink;
 }
 
 /* Landing page information above */
@@ -199,7 +274,6 @@ CSS for all the TicketForms below here
   border: 1px solid #ccc;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
   height: 100%;
-  background-color: rosybrown;
 }
 .temp11 {
   padding: 5px;
@@ -216,22 +290,30 @@ CSS for all the TicketForms below here
 .ticketForm {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   padding: 25px;
-  align-items: center;
   height: 100%;
   width: 100%;
+  align-items: flex-start;
 }
-
+.ticketForm > div {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 5px;
+}
+.formBody {
+  background-color: #1c87c9;
+}
 .summary,
 .selectRequestType,
 .description {
-  width: calc(100% - 10px);
+  width: 100%;
   padding: 8px;
   margin-bottom: 15px;
   border: 1px solid #1c87c9;
   outline: none;
   flex: 1;
+  border-radius: 5px;
 }
 
 .summary::placeholder {
@@ -242,14 +324,18 @@ CSS for all the TicketForms below here
 }
 
 .TicketFormBtn {
-  width: calc(100% - 10px);
+  width: 30%;
   padding: 10px;
   border: none;
   background: #1c87c9;
   font-size: 30px;
   font-weight: 400;
   color: #fff;
-  height: 100px;
+  height: 5%;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .TicketFormBtn:hover {
   background: #2371a0;
@@ -346,17 +432,18 @@ button {
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  border: 1px solid rgb(0, 0, 0); /* 1px wide, solid style, black color */
+  /* border: 1px solid rgb(0, 0, 0); 1px wide, solid style, black color */
   position: static;
   overflow: hidden;
 }
 .request-left-box-container {
   padding: 5px;
+  width: 100%;
   min-height: 100%;
   max-height: 100%;
   position: static;
   overflow: hidden;
-  border: 1px solid rgb(0, 0, 0); /* 1px wide, solid style, black color */
+  /* border: 1px solid rgb(0, 0, 0); 1px wide, solid style, black color */
 }
 
 .request-right-box {
@@ -368,7 +455,7 @@ button {
   max-height: 100%;
   display: flex;
   flex-direction: column;
-  border: 1px solid rgb(0, 0, 0); /* 1px wide, solid style, black color */
+  /* border: 1px solid rgb(0, 0, 0); 1px wide, solid style, black color */
   position: static;
   overflow: hidden;
 }
@@ -377,7 +464,7 @@ button {
   flex: 1;
   min-height: 20%;
   max-height: 20%;
-  border: 1px solid rgb(0, 0, 0); /* 1px wide, solid style, black color */
+  /* border: 1px solid rgb(0, 0, 0); 1px wide, solid style, black color */
   position: static;
   overflow: hidden;
 }
@@ -388,7 +475,7 @@ button {
   flex-direction: column;
   max-height: 80%;
   align-items: center;
-  border: 1px solid rgb(0, 0, 0); /* 1px wide, solid style, black color */
+  /* border: 1px solid rgb(0, 0, 0); 1px wide, solid style, black color */
   position: static;
   overflow: hidden;
 }
@@ -450,3 +537,15 @@ button {
   color: green;
 }
 /*Request page styling above*/
+
+/*Assigned to me page styling below*/
+.assignedToMeContainer {
+  background-color: lightblue;
+  height: 100%;
+  width: 100%;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+/*Assigned to me page styling above*/

@@ -10,6 +10,9 @@ export const HelpProvider = ({ children }) => {
   const [description, setDescription] = useState('');
   const [modal, setModal] = useState(false);
   const [assignedIssues, setAssignedIssues] = useState([]);
+  const [msTriage, setMsTriage] = useState([]);
+  const [dstTriage, setDstTriage] = useState([]);
+
   const [clinicianStatus, setClinicianStatus] = useState('Pending Review');
   return (
     <HelpContext.Provider
@@ -28,6 +31,10 @@ export const HelpProvider = ({ children }) => {
         setAssignedIssues,
         clinicianStatus,
         setClinicianStatus,
+        msTriage,
+        setMsTriage,
+        dstTriage,
+        setDstTriage,
       }}
     >
       {children}

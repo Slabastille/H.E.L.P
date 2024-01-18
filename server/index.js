@@ -1,16 +1,22 @@
 const express = require('express');
 const axios = require('axios');
+const path = require('path');
 const app = express();
 const port = 3001;
 const cors = require('cors');
 // const authToken = process.env.AUTH_TOKEN
 const authToken = '';
+// const history = require('connect-history-api-fallback');
+// app.use(history());
 
 app.use(cors());
 app.use(express.json());
-app.listen(port, () => {
-  console.log(`Server is running on http://localhost:${port}`);
-});
+
+app.use(express.static(path.join(__dirname, '../public')));
+
+app.get('/', (req, res) =>
+  res.sendFile(path.join(__dirname, '../public/index.html'))
+);
 
 app.post('/createJiraIssue', async (req, res) => {
   let data = JSON.stringify({
@@ -81,4 +87,11 @@ app.post('/findTickets', async (req, res) => {
   } catch (error) {
     console.log(error);
   }
+});
+app.get('*', (req, res) =>
+  res.sendFile(path.join(__dirname, '../dist/index.html'))
+);
+
+app.listen(port, () => {
+  console.log(`Server is running on http://localhost:${port}`);
 });

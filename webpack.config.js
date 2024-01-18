@@ -8,6 +8,7 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, './dist'),
     filename: 'index_bundle.js',
+    publicPath: '/',
   },
   target: 'web',
   devServer: {
@@ -18,6 +19,9 @@ module.exports = {
     open: true,
     hot: true,
     liveReload: true,
+    proxy: {
+      '/': 'http://localhost:3001/',
+    },
   },
   resolve: {
     extensions: ['.js', '.jsx', '.json'],
@@ -28,6 +32,10 @@ module.exports = {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
         use: 'babel-loader',
+      },
+      {
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader'],
       },
     ],
   },

@@ -1,8 +1,8 @@
 import React from 'react';
-import { useHistory } from 'react-router-dom';
-import HelpContext from './context/HelpContext';
+import { useHistory, Link } from 'react-router-dom';
+import HelpContext from '../../context/HelpContext';
 import { useState, useContext, useEffect } from 'react';
-import Validate from './context/validateNumber';
+import Validate from '../../context/validateNumber';
 
 const ClinicianInfo = () => {
   const { phoneNumber, setPhoneNumber } = useContext(HelpContext);
@@ -40,6 +40,7 @@ const ClinicianInfo = () => {
   return (
     <div className="ClinicianInfoPage">
       <form className="clincianForm" action="/">
+        <Link to="/landing">Go to Landing</Link>
         <h1>Please Enter the Clinician's phone number below</h1>
         <div>
           <input
