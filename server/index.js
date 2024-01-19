@@ -5,7 +5,7 @@ const app = express();
 const port = 3001;
 const cors = require('cors');
 // const authToken = process.env.AUTH_TOKEN
-const authToken = 'MjEyMzQ3MDk4ODQwOt3Ejix/UVzg5JouEo6ancp7M8/p';
+const authToken = '';
 // const history = require('connect-history-api-fallback');
 // app.use(history());
 
