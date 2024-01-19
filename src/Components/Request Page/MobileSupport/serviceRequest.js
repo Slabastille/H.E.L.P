@@ -10,7 +10,7 @@ const MSRequestPage = () => (
         <TicketForm />
       </div>
     </div>
-
+    {/* Add feature that shows clinician assigned ipads here */}
     <div className="request-right-box">
       <div className="request-top-right-box">
         <ClinicianStatus />
