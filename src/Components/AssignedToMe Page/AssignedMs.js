@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import axios from 'axios';
 import React, { useState, useEffect, useContext } from 'react';
 import HelpContext from '../../context/HelpContext';
@@ -25,8 +25,12 @@ const createTableRows = (arr) => {
 };
 
 const AssignedMs = () => {
+  const history = useHistory();
+
   const [loading, setLoading] = useState(false);
   const { assignedIssues, setAssignedIssues } = useContext(HelpContext);
+  const { assignedSupplyIssues, setAssignedSupplyIssues } =
+    useContext(HelpContext);
 
   const retrieveIssues = async () => {
     //e.preventDefault();
@@ -53,11 +57,33 @@ const AssignedMs = () => {
     console.log(assignedIssues);
   }, [assignedIssues]);
 
+  // useEffect(() => {
+  //   const evenIssues = assignedIssues.filter(
+  //     (issue) =>
+  //       issue.fields.summary.startsWith('New Supply Request For:') === true
+  //   );
+  //   setAssignedSupplyIssues(evenIssues);
+  //   console.log(assignedIssues);
+  // }, [assignedIssues]);
+  const setSupplies = () => {
+    const Issues = assignedIssues.filter(
+      (issue) =>
+        issue.fields.summary.startsWith('New Supply Request For:') === true
+    );
+    setAssignedSupplyIssues(Issues);
+    console.log('issues here below');
+    console.log(Issues);
+    console.log('issues here above');
+    history.push('/supplyPage');
+  };
   if (loading) {
     return <div>Loading...</div>;
   }
   return (
     <div className="past-ticket-table">
+      <div>
+        <div onClick={setSupplies}>BUTTON</div>
+      </div>
       <table>
         <thead>
           <tr>

@@ -10,10 +10,15 @@ export const HelpProvider = ({ children }) => {
   const [description, setDescription] = useState('');
   const [modal, setModal] = useState(false);
   const [assignedIssues, setAssignedIssues] = useState([]);
+  const [assignedSupplyIssues, setAssignedSupplyIssues] = useState([]);
   const [msTriage, setMsTriage] = useState([]);
   const [dstTriage, setDstTriage] = useState([]);
+  const [reporterName, setReporterName] = useState('');
+  const [supplyRequestReporter, setSupplyRequestReporter] = useState([]);
 
   const [clinicianStatus, setClinicianStatus] = useState('Pending Review');
+  const [showSupplyRequest, setShowSupplyRequest] = useState(false);
+
   return (
     <HelpContext.Provider
       value={{
@@ -35,6 +40,14 @@ export const HelpProvider = ({ children }) => {
         setMsTriage,
         dstTriage,
         setDstTriage,
+        reporterName,
+        setReporterName,
+        showSupplyRequest,
+        setShowSupplyRequest,
+        assignedSupplyIssues,
+        setAssignedSupplyIssues,
+        supplyRequestReporter,
+        setSupplyRequestReporter,
       }}
     >
       {children}

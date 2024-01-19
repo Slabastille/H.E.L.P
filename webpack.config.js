@@ -8,7 +8,6 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, './dist'),
     filename: 'index_bundle.js',
-    publicPath: '/',
   },
   target: 'web',
   devServer: {
@@ -17,10 +16,10 @@ module.exports = {
       directory: path.join(__dirname, 'public'),
     },
     open: true,
-    hot: true,
+    // hot: true,
     liveReload: true,
     proxy: {
-      '/': 'http://localhost:3001/',
+      '/': 'http://localhost:3001',
     },
   },
   resolve: {
@@ -32,10 +31,6 @@ module.exports = {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
         use: 'babel-loader',
-      },
-      {
-        test: /\.css$/,
-        use: ['style-loader', 'css-loader'],
       },
     ],
   },

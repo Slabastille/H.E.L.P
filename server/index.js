@@ -5,7 +5,7 @@ const app = express();
 const port = 3001;
 const cors = require('cors');
 // const authToken = process.env.AUTH_TOKEN
-const authToken = '';
+const authToken = 'MjEyMzQ3MDk4ODQwOt3Ejix/UVzg5JouEo6ancp7M8/p';
 // const history = require('connect-history-api-fallback');
 // app.use(history());
 
@@ -59,9 +59,17 @@ app.post('/findTickets', async (req, res) => {
   let data = JSON.stringify({
     jql: req.body.jql,
     startAt: 0,
-    maxResults: 20,
+    maxResults: 200,
 
-    fields: ['key', 'summary', 'reporter', 'status', 'created', 'updated'],
+    fields: [
+      'key',
+      'summary',
+      'reporter',
+      'status',
+      'created',
+      'updated',
+      'description',
+    ],
   });
 
   let config = {
