@@ -1,19 +1,23 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import AssignedMs from './AssignedMs';
 import { Link } from 'react-router-dom';
+import HelpContext from '../../context/HelpContext';
+import { useContext } from 'react';
 
-class AssignedToMe extends React.Component {
-  render() {
-    return (
-      <div>
-        <div className="assignedToMeContainer">
-          <div>ASSIGNED TO MEEE</div>
-
+const AssignedToMe = () => {
+  const { setCurrentPage } = useContext(HelpContext);
+  useEffect(() => {
+    setCurrentPage(2);
+  }, [setCurrentPage]);
+  return (
+    <div className="landingContainer">
+      <div className="assignedToMeContainer">
+        <div className="assignedSection">
           <AssignedMs />
         </div>
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
 
 export default AssignedToMe;

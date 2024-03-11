@@ -4,23 +4,28 @@
 
 body,
 #root {
-  /* background: linear-gradient(-45deg, #0052529f, #add4019f); */
   height: 100%;
   margin: 0;
   padding: 0;
   overflow: hidden;
   position: static;
+  font-family: sans-serif;
 }
 
-/* Header information below */
+/* Header container information */
 .headerContainer {
   width: 100%;
-  height: 9%;
+  height: 8%;
   display: flex;
   flex-direction: column;
-  flex: 1;
-  color: rgb(100, 89, 245);
+  color: #304964;
   /* box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.08), 0 2px 4px 0 rgba(0, 0, 0, 0.12); */
+}
+/* Page container information every page will be contained in this*/
+#container {
+  height: 92%;
+  max-width: 100%;
+  display: flex;
 }
 .headerTop {
   height: 65%;
@@ -28,9 +33,16 @@ body,
   display: flex;
   flex: 1;
   flex-direction: row;
-  justify-content: space-between;
   align-items: center;
-  box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.08), 0 2px 4px 0 rgba(0, 0, 0, 0.12);
+}
+.headerBottom {
+  height: 35%;
+  width: 100%;
+  display: flex;
+  flex: 1;
+  /* background-color: rgba(211, 211, 211, 0.267); */
+  color: white;
+  background-color: #304964;
 }
 .headerTopLeft {
   height: 100%;
@@ -41,19 +53,6 @@ body,
   text-decoration: none;
   align-items: center;
 }
-.headerLogo {
-  height: 80%;
-  padding-left: 50px;
-  padding-right: 40px;
-}
-.appTitle {
-  height: 100%;
-  text-decoration: none;
-  font-size: x-large;
-  font-weight: bold;
-  display: flex;
-  align-items: center;
-}
 .headerTopRight {
   height: 100%;
   width: 50%;
@@ -62,22 +61,43 @@ body,
   flex-direction: row;
   justify-content: flex-end;
   align-items: center;
+  padding-right: 30px;
+  position: relative;
 }
-.headerButton {
+.headerLogo {
   height: 80%;
+  padding-left: 50px;
+  padding-right: 40px;
+}
+.headerTitle {
+  height: 100%;
+  text-decoration: none;
+  font-size: xx-large;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+}
+
+.headerButton {
+  height: 60%;
+  width: 10%;
   color: #fff;
-  background-color: rgb(100, 89, 245);
+  background-color: #304964;
   padding: 15px;
   border-radius: 10px;
+  font-family: sans-serif;
   font-size: 20px;
   display: flex;
   justify-content: center;
   align-items: center;
 }
+.headerButton:hover {
+  background-color: #3a5674;
+  cursor: pointer;
+}
 .loginLogo {
   height: 80%;
 }
-.modal,
 .overlay {
   width: 100vw;
   height: 100vh;
@@ -86,18 +106,17 @@ body,
   right: 0;
   bottom: 0;
   position: fixed;
-}
-.overlay {
   background: rgba(49, 49, 49, 0.8);
+}
+.modal {
+  position: absolute;
+  top: 100%;
 }
 .modal-content {
   position: absolute;
-  top: 40%;
-  left: 50%;
   transform: translate(-50%, -50%);
   line-height: 1.4;
   background: #f1f1f1;
-  padding: 14px 28px;
   border-radius: 3px;
   max-width: 600px;
   min-width: 300px;
@@ -108,48 +127,42 @@ body,
   right: 10px;
   padding: 5px 7px;
 }
-.headerBottom {
-  height: 35%;
-  width: 100%;
-  display: flex;
-  flex: 1;
-  background-color: rgba(211, 211, 211, 0.267);
-}
+
 .headerBottomContainer {
+  padding-left: 20px;
   display: flex;
   width: 30%;
   justify-content: space-between;
   align-content: flex-end;
+  font-family: sans-serif;
 }
 .headerBottomContainer > div {
   display: flex;
-  flex-direction: column;
+  /* flex-direction: column; */
   justify-content: flex-end;
+  border-bottom: solid 1px black;
+  align-items: center;
+  /* border-bottom: 7px solid #c4d600; */
 }
 .nav-link {
+  display: flex;
   text-decoration: none;
   color: inherit;
+  justify-content: center;
 }
-/* Header information above */
-
-/* Body information below */
-#container {
-  height: 91%;
-  max-width: 100%;
-}
-/* Body information above */
 
 /* Landing page information below */
 .landingContainer {
   height: 100%;
   width: 100%;
-  padding: 20px;
+  padding: 15px;
   display: flex;
+  justify-content: center;
   flex-direction: column;
 }
 .landingTopSection {
   width: 100%;
-  height: 24%;
+  height: 15%;
   padding: 10px;
   display: flex;
 }
@@ -157,26 +170,19 @@ body,
   width: 100%;
   height: 100%;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
+  border: 1px solid #e4e2e2;
 }
-.landingMiddleSection {
-  width: 100%;
-  height: 38%;
-  padding: 10px;
+.landingHeaderContainer {
   display: flex;
-}
-.landingAssignedToMeContainer {
+  justify-content: space-around;
   width: 100%;
   height: 100%;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
-  padding: 5px;
-  display: flex;
-  flex-direction: column;
   align-items: center;
-  justify-content: center;
 }
+
 .landingBottomSection {
   width: 100%;
-  height: 38%;
+  height: 85%;
   padding: 10px;
   display: flex;
   justify-content: space-between;
@@ -186,6 +192,7 @@ body,
   height: 100%;
   padding: 10px;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
+  border: 1px solid #e4e2e2;
   display: flex;
 }
 .landingBottomRightSection {
@@ -193,9 +200,24 @@ body,
   height: 100%;
   padding: 10px;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
+  border: 1px solid #e4e2e2;
   display: flex;
 }
-
+.loading {
+  display: flex;
+  flex-direction: row;
+  width: 15%;
+  height: 5%;
+  align-items: center;
+}
+.loading > div {
+  padding-left: 10px;
+  font-size: x-large;
+}
+.loadingGif {
+  width: 20%;
+  height: 75%;
+}
 .landingStats {
   display: flex;
   justify-content: center;
@@ -211,39 +233,29 @@ body,
 
 /* Landing page information above */
 
-.footer {
-  display: flex;
-  position: relative;
-  background-color: rgb(181, 181, 239);
-  height: 30px;
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-}
-
 /*
 CSS for all the createIssue page below here 
 */
 .ClinicianInfoPage {
+  height: 50%;
+  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: rgb(228, 232, 160);
   flex-grow: 1;
   top: 100px;
   bottom: 30px;
   position: static;
 }
-.info {
+/* .info {
   width: calc(100% - 10px);
   padding: 8px;
   margin-bottom: 15px;
   border: 1px solid #1c87c9;
   outline: none;
   flex: 1;
-}
+} */
 .clinicianButton {
   width: calc(100% - 10px);
   padding: 10px;
@@ -261,8 +273,17 @@ CSS for all the clinician info above here ^^^
 /* 
 CSS for all the TicketForms below here
 */
+.ticketContainer {
+  height: 100%;
+  width: 100%;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #ccc;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
+}
 .ticketFormPage {
-  font-family: Roboto, Arial, sans-serif;
+  font-family: sans-serif;
   font-size: 14px;
 
   width: 100%;
@@ -270,8 +291,6 @@ CSS for all the TicketForms below here
   display: flex;
   flex-direction: column;
   align-items: center;
-  border: 1px solid #ccc;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
   height: 100%;
 }
 .temp11 {
@@ -301,15 +320,17 @@ CSS for all the TicketForms below here
   padding: 5px;
 }
 .formBody {
-  background-color: #1c87c9;
+  background-color: rgb(100, 89, 245);
 }
 .summary,
 .selectRequestType,
-.description {
+.description,
+.address,
+.info {
   width: 100%;
   padding: 8px;
   margin-bottom: 15px;
-  border: 1px solid #1c87c9;
+  border: 1px solid rgb(100, 89, 245);
   outline: none;
   flex: 1;
   border-radius: 5px;
@@ -326,7 +347,7 @@ CSS for all the TicketForms below here
   width: 30%;
   padding: 10px;
   border: none;
-  background: #1c87c9;
+  background: rgb(100, 89, 245);
   font-size: 30px;
   font-weight: 400;
   color: #fff;
@@ -371,10 +392,6 @@ CSS for all the AssignedToMe form above here
   border-radius: 10px;
   font-size: 20px;
 }
-table {
-  border-collapse: separate;
-  border-spacing: 3px;
-}
 
 td,
 th {
@@ -400,7 +417,6 @@ label {
   margin-bottom: 8px;
 }
 
-input,
 textarea,
 button {
   margin-bottom: 20px;
@@ -410,13 +426,13 @@ button {
 /*Styling for the Request page below*/
 .request-container {
   /*Style for left and right box container*/
+  height: 100%;
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: stretch;
-  height: 100%;
   max-height: max-content;
   padding: 15px;
-  max-width: 100%;
   /* border: 10px solid black; 1px wide, solid style, black color */
 }
 
@@ -436,12 +452,15 @@ button {
   overflow: hidden;
 }
 .request-left-box-container {
-  padding: 5px;
   width: 100%;
-  min-height: 100%;
-  max-height: 100%;
-  position: static;
+  height: 100%;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
   overflow: hidden;
+  position: static;
+
   /* border: 1px solid rgb(0, 0, 0); 1px wide, solid style, black color */
 }
 
@@ -459,44 +478,70 @@ button {
   overflow: hidden;
 }
 .request-top-right-box {
-  padding: 5px;
+  width: 100%;
+  height: 20%;
+  padding: 10px;
   flex: 1;
-  min-height: 20%;
-  max-height: 20%;
   /* border: 1px solid rgb(0, 0, 0); 1px wide, solid style, black color */
   position: static;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
 }
 .request-bottom-right-box {
-  padding: 5px;
+  padding: 10px;
+  width: 100%;
+  height: 80%;
   flex: 4;
   display: flex;
   flex-direction: column;
-  max-height: 80%;
   align-items: center;
   /* border: 1px solid rgb(0, 0, 0); 1px wide, solid style, black color */
   position: static;
   overflow: hidden;
 }
-.request-bottom-right-header {
-}
+
 .reporter-pastTickets {
   width: 100%;
   height: 100%;
-  border: 1px solid #ccc;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
+  border: 1px solid #e4e2e2;
   padding: 5px;
   display: flex;
   flex-direction: column;
 }
-.request-bottom-right-header {
-  height: 10%;
-}
-.past-ticket-table {
+
+.full-ticket-table {
   height: 90%;
   width: 100%;
   table-layout: fixed;
+  display: block;
   overflow: auto;
+}
+.full-ticket-table th {
+  text-align: start;
+  /* vertical-align: middle; */
+}
+.full-ticket-table td {
+  text-align: start;
+  /* vertical-align: middle; */
+}
+.full-ticket-table thead {
+  position: sticky;
+  top: 0;
+  /* background: white; */
+}
+
+.full-ticket-table tbody {
+  display: block;
+  max-height: 100%; /* Set this to the desired height */
+  overflow-y: auto;
+}
+
+.full-ticket-table tr {
+  display: table;
+  width: 100%;
+  table-layout: fixed;
 }
 
 .clinicianStatus {
@@ -539,12 +584,16 @@ button {
 
 /*Assigned to me page styling below*/
 .assignedToMeContainer {
-  background-color: lightblue;
   height: 100%;
   width: 100%;
-  padding: 20px;
+  padding: 10px;
   display: flex;
   flex-direction: column;
+}
+.assignedSection {
+  height: 100%;
+  width: 100%;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
 }
 
 /*Assigned to me page styling above*/
@@ -554,31 +603,157 @@ button {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: rgb(228, 232, 160);
   flex-grow: 1;
-  top: 100px;
-  bottom: 30px;
-  position: static;
-  background-color: lightcoral;
   height: 100%;
+  width: 100%;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
+}
+.supplyHeader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 7%;
+  color: white;
+  background-color: rgb(100, 89, 245);
 }
 .supplyForm {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  width: 50%;
-  background-color: lightcyan;
-  padding: 10px;
+  width: 100%;
+  height: 97%;
+  justify-content: space-around;
 }
-/* .supplyForm > div,
-button {
+.supplyFormChild {
+  display: flex;
+  flex-direction: column;
+
+  justify-content: space-around;
+  background-color: rgb(181, 181, 239);
+  /* padding-left: 20%; */
+}
+.supplyFormInput {
+  display: flex;
+  width: 50%;
+  height: 100%;
+  overflow: auto;
+}
+.supplyFormChild1 {
+  display: flex;
+  flex-direction: column;
+  padding-left: 20%;
+  width: 50%; /* adjust as needed */
+  height: 100%;
+}
+.supplyFormChild2 {
+  display: flex;
+  flex-direction: column;
+  padding-left: 20%;
+  width: 50%; /* adjust as needed */
+  height: 100%;
+}
+.supplyFormChild2-1 {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 50%;
-  padding: 5px;
-} */
-.supplyFormChild {
-  background-color: lightgreen;
+  justify-content: space-around;
+  width: 100%;
+  padding-top: 5%;
+  height: 100%;
+}
+.saveButton {
+}
+.supplyPreviewSubmit {
+  width: 80%; /* adjust as needed */
+  padding: 20px; /* adjust as needed */
+  font-size: 1.5em; /* adjust as needed */
+  margin-bottom: 20px; /* adjust as needed */
+}
+
+.mainSection {
+  width: 100%;
+  height: 100%;
+  padding: 10px;
+  display: flex;
+}
+/* triage section below */
+.triage-container {
+  width: 100%;
+  height: 100%;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+}
+.triage-ticket-table-title {
+  width: 100%;
+  height: 8%;
+  display: flex;
+  justify-content: center;
+  position: sticky;
+}
+.triage-ticket-table {
+  width: 100%;
+  height: 92%;
+  table-layout: fixed;
+}
+.triage-ticket-table-header {
+  width: 100%;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  border-bottom: 2px solid rgb(223, 225, 230);
+}
+.triage-ticket-table-body {
+  width: 100%;
+  height: 93%;
+  overflow: auto;
+}
+
+.triage-ticket-table table {
+  width: 100%;
+  height: 100%;
+}
+
+.triage-ticket-table th {
+  text-align: start;
+}
+.triage-ticket-table-header tr {
+  height: 100%;
+  width: 100%;
+  border-bottom: 2px solid rgb(223, 225, 230);
+}
+
+.triage-ticket-table td {
+  text-align: start;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 100%;
+  height: 100%;
+  vertical-align: middle;
+}
+
+.triage-ticket-table tbody {
+  display: block;
+  max-height: 100%; /* Set this to the desired height */
+  overflow-y: auto;
+}
+
+.triage-ticket-table tr {
+  display: table;
+  width: 100%;
+  height: 5%;
+  table-layout: fixed;
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
+/* triage section above */
+
+.createIssueContainer,
+.reporterContainer {
+  height: 100%;
+  width: 100%;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
 }

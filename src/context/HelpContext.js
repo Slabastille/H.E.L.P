@@ -12,10 +12,10 @@ export const HelpProvider = ({ children }) => {
   const [assignedIssues, setAssignedIssues] = useState([]);
   const [assignedSupplyIssues, setAssignedSupplyIssues] = useState([]);
   const [msTriage, setMsTriage] = useState([]);
-  const [dstTriage, setDstTriage] = useState([]);
-  const [reporterName, setReporterName] = useState('');
+  const [dsTriage, setDsTriage] = useState([]);
+  const [reporter, setReporter] = useState({ name: '', email: '', npi: '' });
   const [supplyRequestReporter, setSupplyRequestReporter] = useState([]);
-
+  const [currentPage, setCurrentPage] = useState(1);
   const [clinicianStatus, setClinicianStatus] = useState('Pending Review');
   const [showSupplyRequest, setShowSupplyRequest] = useState(false);
 
@@ -38,16 +38,18 @@ export const HelpProvider = ({ children }) => {
         setClinicianStatus,
         msTriage,
         setMsTriage,
-        dstTriage,
-        setDstTriage,
-        reporterName,
-        setReporterName,
+        dsTriage,
+        setDsTriage,
+        reporter,
+        setReporter,
         showSupplyRequest,
         setShowSupplyRequest,
         assignedSupplyIssues,
         setAssignedSupplyIssues,
         supplyRequestReporter,
         setSupplyRequestReporter,
+        currentPage,
+        setCurrentPage,
       }}
     >
       {children}

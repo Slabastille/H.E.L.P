@@ -46,7 +46,7 @@ const ClinicianStatus = () => {
 
   return (
     <div className="clinicianStatus">
-      <h1>Clinician Status</h1>
+      <h1>Reporter Information</h1>
       <button className={h2Class} onClick={handleClick}>
         <h2>{clinicianStatus}</h2>
       </button>

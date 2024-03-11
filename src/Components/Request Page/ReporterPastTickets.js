@@ -26,17 +26,20 @@ const createTableRows = (arr) => {
 
 const ReporterPastTickets = () => {
   const [loading, setLoading] = useState(false);
+  const { reporter, setReporter } = useContext(HelpContext);
   const { assignedIssues, setAssignedIssues } = useContext(HelpContext);
 
   const retrieveIssues = async () => {
     //e.preventDefault();
-    const reporter = 'careconsult@signifyhealth.com';
+    const reporterEmail = reporter.email;
     setLoading(true);
     try {
       const response = await axios.post('http://localhost:3001/findTickets', {
-        jql: `reporter = '${reporter}' AND project = 'Desktop Support' AND status not in (Canceled, Closed, Done, Resolved, 'Task Complete', 'Task Verified (Accepted)')`,
+        //jql: `reporter = '${reporterEmail}' AND project = 'Desktop Support' AND status not in (Canceled, Closed, Done, Resolved, 'Task Complete', 'Task Verified (Accepted)')`,
+        jql: `reporter = '${reporterEmail}' AND project = 'Desktop Support'`,
       });
       setAssignedIssues(response.data);
+      setReporter({ name: '', email: '', npi: '' });
     } catch (error) {
       console.error('Error retrieving tickets:', error);
     } finally {
@@ -63,7 +66,7 @@ const ReporterPastTickets = () => {
         <h1>Reporter Past Tickets</h1>
       </div>
 
-      <div className="past-ticket-table">
+      <div className="full-ticket-table">
         <table>
           <thead>
             <tr>

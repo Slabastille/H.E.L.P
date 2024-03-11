@@ -66,38 +66,43 @@ const AssignedMs = () => {
   //   console.log(assignedIssues);
   // }, [assignedIssues]);
   const setSupplies = () => {
+    console.log('assigned issues here below');
+    console.log(assignedIssues);
+    console.log('assigned issues here above');
+
     const Issues = assignedIssues.filter(
       (issue) =>
         issue.fields.summary.startsWith('New Supply Request For:') === true
     );
     setAssignedSupplyIssues(Issues);
-    console.log('issues here below');
-    console.log(Issues);
-    console.log('issues here above');
-    history.push('/supplyPage');
+    if (assignedSupplyIssues.length > 0) {
+      history.push('/supplyPage');
+    } else {
+      alert('You have no supply requests assigned to you');
+    }
   };
   if (loading) {
     return <div>Loading...</div>;
   }
   return (
-    <div className="past-ticket-table">
-      <div>
-        <div onClick={setSupplies}>BUTTON</div>
-      </div>
-      <table>
-        <thead>
-          <tr>
-            <th>Key</th>
-            <th>Summary</th>
-            <th>Reporter</th>
-            <th>Status</th>
-            <th>Created</th>
-            <th>Updated</th>
-          </tr>
-        </thead>
+    <div>
+      <div onClick={setSupplies}>Supply Request Page</div>
+      <div className="full-ticket-table">
+        <table>
+          <thead>
+            <tr>
+              <th>Key</th>
+              <th>Summary</th>
+              <th>Reporter</th>
+              <th>Status</th>
+              <th>Created</th>
+              <th>Updated</th>
+            </tr>
+          </thead>
 
-        <tbody>{createTableRows(assignedIssues)}</tbody>
-      </table>
+          <tbody>{createTableRows(assignedIssues)}</tbody>
+        </table>
+      </div>
     </div>
   );
 };

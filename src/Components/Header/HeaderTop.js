@@ -18,7 +18,7 @@ const HeaderTop = () => {
   return (
     <div className="headerTop">
       <div className="headerTopLeft">
-        <Link to="/landing">
+        <Link to="/">
           <img
             className="headerLogo"
             src="https://www.signifyhealth.com/hubfs/Blog-News-Generic-Avatar.png"
@@ -26,16 +26,12 @@ const HeaderTop = () => {
           />
         </Link>
 
-        <div className="appTitle">IT Support App</div>
+        <div className="headerTitle">IT Support App</div>
       </div>
 
       <div className="headerTopRight">
-        {/* onClick={toggleModal} */}
-        <div
-          onClick={() => history.push('/ticketForm')}
-          className="headerButton"
-        >
-          Create a Ticket
+        <div className="headerButton" onClick={toggleModal}>
+          Sign In
         </div>
 
         {/* Ternary operator : If the modal value is true it will display the modal and the overlay */}
@@ -51,11 +47,11 @@ const HeaderTop = () => {
           </div>
         )}
 
-        <img
+        {/* <img
           className="loginLogo"
           src="https://cdn-icons-png.flaticon.com/512/6681/6681204.png"
           alt="LOGIN"
-        />
+        /> */}
       </div>
     </div>
   );

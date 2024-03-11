@@ -1,40 +1,24 @@
 import axios from 'axios';
 import React, { useState, useEffect, useContext } from 'react';
 import HelpContext from '../../context/HelpContext';
-
-const createTableRows = (arr) => {
-  return arr.map((value) => (
-    <tr key={value.key}>
-      <td>
-        <a
-          href={'https://jira.signifyhealth.com/browse/' + value.key}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          {value.key}
-        </a>
-      </td>
-      <td>{value.fields.summary}</td>
-      <td>{value.fields.reporter.emailAddress}</td>
-      <td>{value.fields.status.name}</td>
-      <td>{value.fields.created}</td>
-      <td>{value.fields.updated}</td>
-    </tr>
-  ));
-};
+import createTableRows from './createTableRows';
+import tableSorter from './tableSorter';
 
 const DstTriage = () => {
   const [loading, setLoading] = useState(false);
-  const { dstTriage, setDstTriage } = useContext(HelpContext);
+  const { dsTriage, setDsTriage } = useContext(HelpContext);
+  const [sortConfigDs, setSortConfigDs] = useState({
+    key: 'key',
+    direction: 'ascending',
+  });
 
   const retrieveIssues = async () => {
-    //e.preventDefault();
     setLoading(true);
     try {
       const response = await axios.post('http://localhost:3001/findTickets', {
         jql: "project = TI AND status in (Open, 'Waiting For Support') AND assignee in (EMPTY) ORDER BY summary DESC ",
       });
-      setDstTriage(response.data);
+      setDsTriage(response.data);
     } catch (error) {
       console.error('Error retrieving tickets:', error);
     } finally {
@@ -48,33 +32,97 @@ const DstTriage = () => {
     };
     fetchData();
   }, []);
-  useEffect(() => {
-    console.log(dstTriage);
-  }, [dstTriage]);
 
-  if (loading) {
-    return <div>Loading...</div>;
+  useEffect(() => {
+    console.log('DsTriage');
+    console.log(dsTriage);
+    console.log(dsTriage.length);
+  }, [dsTriage]);
+
+  const handleSort = (key) => {
+    let direction = 'ascending';
+    if (sortConfigDs.key === key && sortConfigDs.direction === 'ascending') {
+      direction = 'descending';
+    }
+    setSortConfigDs({ key, direction });
+  };
+
+  useEffect(() => {
+    let sortedDsTriage = tableSorter(
+      [...dsTriage],
+      sortConfigDs.key,
+      sortConfigDs.direction
+    );
+    console.log(sortConfigDs.key);
+    setDsTriage(sortedDsTriage);
+  }, [sortConfigDs]);
+
+  if (loading == true) {
+    return (
+      <div className="loading">
+        <img
+          className="loadingGif"
+          src="https://i.gifer.com/origin/34/34338d26023e5515f6cc8969aa027bca.gif"
+          alt="X"
+        />
+        <div>Loading...</div>
+      </div>
+    );
   }
   return (
-    <div className="reporter-pastTickets">
-      <div className="request-bottom-right-header">
-        <h1>Reporter Past Tickets</h1>
+    <div className="triage-container">
+      <div className="triage-ticket-table-title">
+        <h1>DST Triage</h1>
       </div>
 
-      <div className="past-ticket-table">
+      <div className="triage-ticket-table">
         <table>
-          <thead>
+          <thead className="triage-ticket-table-header">
             <tr>
-              <th>Key</th>
-              <th>Summary</th>
-              <th>Reporter</th>
-              <th>Status</th>
-              <th>Created</th>
-              <th>Updated</th>
+              <th style={{ width: '2%' }}>
+                <a>
+                  <input type="checkbox" />
+                </a>
+              </th>
+              <th style={{ width: '8%' }} onClick={() => handleSort('key')}>
+                Key
+              </th>
+              <th
+                style={{ width: '42%' }}
+                onClick={() => handleSort('fields.summary')}
+              >
+                Summary
+              </th>
+              <th
+                style={{ width: '20%' }}
+                onClick={() => handleSort('fields.reporter.emailAddress')}
+              >
+                Reporter
+              </th>
+              <th
+                style={{ width: '14%' }}
+                onClick={() => handleSort('fields.status.name')}
+              >
+                Status
+              </th>
+              <th
+                style={{ width: '7%' }}
+                onClick={() => handleSort('fields.created')}
+              >
+                Created
+              </th>
+              <th
+                style={{ width: '7%' }}
+                onClick={() => handleSort('fields.updated')}
+              >
+                Updated
+              </th>
             </tr>
           </thead>
 
-          <tbody>{createTableRows(dstTriage)}</tbody>
+          <tbody className="triage-ticket-table-body">
+            {createTableRows(dsTriage)}
+          </tbody>
         </table>
       </div>
     </div>
