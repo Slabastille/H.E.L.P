@@ -11,6 +11,7 @@ const TicketForm = () => {
   const { requestType, setRequestType } = useContext(HelpContext);
   const { description, setDescription } = useContext(HelpContext);
   const { showSupplyRequest, setShowSupplyRequest } = useContext(HelpContext);
+  const { reporter, setReporter } = useContext(HelpContext);
   const checker = () => {
     if (requestType === 'Supply Request') {
       setShowSupplyRequest(true);
@@ -35,7 +36,10 @@ const TicketForm = () => {
       console.error('Error creating Jira issue:', error);
     }
   };
-
+  const handleSubmit2 = (e) => {
+    e.preventDefault();
+    alert(`Ticket Submitted for Review`);
+  };
   const selectChange = (event) => {
     console.log(event.target.value);
     setRequestType(event.target.value);
@@ -50,18 +54,17 @@ const TicketForm = () => {
   const descriptionChange = (event) => {
     setDescription(event.target.value);
   };
-
+  console.log(reporter);
   return (
-    <div className="landingContainer">
+    <div className="ticketContainer">
       <div className="ticketFormPage">
         <div className="formHeader">
           <h1>Enter Ticket Information</h1>
         </div>
         <form className="ticketForm" action="/">
           <div>
-            <Link to="/landing">
-              <h3>Summary</h3>
-            </Link>
+            <h3>Summary</h3>
+
             <input
               className="summary"
               type="text"
@@ -111,7 +114,7 @@ const TicketForm = () => {
               <div>
                 <h3>Address</h3>
                 <textarea
-                  className="Adress"
+                  className="address"
                   placeholder="Leave blank if using clinician default address"
                   rows="6"
                 ></textarea>
@@ -120,7 +123,7 @@ const TicketForm = () => {
           )}
 
           {/*This is for the button below onClick={handleSubmit} */}
-          <button className="TicketFormBtn" type="submit">
+          <button className="TicketFormBtn" onClick={handleSubmit2}>
             Next
           </button>
         </form>

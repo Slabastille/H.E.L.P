@@ -15,15 +15,14 @@ import SupplyPreviewPage from './Components/AssignedToMe Page/SupplyPage/SupplyP
 const App = () => {
   return (
     <HelpProvider>
-      <div></div>
       <Router>
         <Header />
         <div id="container">
           <Switch>
-            <Route exact path="/" component={MSRequestPage} />
+            <Route exact path="/" component={Landing} />
             <Route path="/landing" component={Landing} />
             <Route path="/assignedToMe" component={AssignedToMe} />
-            <Route path="/ticketForm" component={TicketForm} />
+            <Route path="/ticketForm" component={MSRequestPage} />
             <Route path="/createIssue" component={ReporterInfo} />
             <Route path="/supplyPage" component={SupplyPage} />
             <Route path="/supplyPreviewPage" component={SupplyPreviewPage} />

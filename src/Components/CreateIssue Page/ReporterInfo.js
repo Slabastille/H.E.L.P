@@ -6,17 +6,21 @@ import Validate from '../../context/validateNumber';
 
 const ReporterInfo = () => {
   const { showSupplyRequest, setShowSupplyRequest } = useContext(HelpContext);
-
   const { phoneNumber, setPhoneNumber } = useContext(HelpContext);
   const { requestType, setRequestType } = useContext(HelpContext);
-  const { reporterName, setReporterName } = useContext(HelpContext);
+  const { reporter, setReporter } = useContext(HelpContext);
+  const { setCurrentPage } = useContext(HelpContext);
+  useEffect(() => {
+    setCurrentPage(3);
+  }, [setCurrentPage]);
   const history = useHistory();
 
-  //Automatically updates the phone number in state
+  //Automatically updates the email in state
   const handleChange = (event) => {
-    console.log('current phone number');
+    // const { name, value } = event.target;
+
     console.log(event.target.value);
-    setPhoneNumber(event.target.value);
+    setReporter({ ...reporter, email: event.target.value });
   };
 
   const selectChange = (event) => {
@@ -25,55 +29,72 @@ const ReporterInfo = () => {
   };
   const handleClick = (event) => {
     // if (phoneNumber.length === 10) {
-    console.log('The current phone number is ' + phoneNumber);
+    // console.log('The current phone number is ' + phoneNumber);
 
-    console.log('number below');
+    // console.log('number below');
     //Validate(phoneNumber);
 
     if (requestType === 'Support Request') {
-      history.push('/ticketForm1');
+      history.push('/ticketForm');
     } else if (requestType === 'Supply Request') {
       setShowSupplyRequest(true);
       history.push('/ticketForm');
-    } else {
-      document.getElementById('requestError').innerHTML =
-        'Select a Request Type';
     }
     event.preventDefault();
   };
 
   return (
     <div className="landingContainer">
-      <div className="ClinicianInfoPage">
-        <div className="">Please Enter the Clinician's phone number below</div>
-        <img src="/public/img/userLogo.png" alt="X" />
-        <form className="clincianForm" action="/">
-          <div>
-            <input
-              className="info"
-              value={phoneNumber}
-              onChange={handleChange}
-              placeholder="Phone Number"
-            />
+      <div className="mainSection">
+        <div className="reporterContainer">
+          <div className="ClinicianInfoPage">
+            <img src="/img/userLogo.png" alt="X" />
+            <div className="">
+              Please Enter the Clinician's phone number below
+            </div>
+            <form className="clincianForm" action="/">
+              <div>
+                <input
+                  className="info"
+                  // value={reporter.name}
+                  placeholder="Reporter Name"
+                />
+              </div>
+              <div>
+                <input
+                  className="info"
+                  value={reporter.email}
+                  onChange={handleChange}
+                  placeholder="Reporter Email"
+                />
+              </div>
+              <div>
+                <input
+                  className="info"
+                  // value={reporter.npi}
+                  placeholder="Reporter NPI"
+                />
+              </div>
+              <div id="requestError"></div>
+              <select
+                className="selectRequestType"
+                onChange={selectChange}
+                type="select"
+              >
+                <option>Choose a Request Type</option>
+                <option value={'Support Request'}>Support Request</option>
+                <option value={'Supply Request'}>Supply Request</option>
+              </select>
+              <button
+                onClick={handleClick}
+                className="clinicianButton"
+                type="submit"
+              >
+                Submit
+              </button>
+            </form>
           </div>
-          <div id="requestError"></div>
-          <select
-            className="selectRequestType"
-            onChange={selectChange}
-            type="select"
-          >
-            <option>Choose a Request Type</option>
-            <option value={'Support Request'}>Support Request</option>
-            <option value={'Supply Request'}>Supply Request</option>
-          </select>
-          <button
-            onClick={handleClick}
-            className="clinicianButton"
-            type="submit"
-          >
-            Submit
-          </button>
-        </form>
+        </div>
       </div>
     </div>
   );

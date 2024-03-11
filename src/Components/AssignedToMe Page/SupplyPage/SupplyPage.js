@@ -39,22 +39,28 @@ const SupplyPage = () => {
     useContext(HelpContext);
   console.log(assignedSupplyIssues);
   return (
-    <div>
-      <table>
-        <thead>
-          <tr>
-            <th>Key</th>
-            <th>Summary</th>
-            <th>Reporter</th>
-            <th>Status</th>
-            <th>Created</th>
-            <th>Updated</th>
-            <th>Complete Request</th>
-          </tr>
-        </thead>
+    <div className="landingContainer">
+      <div className="mainSection">
+        <div className="createIssueContainer">
+          <div className="full-ticket-table">
+            <table>
+              <thead>
+                <tr>
+                  <th>Key</th>
+                  <th>Summary</th>
+                  <th>Reporter</th>
+                  <th>Status</th>
+                  <th>Created</th>
+                  <th>Updated</th>
+                  <th>Complete Request</th>
+                </tr>
+              </thead>
 
-        <tbody>{createTableRows(assignedSupplyIssues)}</tbody>
-      </table>
+              <tbody>{createTableRows(assignedSupplyIssues)}</tbody>
+            </table>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
