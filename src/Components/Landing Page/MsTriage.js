@@ -1,8 +1,10 @@
 import axios from 'axios';
 import React, { useState, useEffect, useContext } from 'react';
 import HelpContext from '../../context/HelpContext';
-import createTableRows from './createTableRows';
-import tableSorter from './tableSorter';
+import createTableRows from './Triage Tables/createTableRows';
+import createTableHeader from './Triage Tables/createTableHeader';
+import tableSorter from '../Ticket Tables/TableSorter/tableSorter';
+import handleSort from '../Ticket Tables/handleSort';
 
 const MsTriage = () => {
   const [loading, setLoading] = useState(false);
@@ -34,25 +36,13 @@ const MsTriage = () => {
   }, []);
 
   useEffect(() => {
-    // console.log('MsTriage');
-    // console.log(msTriage);
-    //console.log(msTriage.length);
+    console.log('MsTriage');
+    console.log(msTriage);
+    console.log(msTriage.length);
   }, [msTriage]);
 
-  const handleSort = (key) => {
-    let direction = 'ascending';
-    if (sortConfigMs.key === key && sortConfigMs.direction === 'ascending') {
-      direction = 'descending';
-    }
-    setSortConfigMs({ key, direction });
-  };
-
   useEffect(() => {
-    let sortedMsTriage = tableSorter(
-      [...msTriage],
-      sortConfigMs.key,
-      sortConfigMs.direction
-    );
+    let sortedMsTriage = tableSorter([...msTriage], sortConfigMs.key, sortConfigMs.direction);
     console.log(sortConfigMs.key);
     setMsTriage(sortedMsTriage);
   }, [sortConfigMs]);
@@ -60,11 +50,7 @@ const MsTriage = () => {
   if (loading) {
     return (
       <div className="loading">
-        <img
-          className="loadingGif"
-          src="https://i.gifer.com/origin/34/34338d26023e5515f6cc8969aa027bca.gif"
-          alt="X "
-        />
+        <img className="loadingGif" src="https://i.gifer.com/origin/34/34338d26023e5515f6cc8969aa027bca.gif" alt="X " />
         <div>Loading...</div>
       </div>
     );
@@ -76,52 +62,9 @@ const MsTriage = () => {
       </div>
       <div className="triage-ticket-table">
         <table>
-          <thead className="triage-ticket-table-header">
-            <tr>
-              <th style={{ width: '2%' }}>
-                <a>
-                  <input type="checkbox" />
-                </a>
-              </th>
-              <th style={{ width: '8%' }} onClick={() => handleSort('key')}>
-                Key
-              </th>
-              <th
-                style={{ width: '42%' }}
-                onClick={() => handleSort('fields.summary')}
-              >
-                Summary
-              </th>
-              <th
-                style={{ width: '20%' }}
-                onClick={() => handleSort('fields.reporter.emailAddress')}
-              >
-                Reporter
-              </th>
-              <th
-                style={{ width: '14%' }}
-                onClick={() => handleSort('fields.status.name')}
-              >
-                Status
-              </th>
-              <th
-                style={{ width: '7%' }}
-                onClick={() => handleSort('fields.created')}
-              >
-                Created
-              </th>
-              <th
-                style={{ width: '7%' }}
-                onClick={() => handleSort('fields.updated')}
-              >
-                Updated
-              </th>
-            </tr>
-          </thead>
+          <thead className="triage-ticket-table-header">{createTableHeader(setSortConfigMs)}</thead>
 
-          <tbody className="triage-ticket-table-body">
-            {createTableRows(msTriage)}
-          </tbody>
+          <tbody className="triage-ticket-table-body">{createTableRows(msTriage)}</tbody>
         </table>
       </div>
     </div>

@@ -16,7 +16,7 @@ module.exports = {
       directory: path.join(__dirname, 'public'),
     },
     open: true,
-    // hot: true,
+    hot: true,
     liveReload: true,
     proxy: {
       '/': 'http://localhost:3001',

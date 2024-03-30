@@ -7,7 +7,7 @@ import { HelpProvider } from './context/HelpContext';
 import SupplyForm from './SupplyForm';
 import Header from './Components/Header/Header';
 import Landing from './Components/Landing Page/Landing';
-import MSRequestPage from './Components/Request Page/MobileSupport/serviceRequest';
+import MSRequestPage from './Components/Request Page/serviceRequest';
 import AssignedToMe from './Components/AssignedToMe Page/AssignedToMe';
 import SupplyPage from './Components/AssignedToMe Page/SupplyPage/SupplyPage';
 import SupplyPreviewPage from './Components/AssignedToMe Page/SupplyPage/SupplyPreviewPage';
@@ -31,6 +31,7 @@ const App = () => {
           </Switch>
           {/* WORK ON FOOTER LATER<div className="footer">Footer this was created by Samuel</div> */}
         </div>
+        x
       </Router>
     </HelpProvider>
   );
