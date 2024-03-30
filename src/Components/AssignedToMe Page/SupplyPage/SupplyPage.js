@@ -39,7 +39,7 @@ const SupplyPage = () => {
     useContext(HelpContext);
   console.log(assignedSupplyIssues);
   return (
-    <div className="landingContainer">
+    <div className="pageContainer">
       <div className="mainSection">
         <div className="createIssueContainer">
           <div className="full-ticket-table">

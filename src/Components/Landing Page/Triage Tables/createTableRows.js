@@ -1,6 +1,6 @@
 import React from 'react';
-import extractDate from '../Ticket Tables/extractDate';
-import extractTime from '../Ticket Tables/extractTime';
+import extractDate from '../../Ticket Tables/extractDate';
+import extractTime from '../../Ticket Tables/extractTime';
 
 const createTableRows = (arr) => {
   return arr.map((value) => (
@@ -11,11 +11,7 @@ const createTableRows = (arr) => {
         </a>
       </td>
       <td style={{ width: '8%' }}>
-        <a
-          href={'https://jira.signifyhealth.com/browse/' + value.key}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
+        <a href={'https://jira.signifyhealth.com/browse/' + value.key} target="_blank" rel="noopener noreferrer">
           {value.key}
         </a>
       </td>

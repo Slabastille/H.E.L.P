@@ -4,16 +4,16 @@ import { createContext, useState } from 'react';
 const HelpContext = createContext();
 
 export const HelpProvider = ({ children }) => {
-  const [phoneNumber, setPhoneNumber] = useState('');
   const [requestType, setRequestType] = useState('');
   const [summary, setSummary] = useState('');
   const [description, setDescription] = useState('');
   const [modal, setModal] = useState(false);
   const [assignedIssues, setAssignedIssues] = useState([]);
+  const [currentAssignedTable, setCurrentAssignedTable] = useState(1);
   const [assignedSupplyIssues, setAssignedSupplyIssues] = useState([]);
   const [msTriage, setMsTriage] = useState([]);
   const [dsTriage, setDsTriage] = useState([]);
-  const [reporter, setReporter] = useState({ name: '', email: '', npi: '' });
+  const [reporter, setReporter] = useState({ name: '', phone:'', email: '', npi: '' });
   const [supplyRequestReporter, setSupplyRequestReporter] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [clinicianStatus, setClinicianStatus] = useState('Pending Review');
@@ -22,8 +22,6 @@ export const HelpProvider = ({ children }) => {
   return (
     <HelpContext.Provider
       value={{
-        phoneNumber,
-        setPhoneNumber,
         requestType,
         setRequestType,
         summary,
@@ -50,6 +48,8 @@ export const HelpProvider = ({ children }) => {
         setSupplyRequestReporter,
         currentPage,
         setCurrentPage,
+        currentAssignedTable,
+        setCurrentAssignedTable,
       }}
     >
       {children}

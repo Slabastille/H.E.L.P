@@ -2,12 +2,12 @@ import React from 'react';
 import AssignedMs from '../AssignedToMe Page/AssignedMs';
 import LandingStats from './LandingStats';
 import MsTriage from './MsTriage';
-import DstTriage from './DstTriage';
+import DsTriage from './DsTriage';
 import LandingHeader from './LandingHeader';
 
 const Landing = () => {
   return (
-    <div className="landingContainer">
+    <div className="pageContainer">
       <div className="landingTopSection">
         <div className="landingStatsContainer">
           <LandingHeader />
@@ -20,7 +20,7 @@ const Landing = () => {
         </div>
 
         <div className="landingBottomRightSection">
-          <DstTriage />
+          <DsTriage />
         </div>
       </div>
     </div>

@@ -8,28 +8,25 @@ const HeaderSub = () => {
   return (
     <div className="headerBottom">
       <div className="headerBottomContainer">
-        <div
-          style={currentPage === 1 ? { borderBottom: '7px solid #c4d600' } : {}}
-        >
-          <Link to="/landing" className="nav-link">
-            Home
-          </Link>
-        </div>
-        <div
+        <Link to="/landing" className="nav-link" style={currentPage === 1 ? { borderBottom: '7px solid #c4d600' } : {}}>
+          <div>Home</div>
+        </Link>
+
+        <Link
+          to="/assignedToMe"
+          className="nav-link"
           style={currentPage === 2 ? { borderBottom: '7px solid #c4d600' } : {}}
         >
-          <Link to="/assignedToMe" className="nav-link">
-            All Assigned to Me
-          </Link>
-        </div>
+          <div>My Issues</div>
+        </Link>
 
-        <div
+        <Link
+          to="/createIssue"
+          className="nav-link"
           style={currentPage === 3 ? { borderBottom: '7px solid #c4d600' } : {}}
         >
-          <Link to="/createIssue" className="nav-link">
-            Create Issue
-          </Link>
-        </div>
+          <div>Create Issue</div>
+        </Link>
       </div>
     </div>
   );

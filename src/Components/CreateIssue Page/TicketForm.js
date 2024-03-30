@@ -1,23 +1,36 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import HelpContext from '../../context/HelpContext';
 import { useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+
 const TicketForm = () => {
   const history = useHistory();
-  const { phoneNumber, setPhoneNumber } = useContext(HelpContext);
+  //Current Page within the TicketForm Container
+  const [currentPage, setCurrentPage] = useState(1);
+  const { reporter } = useContext(HelpContext);
+
+  //Variables for the api body
   const { summary, setSummary } = useContext(HelpContext);
   const { requestType, setRequestType } = useContext(HelpContext);
   const { description, setDescription } = useContext(HelpContext);
+  
+  //Shows the supply request form if true
   const { showSupplyRequest, setShowSupplyRequest } = useContext(HelpContext);
-  const { reporter, setReporter } = useContext(HelpContext);
-  const checker = () => {
-    if (requestType === 'Supply Request') {
+  //Updates the showSupplyRequest state based on the request type
+  useEffect(() => {
+    if (requestType === 'Support Request') {
+      setShowSupplyRequest(false)
+    } else if (requestType === 'Supply Request') {
       setShowSupplyRequest(true);
-    }
-  };
-  checker();
+    }}, [requestType]);
+
+
+
+  console.log("reporteerrerer")
+  console.log(reporter)
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -36,31 +49,31 @@ const TicketForm = () => {
       console.error('Error creating Jira issue:', error);
     }
   };
-  const handleSubmit2 = (e) => {
+  const handleSubmit2 = (a) => (e) => {
+    console.log("Going to page " + a)
+    setCurrentPage(a)
     e.preventDefault();
-    alert(`Ticket Submitted for Review`);
-  };
-  const selectChange = (event) => {
-    console.log(event.target.value);
-    setRequestType(event.target.value);
-    if (event.target.value === 'Supply Request') {
-      setShowSupplyRequest(true);
-    }
+    //alert(`Ticket Submitted for Review`);
   };
 
+  const selectChange = (event) => {
+    setRequestType(event.target.value);
+  };
   const summaryChange = (event) => {
     setSummary(event.target.value);
   };
   const descriptionChange = (event) => {
     setDescription(event.target.value);
   };
-  console.log(reporter);
+
+
   return (
     <div className="ticketContainer">
       <div className="ticketFormPage">
         <div className="formHeader">
           <h1>Enter Ticket Information</h1>
         </div>
+        {currentPage === 1 && ( 
         <form className="ticketForm" action="/">
           <div>
             <h3>Summary</h3>
@@ -123,10 +136,28 @@ const TicketForm = () => {
           )}
 
           {/*This is for the button below onClick={handleSubmit} */}
-          <button className="TicketFormBtn" onClick={handleSubmit2}>
+          <button className="TicketFormBtn" onClick={handleSubmit2(2)}>
             Next
           </button>
-        </form>
+        </form>)}
+        {currentPage === 2 && 
+        <form className="ticketForm" action="/">
+            <div>
+              <h3>Summary 2 </h3>
+  
+              <input
+                className="summary"
+                type="text"
+                name="name"
+                placeholder="Summary"
+              />
+            </div>
+  
+            {/*This is for the button below onClick={handleSubmit} */}
+            <button className="TicketFormBtn" onClick={handleSubmit2(1)}>
+              Next
+            </button>
+          </form>}
       </div>
     </div>
   );

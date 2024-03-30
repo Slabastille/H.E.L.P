@@ -3,7 +3,6 @@ import HelpContext from './context/HelpContext';
 import { useContext } from 'react';
 
 const SupplyForm = () => {
-  //   const { phoneNumber, setPhoneNumber } = useContext(HelpContext);
   return (
     <div className="ticketFormPage">
       <form className="ticketForm" action="/">

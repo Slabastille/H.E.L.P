@@ -44,7 +44,7 @@ const SupplyPreviewPage = (props) => {
     return <div>Loading...</div>;
   }
   return (
-    <div className="landingContainer">
+    <div className="pageContainer">
       <div className="mainSection">
         <div className="supplyFormContainer">
           <div className="supplyHeader">
