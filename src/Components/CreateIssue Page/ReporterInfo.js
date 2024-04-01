@@ -36,15 +36,17 @@ const ReporterInfo = () => {
   };
 
   const handleClick = (event) => {
+    event.preventDefault();
     if (requestType === 'Support Request') {
       history.push('/ticketForm');
     } else if (requestType === 'Supply Request') {
       setShowSupplyRequest(true);
       history.push('/ticketForm');
     } else {
-      window.alert('Choose a request Type');
+      history.push('/ticketForm');
+      
+      //window.alert('Choose a request Type');
     }
-     event.preventDefault();
   };
 
   return (
@@ -56,6 +58,7 @@ const ReporterInfo = () => {
               <img src="/img/userLogo.png" alt="X" />
             </div>
             <div className="clinicianInfoTitle">Enter clinician info below</div>
+            
           </div>
           <form className="clinicianForm" action="/">
             <div className="clinicianInfoContainer">

@@ -61,7 +61,7 @@ app.post('/createJiraIssue', async (req, res) => {
     url: 'https://jira.dev.signifyhealth.com/rest/api/2/issue/',
     headers: {
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${authToken}`,
+      Authorization: `Bearer ${devToken}`,
     },
     data: data,
   };
@@ -101,7 +101,7 @@ app.post('/findTickets', async (req, res) => {
     url: 'https://jira.dev.signifyhealth.com/rest/api/2/search/',
     headers: {
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${authToken}`,
+      Authorization: `Bearer ${devToken}`,
     },
     data: data,
   };
@@ -126,16 +126,16 @@ app.post('/createJiraIssuev2', async (req, res) => {
       project: {
         key: req.body.project,
       },
-      customfield_20100: req.body.npi,
-      customfield_18343: req.body.name,
-      customfield_12412: req.body.name,
-      customfield_22714: req.body.address1,
-      customfield_22712: req.body.address2,
-      customfield_20905: req.body.city,
-      customfield_12213: { value: req.body.state },
-      customfield_12208: req.body.zip,
-      customfield_13103: req.body.phone,
-      customfield_18192: req.body.email,
+      // customfield_20100: req.body.npi,
+      // customfield_18343: req.body.name,
+      // customfield_12412: req.body.name,
+      // customfield_22714: req.body.address1,
+      // customfield_22712: req.body.address2,
+      // customfield_20905: req.body.city,
+      // customfield_12213: { value: req.body.state },
+      // customfield_12208: req.body.zip,
+      // customfield_13103: req.body.phone,
+      // customfield_18192: req.body.email,
 
       customfield_22315: req.body.isAssetsVerified,
 

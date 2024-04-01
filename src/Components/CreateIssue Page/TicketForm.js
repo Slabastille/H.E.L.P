@@ -12,10 +12,13 @@ const TicketForm = () => {
   const { reporter } = useContext(HelpContext);
 
   //Variables for the api body
-  const { summary, setSummary } = useContext(HelpContext);
+  const [ summary, setSummary ] = useState('');
+  const [ description, setDescription ] = useState('');
   const { requestType, setRequestType } = useContext(HelpContext);
-  const { description, setDescription } = useContext(HelpContext);
-  
+  const [verifiedAssets, setVerifiedAssets] = useState('');
+  const [supplies, setSupplies] = useState([]);
+  const [address, setAddress] = useState(''); 
+
   //Shows the supply request form if true
   const { showSupplyRequest, setShowSupplyRequest } = useContext(HelpContext);
   //Updates the showSupplyRequest state based on the request type
@@ -27,9 +30,6 @@ const TicketForm = () => {
     }}, [requestType]);
 
 
-
-  console.log("reporteerrerer")
-  console.log(reporter)
   
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -50,114 +50,165 @@ const TicketForm = () => {
     }
   };
   const handleSubmit2 = (a) => (e) => {
+    e.preventDefault();
     console.log("Going to page " + a)
     setCurrentPage(a)
-    e.preventDefault();
     //alert(`Ticket Submitted for Review`);
   };
 
-  const selectChange = (event) => {
-    setRequestType(event.target.value);
-  };
-  const summaryChange = (event) => {
-    setSummary(event.target.value);
-  };
-  const descriptionChange = (event) => {
-    setDescription(event.target.value);
-  };
+  const changeFormValue = (setValue) => (event) => {
+    setValue(event.target.value);
+  }
+
+
+
+  useEffect(() => {
+    console.log("des below")
+    console.log(description)
+  }, [description]);
 
 
   return (
     <div className="ticketContainer">
       <div className="ticketFormPage">
-        <div className="formHeader">
-          <h1>Enter Ticket Information</h1>
-        </div>
+        
         {currentPage === 1 && ( 
-        <form className="ticketForm" action="/">
-          <div>
-            <h3>Summary</h3>
-
-            <input
-              className="summary"
-              type="text"
-              name="name"
-              value={summary}
-              placeholder="Summary"
-              onChange={summaryChange}
-            />
+        <div className='currentTicketForm'> 
+          <div className="ticketFormHeader">
+            <h1>Create Issue</h1>
           </div>
 
-          <div>
-            <h3>Description</h3>
-            <textarea
-              className="description"
-              placeholder="Description"
-              value={description}
-              rows="6"
-              onChange={descriptionChange}
-            ></textarea>
-          </div>
-          <div>
-            <h3>Request Type</h3>
-            <select
-              className="selectRequestType"
-              onChange={selectChange}
-              type="select"
-            >
-              <option>Choose a Request Type</option>
-              <option value={'Support Request'}>Support Request</option>
-              <option value={'Supply Request'}>Supply Request</option>
-            </select>
-          </div>
+          <form className="ticketForm" action="/">
+            <div className='ticketFormItemsContainer'>
+              <div className='ticketFormItems'>
+                <div className='ticketFormItemIdentifier'>Summary</div>
+                <input
+                  className="ticketFormSummary"
+                  type="text"
+                  name="name"
+                  value={summary}
+                  placeholder="Summary"
+                  onChange={changeFormValue(setSummary)}
+                />
+              </div>
 
-          {showSupplyRequest && (
-            <div>
-              <div>
-                <h3>Choose Your Supplies</h3>
-                <select multiple size="6" className="selectRequestType">
-                  <option value="American">Lightning to USB-A</option>{' '}
-                  <option value="Andean">Lightning to USB-C</option>{' '}
-                  <option value="Chilean">Car Charger</option>{' '}
-                  <option value="Greater">Wall Charger</option>{' '}
-                  <option value="James's">iPad Case/Keyboard</option>{' '}
-                  <option value="Lesser">iPad Only</option>{' '}
+              <div className='ticketFormItems'>
+                <div className='ticketFormItemIdentifier'>Description</div>
+                <textarea
+                  className="ticketFormDescription"
+                  placeholder="Description"
+                  value={description}
+                  rows="6"
+                  onChange={changeFormValue(setDescription)}
+                />
+              </div>
+
+              <div className='ticketFormItems'>
+                <div className='ticketFormItemIdentifier'>Request Type</div>
+                <select className="ticketFormRequestType" onChange={changeFormValue(setRequestType)} type="select">
+                  <option>Choose a Request Type</option>
+                  <option value={'Support Request'}>Support Request</option>
+                  <option value={'Supply Request'}>Supply Request</option>
                 </select>
               </div>
-              <div>
-                <h3>Address</h3>
-                <textarea
-                  className="address"
-                  placeholder="Leave blank if using clinician default address"
-                  rows="6"
-                ></textarea>
-              </div>
-            </div>
-          )}
 
-          {/*This is for the button below onClick={handleSubmit} */}
-          <button className="TicketFormBtn" onClick={handleSubmit2(2)}>
-            Next
-          </button>
-        </form>)}
-        {currentPage === 2 && 
-        <form className="ticketForm" action="/">
-            <div>
-              <h3>Summary 2 </h3>
-  
+              
+
+              <div className='ticketFormItems'>
+                <div className='ticketFormItemIdentifier'>Address</div>
+                <textarea
+                  className="ticketFormAddress"
+                  placeholder="Provider address will auto populate here -> 1234 Street City State Zip"
+                  rows="6"
+                  onChange={changeFormValue(setAddress)}
+                  disabled={!showSupplyRequest}
+                />
+              </div>
+
+              <div className='ticketFormItems'>
+                <div className='ticketFormItemIdentifier'>Verified Existing Assets?</div>
+                <select className='ticketFormVerifyAssets'>
+                  <option>Select...</option>
+                  <option value="Yes">Yes</option>
+                  <option value="No">No</option>
+                </select>
+              </div>
+
+              <div className='ticketFormItems'>
+                <div className='ticketFormItemIdentifier'>Choose Your Supplies</div>
+                <select multiple size="6" className="ticketFormSupplies" disabled={!showSupplyRequest}>
+                  <option value="American">Lightning to USB-A</option>
+                  <option value="Andean">Lightning to USB-C</option>
+                  <option value="Chilean">Car Charger</option>
+                  <option value="Greater">Wall Charger</option>
+                  <option value="James's">iPad Case/Keyboard</option>
+                  <option value="Lesser">iPad Only</option>
+                </select>
+              </div>
+              
+            </div>
+
+            <div className='ticketFormButtonContainer'>
+                <button className='ticketFormSecondButton'>
+                  Cancel
+                </button>
+                <button className="ticketFormButton" onClick={handleSubmit2(2)}>
+                  Create Ticket
+                </button>
+            </div>
+          </form>
+
+        </div>)}
+
+
+        {currentPage === 2 && ( 
+        <div className='currentTicketForm'>
+          <div className="ticketFormHeader">
+            <h1>Comments</h1>
+          </div>
+
+          <form className="ticketForm" action="/">
+            <div className='ticketFormCommentSection'>
+              <div className='ticketAllComments'>
+                <div className='comment'>
+                Messages go here.
+                </div>
+                <div className='comment'>
+                Messages go here.
+                </div>
+                <div className='comment'>
+                Messages go here.
+                </div>
+                <div className='comment'>
+                Messages go here.
+                </div>
+                <div className='comment'>
+                Messages go here.
+                </div>
+              </div>
               <input
-                className="summary"
+                className="ticketComment"
                 type="text"
                 name="name"
-                placeholder="Summary"
+                // value={summary}
+                // onChange={summaryChange}
               />
             </div>
-  
-            {/*This is for the button below onClick={handleSubmit} */}
-            <button className="TicketFormBtn" onClick={handleSubmit2(1)}>
-              Next
-            </button>
-          </form>}
+    
+            <div className='ticketFormButtonContainer'>
+              
+              <div className='ticketFormSecondButton'>
+                Set Status
+              </div>
+              <div className="ticketFormButton" onClick={handleSubmit2(1)}>
+                Resolve Issue
+              </div>
+            </div>              
+          </form>
+
+        </div>)}
+
+
       </div>
     </div>
   );
