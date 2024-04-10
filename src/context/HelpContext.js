@@ -4,6 +4,7 @@ import { createContext, useState } from 'react';
 const HelpContext = createContext();
 
 export const HelpProvider = ({ children }) => {
+  const [loggedInUser, setLoggedInUser] = useState({ name: 'Samuel', role: 'Admin' });
   // const [summary, setSummary] = useState('');
   // const [description, setDescription] = useState('');
   // const [verifiedAssets, setVerifiedAssets] = useState(false);
@@ -22,16 +23,22 @@ export const HelpProvider = ({ children }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [clinicianStatus, setClinicianStatus] = useState('Pending Review');
   const [showSupplyRequest, setShowSupplyRequest] = useState(false);
+  const [comments, setComments] = useState([]);
+  const [currentRequest, setCurrentRequest] = useState({ id : "", key : "", status : "Waiting for Support", });
 
   return (
     <HelpContext.Provider
-      value={{   
+      value={{
+        loggedInUser,
+        setLoggedInUser,   
         // summary,
         // setSummary,
         // description,
         // setDescription,
         requestType,
         setRequestType,
+        comments,
+        setComments,
         // verifiedAssets,
         // setVerifiedAssets,
         modal,
@@ -56,6 +63,8 @@ export const HelpProvider = ({ children }) => {
         setCurrentPage,
         currentAssignedTable,
         setCurrentAssignedTable,
+        currentRequest,
+        setCurrentRequest,
       }}
     >
       {children}

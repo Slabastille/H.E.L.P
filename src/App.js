@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import TicketForm from './Components/CreateIssue Page/TicketForm';
+import TicketForm from './Components/CreateIssue Page/TicketForm/TicketForm';
 import ReporterInfo from './Components/CreateIssue Page/reporterInfo';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { Link } from 'react-router-dom';

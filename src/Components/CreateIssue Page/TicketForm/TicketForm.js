@@ -1,14 +1,20 @@
 import React, { useEffect, useState } from 'react';
-import HelpContext from '../../context/HelpContext';
+import HelpContext from '../../../context/HelpContext';
 import { useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import CommentSection from './CommentSection';
+import extractDate from '../../Ticket Tables/extractDate';
+import extractTime from '../../Ticket Tables/extractTime';
+import CommentsPage from './CommentsPage';
+
+import loadingGif from '../../../../public/img/loading.gif'
 
 const TicketForm = () => {
   const history = useHistory();
   //Current Page within the TicketForm Container
-  const [currentPage, setCurrentPage] = useState(1);
+  const [currentPage, setCurrentPage] = useState(2);
   const { reporter } = useContext(HelpContext);
 
   //Variables for the api body
@@ -18,6 +24,11 @@ const TicketForm = () => {
   const [verifiedAssets, setVerifiedAssets] = useState('');
   const [supplies, setSupplies] = useState([]);
   const [address, setAddress] = useState(''); 
+  const {comments, setComments} = useContext(HelpContext); 
+  const {loggedInUser} = useContext(HelpContext);
+  const [loading, setLoading] = useState(false);
+  const {currentRequest, setCurrentRequest} = useContext(HelpContext);
+
 
   //Shows the supply request form if true
   const { showSupplyRequest, setShowSupplyRequest } = useContext(HelpContext);
@@ -28,6 +39,7 @@ const TicketForm = () => {
     } else if (requestType === 'Supply Request') {
       setShowSupplyRequest(true);
     }}, [requestType]);
+  
 
 
   
@@ -35,15 +47,20 @@ const TicketForm = () => {
     e.preventDefault();
 
     try {
+      setLoading(true);
       const response = await axios.post(
         'http://localhost:3001/createJiraIssue',
         {
+          projectName: 'TI',  
           summary: summary,
           description: description,
         }
       );
-
-      console.log('Jira issue created:', response.data);
+      //setCurrentRequest({id: response.data.key, status: 'Pending Review'});
+      setLoading(false);
+      setCurrentPage(2);
+      console.log('Jira issue created:', response);
+      setCurrentRequest({id: response.data.id, key : response.data.key, status : "851"})
       //window.location.href = `https://jira.signifyhealth.com/projects/MS/queues/custom${response.data.key}`;
     } catch (error) {
       console.error('Error creating Jira issue:', error);
@@ -65,6 +82,7 @@ const TicketForm = () => {
   useEffect(() => {
     console.log("des below")
     console.log(description)
+    console.log(summary)
   }, [description]);
 
 
@@ -72,13 +90,14 @@ const TicketForm = () => {
     <div className="ticketContainer">
       <div className="ticketFormPage">
         
-        {currentPage === 1 && ( 
+      
+         {!loading && currentPage === 1 && ( 
         <div className='currentTicketForm'> 
           <div className="ticketFormHeader">
             <h1>Create Issue</h1>
           </div>
 
-          <form className="ticketForm" action="/">
+          <form className="ticketForm" onSubmit={(e) => handleSubmit(e)}>
             <div className='ticketFormItemsContainer'>
               <div className='ticketFormItems'>
                 <div className='ticketFormItemIdentifier'>Summary</div>
@@ -127,7 +146,7 @@ const TicketForm = () => {
 
               <div className='ticketFormItems'>
                 <div className='ticketFormItemIdentifier'>Verified Existing Assets?</div>
-                <select className='ticketFormVerifyAssets'>
+                <select className='ticketFormVerifyAssets' disabled={!showSupplyRequest}>
                   <option>Select...</option>
                   <option value="Yes">Yes</option>
                   <option value="No">No</option>
@@ -149,10 +168,11 @@ const TicketForm = () => {
             </div>
 
             <div className='ticketFormButtonContainer'>
-                <button className='ticketFormSecondButton'>
+                {/* <div className='ticketFormSecondButton'>
                   Cancel
-                </button>
-                <button className="ticketFormButton" onClick={handleSubmit2(2)}>
+                </div>
+                 */}
+                <button onClick={handleSubmit2(2)} className="ticketFormButton" >
                   Create Ticket
                 </button>
             </div>
@@ -160,53 +180,9 @@ const TicketForm = () => {
 
         </div>)}
 
-
-        {currentPage === 2 && ( 
-        <div className='currentTicketForm'>
-          <div className="ticketFormHeader">
-            <h1>Comments</h1>
-          </div>
-
-          <form className="ticketForm" action="/">
-            <div className='ticketFormCommentSection'>
-              <div className='ticketAllComments'>
-                <div className='comment'>
-                Messages go here.
-                </div>
-                <div className='comment'>
-                Messages go here.
-                </div>
-                <div className='comment'>
-                Messages go here.
-                </div>
-                <div className='comment'>
-                Messages go here.
-                </div>
-                <div className='comment'>
-                Messages go here.
-                </div>
-              </div>
-              <input
-                className="ticketComment"
-                type="text"
-                name="name"
-                // value={summary}
-                // onChange={summaryChange}
-              />
-            </div>
-    
-            <div className='ticketFormButtonContainer'>
-              
-              <div className='ticketFormSecondButton'>
-                Set Status
-              </div>
-              <div className="ticketFormButton" onClick={handleSubmit2(1)}>
-                Resolve Issue
-              </div>
-            </div>              
-          </form>
-
-        </div>)}
+        {loading && <img src={loadingGif} alt="loading..." />}
+        
+        {!loading && currentPage === 2 && <CommentsPage/>}
 
 
       </div>
