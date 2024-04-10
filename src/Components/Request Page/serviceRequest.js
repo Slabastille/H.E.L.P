@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import ReporterPastTickets from './ReporterPastTickets';
 import ClinicianStatus from './ClinicianStatus';
-import TicketForm from '../CreateIssue Page/TicketForm';
+import TicketForm from '../CreateIssue Page/TicketForm/TicketForm';
 
 const MSRequestPage = () => {
   //confirm before leaving page

@@ -2,7 +2,6 @@ import React, { useState, useContext, useEffect } from 'react';
 import { useHistory, Link } from 'react-router-dom';
 import HelpContext from '../../context/HelpContext';
 import Validate from '../../context/validateNumber';
-import setUserinfo from './setUserInfo';
 
 
 //Finish Form for the reporter info page

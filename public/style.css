@@ -234,10 +234,9 @@ CSS for all the createIssue page below here
   height: 100%;
   width: 30%;
   display: flex;
-  justify-content: baseline;
   align-items: center;
   padding-left: 5%;
-  font-size: 1.2rem;
+  font-size: 1.2em;
 }
 .clinicianInfo {
   width: 80%;
@@ -246,6 +245,9 @@ CSS for all the createIssue page below here
   border-radius: 5px;
   outline: none;
   margin: 0;
+}
+.clinicianInfo:hover{
+  background-color: #ebebea;
 }
 .clinicianRequestType {
   width: 80%;
@@ -260,11 +262,15 @@ CSS for all the createIssue page below here
   display: flex;
   justify-content: center;
   border: none;
-  background: #1c87c9;
+  background: #304964;
   font-size: 30px;
   font-weight: 400;
   color: #fff;
   border-radius: 5px;
+}
+.clinicianButton:hover {
+  background: #506884;
+  cursor: pointer;
 }
 /*
 CSS for all the clinician info above here ^^^
@@ -339,7 +345,7 @@ CSS for all the TicketForms below here
 .ticketFormItemIdentifier{
   width: 20%;
   height: 100%;
-  font-size: 1.3em;
+  font-size: 1.5em;
   padding-left: 30px;
   font-weight: 400;
   /* background-color: #1c87c9; */
@@ -349,8 +355,19 @@ CSS for all the TicketForms below here
   height: 50%;
   border: 1px solid #ccc;
   border-radius: 10px;
-  font-size: 1em;
+  font-size: 1.2em;
   padding: 10px 20px;
+}
+.ticketFormSummary:hover,.ticketFormAddress:hover,
+.ticketFormDescription:hover, .ticketFormSupplies:hover
+{
+  background-color: #ebebea;
+}
+
+
+.ticketFormVerifyAssets:hover, .ticketFormRequestType:hover{
+  background-color: #ebebea;
+  cursor: pointer;
 }
 
 .ticketFormDescription, .ticketFormSupplies, .ticketFormAddress{
@@ -360,69 +377,230 @@ CSS for all the TicketForms below here
   flex-direction: column;
   border: 1px solid #ccc;
   border-radius: 10px;
-  font-size: 1em;
+  font-size: 1.2em;
   padding: 10px 20px;
   resize: none;
   overflow: auto;
 
 }
-/* 
-.summary,
-.selectRequestType,
-.description,
-.address {
-  width: 100%;
-  padding: 8px;
-  margin-bottom: 15px;
-  border: .2px solid black;
-  outline: none;
-  flex: 1;
-  border-radius: 5px;
-}
-
-.summary::placeholder {
-  color: #666666;
-}
-.selectRequestType {
-  color: #666666;
-} */
-
-
-
 
 .ticketFormCommentSection{
   width: 100%;
-  height: 97%;
+  height: 80%;
   display: flex;
   flex-direction: column;
-  background-color: lightgrey
+  justify-content: space-between;
+  align-items: center;
 }
+
+.ticketAllCommentsContainer{
+  width: 99%;
+  height: 70%;
+  max-height: 80%;
+  /* background-color: white; */
+  border-color: lightgray;
+  border-style: double;
+  border-radius: 10px;
+  /* overflow: scroll; */
+
+  /* Hide scrollbar for Chrome, Safari and Opera 
+  ::-webkit-scrollbar {
+    width: 0px;  /* For vertical scrollbars */
+    /* height: 0px; For horizontal scrollbars} */
+
+}
+
 .ticketAllComments{
   width: 100%;
-  height: 40%;
-  max-height: 80%;
+  min-height: 20%;
+  padding: 1%;
+  /* background-color: antiquewhite; */
+  border-bottom: lightgray 1px solid;
+
+  margin-bottom: 1%;
 }
-.ticketComment{
+.commentHeader{
   width: 100%;
-  height: 10%;
-  max-height: 20%;
+  min-height: 5%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top : 1%;
+
 }
+.commentTitle{
+  margin-left: 1%;
+  font-size: 1.1em;
+}
+.commentType{
+  width: 10%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 0.9em;
+  font-weight: 200;
+  margin-right: 1%;
+  border-radius: 5px;
+  border-style: double;
+  border-color: lightgray; 
+}
+.comment{
+  width: 100%;
+  min-height: 10%;
+  flex-grow: 3;
+  white-space: pre-wrap;
+  overflow: auto;
+  margin-bottom: 1%;
+  margin-top: 1%;
+  padding: 1%;
+}
+.commentActions{
+  width: 10%;
+  min-height: 4%;
+  padding-left: 1%;
+  padding-right: 1%;
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: white;
+}
+
+.commentEdit{
+
+}
+.commentDelete{
+
+}
+
+.ticketCommentSection{
+  width: 100%;
+  height: 30%;
+  /* max-height: 20%; */
+  /* z-index: 5; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+}
+.commentSectionContainer{
+  width: 99%;
+  height: 95%;
+  background-color: white;
+  border-color: lightgray;
+  border-style: double;
+  border-radius: 10px;
+
+}
+.commentSectionHeader{
+  width: 100%;
+  height: 15%;
+  display: flex;
+  justify-content: flex-end;
+
+
+}
+.commentSectionHeaderCanned{
+  width: 20%;
+  height: 99%;
+  background-color: white;
+  margin-right: 5%;
+  font-size: 1.1em;
+  font-weight: 200;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+}
+.commentSectionHeaderCanned:hover{
+  /* background-color: #ebebea; */
+  font-weight: 1000;
+  cursor: pointer;
+}
+
+.commentSectionBody{
+  width: 100%;
+  height: 85%;
+  display: flex;
+  flex-direction: column;
+
+}
+.commentBox{
+  width: 100%;
+  height: 85%;
+  overflow: scroll;
+  background-color: #ebebea;
+  padding: 1%;
+  resize: none;
+  border: none;
+
+  /* Hide scrollbar for Chrome, Safari and Opera */
+  ::-webkit-scrollbar {
+    width: 0px;  /* For vertical scrollbars */
+    height: 0px; /* For horizontal scrollbars */
+  }
+
+  /* Hide scrollbar for IE, Edge and Firefox */
+  scrollbar-width: none;  /* For Firefox */
+  -ms-overflow-style: none;  /* For Internet Explorer and Edge */
+}
+.commentBoxButtons{
+  width: 100%;
+  height: 15%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+.commentButtonPublic{
+  width: 20%;
+  height: 90%;
+  background-color: #c4d600;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.1em;
+}
+.commentButtonPublic:hover{
+  background-color: #e1ff00;
+  cursor: pointer;
+}
+.commentButtonInternal{
+  width: 20%;
+  height: 90%;
+  background-color: #304964;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 400;
+  font-size: 1.1em;
+
+}
+.commentButtonInternal:hover{
+  background-color: #506884;
+  
+  cursor: pointer;
+}
+
+
 
 .ticketFormButtonContainer{
   height: 5%;
   width: 100%;
-  background-color: rgb(0, 255, 30);
+  /* background-color: lightgrey; */
   display: flex;
   flex-direction: row;
-  justify-content:flex-end
+  justify-content:space-around;
+  align-items: center;
+  margin-top: 5%;
 }
 .ticketFormButton {
   width: 20%;
-  height: 4%;
+  height: 50%;
   padding: 10px;
   border: none;
-  background: rgb(100, 89, 245);
-  font-size: 30px;
+  background: #304964;
+  font-size: 1.8em;
   font-weight: 400;
   color: #fff;
   border-radius: 10px;
@@ -431,25 +609,146 @@ CSS for all the TicketForms below here
   align-items: center;
 }
 .ticketFormButton:hover {
-  background: #2371a0;
+  background: #506884;
+  cursor: pointer;
 }
 .ticketFormSecondButton{
   width: 20%;
   height: 4%;
   padding: 10px;
   border: none;
-  background: rgb(100, 89, 245);
-  font-size: 30px;
+  /* background: #304964; */
+  font-size: 1.5em;
   font-weight: 400;
-  color: #fff;
-  border-radius: 10px;
+  color: #304964;
+  /* border-radius: 10px; */
   display: flex;
   justify-content: center;
   align-items: center;
+  background : none;
 }
 .ticketFormSecondButton:hover {
-  background: #2371a0;
+  /* background: #506884; */
+  cursor: pointer;
+  text-decoration: underline;
+
 }
+
+.ticketFormResolveContainer{
+  width: 99%;
+  height: 80%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  /* background-color: white; */
+  border-color: lightgray;
+  border-style: double;
+  border-radius: 10px;
+}
+.ticketFormResolveItems{
+  width: 80%;
+  height: 20%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1%;
+
+}
+.ticketFormResolveItemHeader{
+  height: 50%;
+  width: 30%;
+  font-size: 1.5em;
+  font-weight: 400;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  /* padding-left: 5%; */
+}
+.ticketFormResolveItemBody{
+  height: 50%;
+  width: 70%;
+  font-size: 1.2em;
+  display: flex;
+  justify-content: flex-start;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  font-size: 1.2em;
+  padding: 10px 20px;
+}
+.ticketFormResolveItemBody:hover{
+  background-color: #ebebea;
+  cursor: text;
+
+}
+.ticketFormResolveItemBodyIssues{
+  height: 50%;
+  width: 70%;
+  font-size: 1.2em;
+  display: flex;
+  justify-content: flex-start;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  font-size: 1.2em;
+  /* padding: 10px 20px; */
+  /* background-color:yellow; */
+}
+.ticketFormResolveItemBodyIssues:hover{
+  background-color: #ebebea;
+  cursor: text;
+}
+.ticketFormResolveItemBodyIssues:focus-within {
+  border: 2px solid blue; /* Adds a blue border when an element inside it is focused */
+}
+.ticketFormResolveItemBodyIssueKeys{
+  background-color: #c4d600;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 22%;
+  font-size: 1em;
+}
+.ticketFormResolveItemBodyIssueInput{
+  height: 100%;
+  width: 100%;
+  border: none;
+  color: black;
+  outline: none;
+  border-radius: 10px;
+  font-size: 1.2em;
+  padding-left: 2%;
+}
+.ticketFormResolveItemBodyIssueInput:hover{
+  background-color: #ebebea;
+  cursor: text;
+}
+.ticketFormResolveItemBodylabel {
+  height: 60%;
+  width: 70%;
+  font-size: 1.2em;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  
+}
+.ticketFormResolveItemBodyCategories{
+  height: 49%;
+  width: 70%;
+  font-size: 1.2em;
+  display: flex;
+  justify-content: space-between;
+}
+.ticketFormResolveItemBodyCategorySelector{
+  width: 49%;
+  padding: 10px 20px;
+  border-radius: 10px;
+  
+}
+.ticketFormResolveItemBodyCategorySelector:hover{
+  background-color: #ebebea;
+}
+
 /* 
 CSS for all the TicketForms above here
 */
