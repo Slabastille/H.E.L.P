@@ -25,7 +25,8 @@ export const HelpProvider = ({ children }) => {
   const [showSupplyRequest, setShowSupplyRequest] = useState(false);
   const [comments, setComments] = useState([]);
   const [currentRequest, setCurrentRequest] = useState({ id : "", key : "", status : "Waiting for Support", });
-
+  const [linkedRequests, setLinkedRequests] = useState([]);
+  const [linkType, setLinkType] = useState('');
   return (
     <HelpContext.Provider
       value={{
@@ -65,6 +66,10 @@ export const HelpProvider = ({ children }) => {
         setCurrentAssignedTable,
         currentRequest,
         setCurrentRequest,
+        linkedRequests,
+        setLinkedRequests,
+        linkType,
+        setLinkType,
       }}
     >
       {children}

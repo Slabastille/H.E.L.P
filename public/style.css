@@ -185,7 +185,6 @@ CSS for all the createIssue page below here
   flex-direction: column;
   align-items: center;
   background-color: white;
-
 }
 .clinicianInfoHeader {
   width: 70%;
@@ -246,7 +245,7 @@ CSS for all the createIssue page below here
   outline: none;
   margin: 0;
 }
-.clinicianInfo:hover{
+.clinicianInfo:hover {
   background-color: #ebebea;
 }
 .clinicianRequestType {
@@ -288,7 +287,6 @@ CSS for all the TicketForms below here
   border: 1px solid #e4e2e2;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
   background-color: white;
-
 }
 .ticketFormPage {
   height: 100%;
@@ -297,7 +295,7 @@ CSS for all the TicketForms below here
   font-size: 14px;
   padding: 10px;
 }
-.currentTicketForm{
+.currentTicketForm {
   width: 100%;
   height: 100%;
   flex-direction: column;
@@ -325,15 +323,16 @@ CSS for all the TicketForms below here
   align-items: flex-start;
 }
 
-.ticketFormItemsContainer{
+.ticketFormItemsContainer {
   width: 100%;
   height: 80%;
   display: flex;
   flex-direction: column;
   overflow: auto;
+  /* background-color: #ebebea; */
 }
 
-.ticketFormItems{
+.ticketFormItems {
   width: 100%;
   height: 16%;
   display: flex;
@@ -341,8 +340,9 @@ CSS for all the TicketForms below here
   justify-content: space-between;
   align-items: top;
   margin-bottom: 1%;
+  /* background-color: aqua; */
 }
-.ticketFormItemIdentifier{
+.ticketFormItemIdentifier {
   width: 20%;
   height: 100%;
   font-size: 1.5em;
@@ -350,27 +350,32 @@ CSS for all the TicketForms below here
   font-weight: 400;
   /* background-color: #1c87c9; */
 }
-.ticketFormSummary, .ticketFormRequestType, .ticketFormVerifyAssets{
+.ticketFormSummary,
+.ticketFormRequestType,
+.ticketFormVerifyAssets {
   width: 80%;
-  height: 50%;
+  height: 70%;
   border: 1px solid #ccc;
   border-radius: 10px;
   font-size: 1.2em;
   padding: 10px 20px;
 }
-.ticketFormSummary:hover,.ticketFormAddress:hover,
-.ticketFormDescription:hover, .ticketFormSupplies:hover
-{
+.ticketFormSummary:hover,
+.ticketFormAddress:hover,
+.ticketFormDescription:hover,
+.ticketFormSupplies:hover {
   background-color: #ebebea;
 }
 
-
-.ticketFormVerifyAssets:hover, .ticketFormRequestType:hover{
+.ticketFormVerifyAssets:hover,
+.ticketFormRequestType:hover {
   background-color: #ebebea;
   cursor: pointer;
 }
 
-.ticketFormDescription, .ticketFormSupplies, .ticketFormAddress{
+.ticketFormDescription,
+.ticketFormSupplies,
+.ticketFormAddress {
   width: 80%;
   height: 100%;
   display: flex;
@@ -381,10 +386,9 @@ CSS for all the TicketForms below here
   padding: 10px 20px;
   resize: none;
   overflow: auto;
-
 }
 
-.ticketFormCommentSection{
+.ticketFormCommentSection {
   width: 100%;
   height: 80%;
   display: flex;
@@ -393,7 +397,7 @@ CSS for all the TicketForms below here
   align-items: center;
 }
 
-.ticketAllCommentsContainer{
+.ticketAllCommentsContainer {
   width: 99%;
   height: 70%;
   max-height: 80%;
@@ -406,11 +410,10 @@ CSS for all the TicketForms below here
   /* Hide scrollbar for Chrome, Safari and Opera 
   ::-webkit-scrollbar {
     width: 0px;  /* For vertical scrollbars */
-    /* height: 0px; For horizontal scrollbars} */
-
+  /* height: 0px; For horizontal scrollbars} */
 }
 
-.ticketAllComments{
+.ticketAllComments {
   width: 100%;
   min-height: 20%;
   padding: 1%;
@@ -419,20 +422,19 @@ CSS for all the TicketForms below here
 
   margin-bottom: 1%;
 }
-.commentHeader{
+.commentHeader {
   width: 100%;
   min-height: 5%;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top : 1%;
-
+  margin-top: 1%;
 }
-.commentTitle{
+.commentTitle {
   margin-left: 1%;
   font-size: 1.1em;
 }
-.commentType{
+.commentType {
   width: 10%;
   display: flex;
   justify-content: center;
@@ -442,9 +444,9 @@ CSS for all the TicketForms below here
   margin-right: 1%;
   border-radius: 5px;
   border-style: double;
-  border-color: lightgray; 
+  border-color: lightgray;
 }
-.comment{
+.comment {
   width: 100%;
   min-height: 10%;
   flex-grow: 3;
@@ -454,7 +456,7 @@ CSS for all the TicketForms below here
   margin-top: 1%;
   padding: 1%;
 }
-.commentActions{
+.commentActions {
   width: 10%;
   min-height: 4%;
   padding-left: 1%;
@@ -466,14 +468,12 @@ CSS for all the TicketForms below here
   background-color: white;
 }
 
-.commentEdit{
-
+.commentEdit {
 }
-.commentDelete{
-
+.commentDelete {
 }
 
-.ticketCommentSection{
+.ticketCommentSection {
   width: 100%;
   height: 30%;
   /* max-height: 20%; */
@@ -481,26 +481,22 @@ CSS for all the TicketForms below here
   display: flex;
   align-items: center;
   justify-content: center;
-  
 }
-.commentSectionContainer{
+.commentSectionContainer {
   width: 99%;
   height: 95%;
   background-color: white;
   border-color: lightgray;
   border-style: double;
   border-radius: 10px;
-
 }
-.commentSectionHeader{
+.commentSectionHeader {
   width: 100%;
   height: 15%;
   display: flex;
   justify-content: flex-end;
-
-
 }
-.commentSectionHeaderCanned{
+.commentSectionHeaderCanned {
   width: 20%;
   height: 99%;
   background-color: white;
@@ -512,20 +508,19 @@ CSS for all the TicketForms below here
   align-items: center;
   border-radius: 10px;
 }
-.commentSectionHeaderCanned:hover{
+.commentSectionHeaderCanned:hover {
   /* background-color: #ebebea; */
   font-weight: 1000;
   cursor: pointer;
 }
 
-.commentSectionBody{
+.commentSectionBody {
   width: 100%;
   height: 85%;
   display: flex;
   flex-direction: column;
-
 }
-.commentBox{
+.commentBox {
   width: 100%;
   height: 85%;
   overflow: scroll;
@@ -536,22 +531,22 @@ CSS for all the TicketForms below here
 
   /* Hide scrollbar for Chrome, Safari and Opera */
   ::-webkit-scrollbar {
-    width: 0px;  /* For vertical scrollbars */
+    width: 0px; /* For vertical scrollbars */
     height: 0px; /* For horizontal scrollbars */
   }
 
   /* Hide scrollbar for IE, Edge and Firefox */
-  scrollbar-width: none;  /* For Firefox */
-  -ms-overflow-style: none;  /* For Internet Explorer and Edge */
+  scrollbar-width: none; /* For Firefox */
+  -ms-overflow-style: none; /* For Internet Explorer and Edge */
 }
-.commentBoxButtons{
+.commentBoxButtons {
   width: 100%;
   height: 15%;
   display: flex;
   justify-content: flex-end;
   align-items: center;
 }
-.commentButtonPublic{
+.commentButtonPublic {
   width: 20%;
   height: 90%;
   background-color: #c4d600;
@@ -560,11 +555,11 @@ CSS for all the TicketForms below here
   align-items: center;
   font-size: 1.1em;
 }
-.commentButtonPublic:hover{
+.commentButtonPublic:hover {
   background-color: #e1ff00;
   cursor: pointer;
 }
-.commentButtonInternal{
+.commentButtonInternal {
   width: 20%;
   height: 90%;
   background-color: #304964;
@@ -574,23 +569,20 @@ CSS for all the TicketForms below here
   align-items: center;
   font-weight: 400;
   font-size: 1.1em;
-
 }
-.commentButtonInternal:hover{
+.commentButtonInternal:hover {
   background-color: #506884;
-  
+
   cursor: pointer;
 }
 
-
-
-.ticketFormButtonContainer{
+.ticketFormButtonContainer {
   height: 5%;
   width: 100%;
   /* background-color: lightgrey; */
   display: flex;
   flex-direction: row;
-  justify-content:space-around;
+  justify-content: space-around;
   align-items: center;
   margin-top: 5%;
 }
@@ -612,7 +604,7 @@ CSS for all the TicketForms below here
   background: #506884;
   cursor: pointer;
 }
-.ticketFormSecondButton{
+.ticketFormSecondButton {
   width: 20%;
   height: 4%;
   padding: 10px;
@@ -625,16 +617,15 @@ CSS for all the TicketForms below here
   display: flex;
   justify-content: center;
   align-items: center;
-  background : none;
+  background: none;
 }
 .ticketFormSecondButton:hover {
   /* background: #506884; */
   cursor: pointer;
   text-decoration: underline;
-
 }
 
-.ticketFormResolveContainer{
+.ticketFormResolveContainer {
   width: 99%;
   height: 80%;
   display: flex;
@@ -646,7 +637,7 @@ CSS for all the TicketForms below here
   border-style: double;
   border-radius: 10px;
 }
-.ticketFormResolveItems{
+.ticketFormResolveItems {
   width: 80%;
   height: 20%;
   display: flex;
@@ -654,9 +645,8 @@ CSS for all the TicketForms below here
   justify-content: space-between;
   align-items: center;
   margin-bottom: 1%;
-
 }
-.ticketFormResolveItemHeader{
+.ticketFormResolveItemHeader {
   height: 50%;
   width: 30%;
   font-size: 1.5em;
@@ -666,7 +656,7 @@ CSS for all the TicketForms below here
   align-items: center;
   /* padding-left: 5%; */
 }
-.ticketFormResolveItemBody{
+.ticketFormResolveItemBody {
   height: 50%;
   width: 70%;
   font-size: 1.2em;
@@ -677,12 +667,11 @@ CSS for all the TicketForms below here
   font-size: 1.2em;
   padding: 10px 20px;
 }
-.ticketFormResolveItemBody:hover{
+.ticketFormResolveItemBody:hover {
   background-color: #ebebea;
   cursor: text;
-
 }
-.ticketFormResolveItemBodyIssues{
+.ticketFormResolveItemBodyIssues {
   height: 50%;
   width: 70%;
   font-size: 1.2em;
@@ -694,14 +683,14 @@ CSS for all the TicketForms below here
   /* padding: 10px 20px; */
   /* background-color:yellow; */
 }
-.ticketFormResolveItemBodyIssues:hover{
+.ticketFormResolveItemBodyIssues:hover {
   background-color: #ebebea;
   cursor: text;
 }
 .ticketFormResolveItemBodyIssues:focus-within {
   border: 2px solid blue; /* Adds a blue border when an element inside it is focused */
 }
-.ticketFormResolveItemBodyIssueKeys{
+.ticketFormResolveItemBodyIssueKeys {
   background-color: #c4d600;
   display: flex;
   flex-direction: row;
@@ -709,7 +698,7 @@ CSS for all the TicketForms below here
   width: 22%;
   font-size: 1em;
 }
-.ticketFormResolveItemBodyIssueInput{
+.ticketFormResolveItemBodyIssueInput {
   height: 100%;
   width: 100%;
   border: none;
@@ -719,33 +708,35 @@ CSS for all the TicketForms below here
   font-size: 1.2em;
   padding-left: 2%;
 }
-.ticketFormResolveItemBodyIssueInput:hover{
+.ticketFormResolveItemBodyIssueInput:hover {
   background-color: #ebebea;
   cursor: text;
 }
 .ticketFormResolveItemBodylabel {
   height: 60%;
   width: 70%;
-  font-size: 1.2em;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  
+  font-size: 1.2em;
 }
-.ticketFormResolveItemBodyCategories{
+.ticketFormResolveItemBodylabels {
+  font-size: 1em;
+  /* padding-bottom: 5px; */
+}
+.ticketFormResolveItemBodyCategories {
   height: 49%;
   width: 70%;
-  font-size: 1.2em;
   display: flex;
   justify-content: space-between;
 }
-.ticketFormResolveItemBodyCategorySelector{
+.ticketFormResolveItemBodyCategorySelector {
+  font-size: 1.2em;
   width: 49%;
   padding: 10px 20px;
   border-radius: 10px;
-  
 }
-.ticketFormResolveItemBodyCategorySelector:hover{
+.ticketFormResolveItemBodyCategorySelector:hover {
   background-color: #ebebea;
 }
 
@@ -863,7 +854,6 @@ CSS for all the TicketForms above here
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
   border: 1px solid #e4e2e2;
   background-color: white;
-
 }
 
 .full-ticket-table {
@@ -872,6 +862,18 @@ CSS for all the TicketForms above here
   table-layout: fixed;
   display: block;
   overflow: auto;
+}
+.clicked {
+  background-color: #4caf50; /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  transition-duration: 0.4s;
+  cursor: pointer;
 }
 .full-ticket-table th {
   text-align: start;
@@ -909,7 +911,6 @@ CSS for all the TicketForms above here
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
   border: 1px solid #e4e2e2;
   background-color: white;
-
 }
 .clinicianStatus > button {
   padding: 10px;
@@ -1030,7 +1031,6 @@ CSS for all the TicketForms above here
   border: 1px solid #e4e2e2;
   display: flex;
   align-items: center;
-  
 }
 /* Landing page information below */
 .landingOrganizer {
@@ -1074,7 +1074,6 @@ CSS for all the TicketForms above here
   border: 1px solid #e4e2e2;
   display: flex;
   background-color: white;
-
 }
 .landingBottomRightSection {
   width: 49.75%;
@@ -1084,7 +1083,6 @@ CSS for all the TicketForms above here
   border: 1px solid #e4e2e2;
   display: flex;
   background-color: white;
-
 }
 .loading {
   display: flex;
@@ -1121,44 +1119,107 @@ CSS for all the TicketForms above here
   padding: 10px;
   display: flex;
   flex-direction: column;
+  overflow: hidden;
+  /* background-color: lightcoral; */
 }
+
 .triage-ticket-table-title {
   width: 100%;
   height: 8%;
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 0.5%;
   position: sticky;
+  font-size: 2rem;
 }
+.triage-ticket-table-title > div:nth-child(2) {
+  height: 50%;
+  width: 3%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1rem;
+  border-radius: 10px;
+  background-color: #ebebea;
+}
+
 .triage-ticket-table {
   width: 100%;
-  height: 92%;
+  height: 500px;
   table-layout: fixed;
+  /* background-color: lightblue; */
 }
+
 .triage-ticket-table-header {
   width: 100%;
+  height: 7%;
   position: sticky;
   top: 0;
   z-index: 100;
-  border-bottom: 2px solid rgb(223, 225, 230);
-}
-.triage-ticket-table-body {
-  width: 100%;
-  height: 93%;
-  overflow: auto;
-}
-
-.triage-ticket-table table {
-  width: 100%;
-  height: 100%;
-}
-
-.triage-ticket-table th {
-  text-align: start;
+  /* background-color: aqua; */
+  overflow: hidden;
 }
 .triage-ticket-table-header tr {
   height: 100%;
   width: 100%;
   border-bottom: 2px solid rgb(223, 225, 230);
+}
+
+.triage-ticket-table-header {
+  text-align: start;
+  background-color: #ebebea;
+  width: 50%;
+}
+.triage-ticket-table-header th:hover {
+}
+
+.triage-ticket-table-headerItems {
+  display: flex;
+  align-items: center;
+  width: fit-content;
+  height: 100%;
+  padding-left: 2%;
+  padding-right: 2%;
+  padding-top: 1%;
+  overflow: hidden;
+  border-radius: 5px;
+}
+.triage-ticket-table-headerItems:hover {
+  cursor: pointer;
+  background-color: #d0cfce;
+}
+.triage-ticket-table-headerItemsImg {
+  height: 20px;
+  width: 20px;
+}
+.triage-ticket-table-container {
+  width: 100%;
+  height: 92%;
+  overflow-y: scroll;
+}
+.triage-ticket-table-body {
+  width: 100%;
+  overflow: scroll;
+}
+
+.triage-ticket-table-body::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.triage-ticket-table-body {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.triage-ticket-table-body tr:hover {
+  background-color: #f5f5f5;
+}
+
+.triage-ticket-table table {
+  width: 100%;
+  height: 100%;
 }
 
 .triage-ticket-table td {
@@ -1185,10 +1246,7 @@ CSS for all the TicketForms above here
   padding-top: 15px;
   padding-bottom: 15px;
 }
-.triage-ticket-table-header th:hover {
-  cursor: pointer;
-  background-color: #506884;
-}
+
 /* triage section above */
 /* Landing page information above */
 
@@ -1208,14 +1266,13 @@ CSS for all the AssignedToMe page below here
   height: 100%;
   padding: 10px;
   display: flex;
-  
 }
 
 .assignedToMeQueues {
   width: 100%;
   height: 100%;
   padding: 10px;
-  
+
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
   border: 1px solid #e4e2e2;
   background-color: white;
@@ -1227,6 +1284,8 @@ CSS for all the AssignedToMe page below here
   display: flex;
   flex-direction: column;
   align-items: center;
+  font-size: 2em;
+  padding-top: 1%;
 }
 .assignedToMeQueuesBody {
   width: 100%;
@@ -1234,7 +1293,6 @@ CSS for all the AssignedToMe page below here
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  background-color: lightgoldenrodyellow;
 }
 /* .assignedToMeQueuesBody div {
   width: 100%;
@@ -1253,22 +1311,31 @@ CSS for all the AssignedToMe page below here
   justify-content: space-between;
   align-items: center;
   border-radius: 10px;
-  background-color: lightgreen;
 }
 .assignedToMeAllQueueTitles:hover {
-  background-color: darkcyan;
+  background-color: #ebebea;
   cursor: pointer;
+}
+.assignedToMeAllQueueTitleHeaders {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.2em;
 }
 .assignedQueueLength {
   display: flex;
   justify-content: center;
+  align-items: center;
   width: 15%;
-  background-color: red;
-  border-radius: 10px;
+  background-color: #bcbab9;
+  border-radius: 20px;
 }
 
 .assignedToMeCurrentQueue {
-  background-color: aqua;
+  background-color: #ebebea;
+}
+.assignedToMeCurrentQueue:hover {
+  background-color: #d0cfce;
 }
 .assignedToMeTableContainer {
   height: 100%;
@@ -1278,51 +1345,97 @@ CSS for all the AssignedToMe page below here
 .assignedToMeTable {
   width: 100%;
   height: 100%;
-  display: flex;
-  flex-direction: column;
   padding: 10px;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
   border: 1px solid #e4e2e2;
-  background-color: white;
 
+  /* background-color: white; */
+  /* background-color: #000000; */
 }
-.assignedContainer {
-  height: 90%;
+
+.assignedToMeTable table {
   width: 100%;
+  height: 100%;
   table-layout: fixed;
-  display: block;
-  overflow: auto;
+  background-color: lightcyan;
 }
-.allAssignedIssuesTable {
+.assignedToMeTable tr {
+  display: table;
+  width: 100%;
+  height: 5%;
+  table-layout: fixed;
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+.assignedToMeTable th {
   text-align: start;
 }
-.allAssignedIssuesTable thead {
-  text-align: start;
-
-  position: sticky;
-  top: 0;
-  background-color: #1c87c9;
-}
-.allAssignedIssuesTable tbody {
+.assignedToMeTable tbody {
   display: block;
   max-height: 100%; /* Set this to the desired height */
   overflow-y: auto;
 }
-.allAssignedIssuesTable th {
-  text-align: start;
-  vertical-align: middle;
+
+.assignedHeadersContainer {
+  width: 100%;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+.assignedHeadersContainer tr {
+  border-bottom: 2px solid rgb(223, 225, 230);
 }
 
-.allAssignedIssuesTable tr {
-  display: table;
+.assignedBody {
+  display: block;
   width: 100%;
-  table-layout: fixed;
+  height: 100%;
+  overflow: auto;
 }
-/*
-.assignedSupplyIssuesTable {
+
+.assignedHeadersContainer th:nth-child(1) {
+  width: 2%;
 }
-.allAssignedSlaTable {
-} */
+.assignedHeadersContainer th:nth-child(2) {
+  width: 8%;
+}
+.assignedHeadersContainer th:nth-child(3) {
+  width: 55%;
+}
+.assignedHeadersContainer th:nth-child(4) {
+  width: 15%;
+}
+.assignedHeadersContainer th:nth-child(5) {
+  width: 10%;
+}
+.assignedHeadersContainer th:nth-child(6) {
+  width: 5%;
+}
+.assignedHeadersContainer th:nth-child(7) {
+  width: 5%;
+}
+
+.assignedBody td:nth-child(1) {
+  width: 2%;
+}
+.assignedBody td:nth-child(2) {
+  width: 8%;
+}
+.assignedBody td:nth-child(3) {
+  width: 55%;
+}
+.assignedBody td:nth-child(4) {
+  width: 15%;
+}
+.assignedBody td:nth-child(5) {
+  width: 10%;
+}
+.assignedBody td:nth-child(6) {
+  width: 5%;
+}
+.assignedBody td:nth-child(7) {
+  width: 5%;
+}
 
 /* 
 CSS for all the AssignedToMe page above here

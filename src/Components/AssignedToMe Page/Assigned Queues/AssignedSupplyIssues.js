@@ -11,9 +11,8 @@ const AssignedSupplyIssues = () => {
   }
 
   return (
-    <div className="assignedContainer">
-      <table className="assignedSupplyIssuesTable">
-        <thead>
+      <table >
+        <thead className='assignedHeaders'>
           <tr>
             <th>Fulfill</th>
             <th>Key</th>
@@ -25,9 +24,8 @@ const AssignedSupplyIssues = () => {
           </tr>
         </thead>
 
-        <tbody>{createAssignedSupplyRows(assignedSupplyIssues)}</tbody>
+        <tbody className='assignedBody'>{createAssignedSupplyRows(assignedSupplyIssues)}</tbody>
       </table>
-    </div>
   );
 };
 

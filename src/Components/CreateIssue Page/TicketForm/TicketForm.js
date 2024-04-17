@@ -14,11 +14,12 @@ import loadingGif from '../../../../public/img/loading.gif'
 const TicketForm = () => {
   const history = useHistory();
   //Current Page within the TicketForm Container
-  const [currentPage, setCurrentPage] = useState(2);
+  const [currentPage, setCurrentPage] = useState(1);
   const { reporter } = useContext(HelpContext);
 
   //Variables for the api body
   const [ summary, setSummary ] = useState('');
+  const [issueType, setIssueType] = useState('Service Request');
   const [ description, setDescription ] = useState('');
   const { requestType, setRequestType } = useContext(HelpContext);
   const [verifiedAssets, setVerifiedAssets] = useState('');
@@ -28,6 +29,7 @@ const TicketForm = () => {
   const {loggedInUser} = useContext(HelpContext);
   const [loading, setLoading] = useState(false);
   const {currentRequest, setCurrentRequest} = useContext(HelpContext);
+  const {linkedRequests , setLinkedRequests} = useContext(HelpContext);
 
 
   //Shows the supply request form if true
@@ -48,28 +50,32 @@ const TicketForm = () => {
 
     try {
       setLoading(true);
+      if(requestType === 'Support Request'){
       const response = await axios.post(
         'http://localhost:3001/createJiraIssue',
         {
           projectName: 'TI',  
           summary: summary,
           description: description,
+          issueType: issueType
         }
       );
-      //setCurrentRequest({id: response.data.key, status: 'Pending Review'});
-      setLoading(false);
-      setCurrentPage(2);
+      setCurrentRequest({id: response.data.id, key:response.data.key, status: 'Waiting for Support'});
       console.log('Jira issue created:', response);
-      setCurrentRequest({id: response.data.id, key : response.data.key, status : "851"})
       //window.location.href = `https://jira.signifyhealth.com/projects/MS/queues/custom${response.data.key}`;
+    }
+    setCurrentPage(2);
+    setLoading(false);
     } catch (error) {
-      console.error('Error creating Jira issue:', error);
+      console.log("Failed to create Jira issue")
     }
   };
   const handleSubmit2 = (a) => (e) => {
     e.preventDefault();
     console.log("Going to page " + a)
+    setCurrentRequest({id: '1799361', key:'TI-241132', status: 'Waiting For Support'})
     setCurrentPage(a)
+
     //alert(`Ticket Submitted for Review`);
   };
 
@@ -83,7 +89,8 @@ const TicketForm = () => {
     console.log("des below")
     console.log(description)
     console.log(summary)
-  }, [description]);
+    console.log(issueType)
+  }, [issueType]);
 
 
   return (
@@ -97,7 +104,7 @@ const TicketForm = () => {
             <h1>Create Issue</h1>
           </div>
 
-          <form className="ticketForm" onSubmit={(e) => handleSubmit(e)}>
+          <form className="ticketForm">
             <div className='ticketFormItemsContainer'>
               <div className='ticketFormItems'>
                 <div className='ticketFormItemIdentifier'>Summary</div>
@@ -109,6 +116,17 @@ const TicketForm = () => {
                   placeholder="Summary"
                   onChange={changeFormValue(setSummary)}
                 />
+              </div>
+
+              <div className='ticketFormItems'>
+                <div className='ticketFormItemIdentifier'>Issue Type</div>
+                <select className="ticketFormRequestType" onChange={changeFormValue(setIssueType)} type="select">
+                  <option>Choose an Issue Type</option>
+                  <option value={'Service Request'}>Service Request</option>
+                  <option value={'Task'}>Task</option>
+                  {/* <option value={'Incident'}>Incident</option> */}
+
+                </select>
               </div>
 
               <div className='ticketFormItems'>
@@ -124,7 +142,7 @@ const TicketForm = () => {
 
               <div className='ticketFormItems'>
                 <div className='ticketFormItemIdentifier'>Request Type</div>
-                <select className="ticketFormRequestType" onChange={changeFormValue(setRequestType)} type="select">
+                <select className="ticketFormRequestType" value={requestType} onChange={changeFormValue(setRequestType)} type="select">
                   <option>Choose a Request Type</option>
                   <option value={'Support Request'}>Support Request</option>
                   <option value={'Supply Request'}>Supply Request</option>

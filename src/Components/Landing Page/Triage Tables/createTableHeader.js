@@ -12,22 +12,34 @@ const createTableHeader = (setSortConfig) => {
         </a>
       </th>
       <th style={{ width: '8%' }} onClick={() => handleSort('key', setSortConfig)}>
+        <div>
         Key
+        </div>
       </th>
       <th style={{ width: '42%' }} onClick={() => handleSort('fields.summary', setSortConfig)}>
+        <div>
         Summary
+        </div>
       </th>
       <th style={{ width: '20%' }} onClick={() => handleSort('fields.reporter.name', setSortConfig)}>
+        <div>
         Reporter
+        </div>
       </th>
       <th style={{ width: '14%' }} onClick={() => handleSort('fields.status.name', setSortConfig)}>
+        <div>
         Status
+        </div>
       </th>
       <th style={{ width: '7%' }} onClick={() => handleSort('fields.created', setSortConfig)}>
+        <div>
         Created
+        </div>
       </th>
       <th style={{ width: '7%' }} onClick={() => handleSort('fields.updated', setSortConfig)}>
+        <div>
         Updated
+        </div>
       </th>
     </tr>
   );

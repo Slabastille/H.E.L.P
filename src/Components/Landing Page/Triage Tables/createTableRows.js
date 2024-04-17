@@ -7,7 +7,7 @@ const createTableRows = (arr) => {
     <tr key={value.key}>
       <td style={{ width: '2%' }}>
         <a>
-          <input type="checkbox" />
+          <input type="checkbox" checked={isAllChecked} onChange={handleHeaderCheckboxClick} />
         </a>
       </td>
       <td style={{ width: '8%' }}>
@@ -17,7 +17,7 @@ const createTableRows = (arr) => {
       </td>
       <td
         style={{
-          width: '42%',
+          width: '40%',
           overflow: 'hidden',
           textOverflow: 'ellipsis',
         }}
@@ -33,8 +33,8 @@ const createTableRows = (arr) => {
       >
         Waiting For Customer
       </td>
-      <td style={{ width: '7%' }}>{extractDate(value.fields.created)}</td>
-      <td style={{ width: '7%' }}>{extractDate(value.fields.updated)}</td>
+      <td style={{ width: '8%' }}>{extractDate(value.fields.created)}</td>
+      <td style={{ width: '8%' }}>{extractDate(value.fields.updated)}</td>
     </tr>
   ));
 };

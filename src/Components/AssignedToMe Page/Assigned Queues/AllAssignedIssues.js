@@ -34,14 +34,13 @@ const AllAssignedIssues = () => {
     setAssignedIssues(sortedassignedIssues);
   }, [sortConfigAllAssigned]);
   return (
-    <div className="assignedContainer">
-      <table className="allAssignedIssuesTable">
-        <thead>
+      <table>
+        <thead className='assignedHeadersContainer'>
           <tr>
             <th>
               <input type="checkbox" />
             </th>
-            <th onClick={() => handleSort2('key', setSortConfigAllAssigned)}>Key</th>
+            <th onClick={() => handleSort2('key', setSortConfigAllAssigned)}><div>Key</div><div>arrowhere</div></th>
             <th onClick={() => handleSort2('fields.summary', setSortConfigAllAssigned)}>Summary</th>
             <th onClick={() => handleSort2('fields.reporter.name', setSortConfigAllAssigned)}>Reporter</th>
             <th onClick={() => handleSort2('fields.status.name', setSortConfigAllAssigned)}>Status</th>
@@ -50,9 +49,8 @@ const AllAssignedIssues = () => {
           </tr>
         </thead>
 
-        <tbody>{createAssignedIssuesRows(assignedIssues)}</tbody>
+        <tbody className='assignedBody'>{createAssignedIssuesRows(assignedIssues)}</tbody>
       </table>
-    </div>
   );
 };
 
