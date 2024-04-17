@@ -6,9 +6,8 @@ const AllAssignedSLA = () => {
   const { assignedIssues } = useContext(HelpContext);
 
   return (
-    <div className="full-ticket-table">
       <table>
-        <thead>
+        <thead className='assignedHeaders'>
           <tr>
             <th>
               <input type="checkbox" />
@@ -22,9 +21,8 @@ const AllAssignedSLA = () => {
           </tr>
         </thead>
 
-        <tbody>{createAssignedSlaRows(assignedIssues)}</tbody>
+        <tbody className='assignedBody'>{createAssignedSlaRows(assignedIssues)}</tbody>
       </table>
-    </div>
   );
 };
 

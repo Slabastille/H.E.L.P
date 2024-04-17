@@ -11,7 +11,7 @@ const AssignedToMe = () => {
   const retrieveIssues = async () => {
     try {
       const response = await axios.post('http://localhost:3001/findTickets', {
-        jql: "assignee = 'slabastille@signifyhealth.com' AND status not in (Canceled, Closed, Done, Resolved, 'Task Complete', 'Task Verified (Accepted)')",
+        jql: "assignee = 'slabastille@signifyhealth.com' AND resolution = Unresolved order by updated DESC",
       });
       setAssignedIssues(response.data);
     } catch (error) {

@@ -4,11 +4,11 @@ import extractTime from '../../Ticket Tables/extractTime';
 const createAssignedIssuesRows = (arr) => {
   return arr.map((value) => (
     <tr key={value.key}>
-      <th>
+      <td>
         <a>
           <input type="checkbox" />
         </a>
-      </th>
+      </td>
       <td>
         <a href={'https://jira.signifyhealth.com/browse/' + value.key} target="_blank" rel="noopener noreferrer">
           {value.key}

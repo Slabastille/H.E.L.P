@@ -4,9 +4,8 @@ const path = require('path');
 const app = express();
 const port = 3001;
 const cors = require('cors');
-// const authToken = process.env.AUTH_TOKEN
-const authToken = 'MjEyMzQ3MDk4ODQwOt3Ejix/UVzg5JouEo6ancp7M8/p';
-const devToken = 'OTE3MzQxNTcwNzM3OsMm6lB0v+Q8lIx2/ZUn3n8TIDea';
+// const devToken = process.env.AUTH_TOKEN
+
 // const history = require('connect-history-api-fallback');
 // app.use(history());
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
@@ -15,9 +14,7 @@ app.use(express.json());
 
 app.use(express.static(path.join(__dirname, '../public')));
 
-app.get('/', (req, res) =>
-  res.sendFile(path.join(__dirname, '../public/index.html'))
-);
+app.get('/', (req, res) => res.sendFile(path.join(__dirname, '../public/index.html')));
 
 app.post('/createJiraIssue', async (req, res) => {
   let data = JSON.stringify({
@@ -36,9 +33,9 @@ app.post('/createJiraIssue', async (req, res) => {
         key: req.body.projectName,
       },
       summary: req.body.summary,
-      description : req.body.description,
+      description: req.body.description,
       issuetype: {
-        name: 'Service Request',
+        name: req.body.issueType,
       },
       // customfield_20100: req.body.npi,
       // customfield_18343: req.body.name,
@@ -73,7 +70,8 @@ app.post('/createJiraIssue', async (req, res) => {
     console.log(config);
     console.log('after config');
     const response = await axios.request(config);
-    console.log(response);
+    console.log(response.data);
+    console.log('DATA ABOVEEEEE !!!!!');
     res.json(response.data);
   } catch (error) {
     console.log(error);
@@ -84,17 +82,9 @@ app.post('/findTickets', async (req, res) => {
   let data = JSON.stringify({
     jql: req.body.jql,
     startAt: 0,
-    maxResults: 15,
+    maxResults: 1000,
 
-    fields: [
-      'key',
-      'summary',
-      'reporter',
-      'status',
-      'created',
-      'updated',
-      'description',
-    ],
+    fields: ['key', 'summary', 'reporter', 'status', 'created', 'updated', 'description'],
   });
 
   let config = {
@@ -110,7 +100,7 @@ app.post('/findTickets', async (req, res) => {
 
   try {
     console.log('Checking now......');
-    console.log('Here is the token: ' + authToken);
+    console.log('Here is the token: ' + devToken);
     //console.log(config);
     //console.log('after config');
     const response = await axios.request(config);
@@ -173,8 +163,6 @@ app.post('/createJiraIssuev2', async (req, res) => {
   }
 });
 
-
-
 app.post('/addComment', async (req, res) => {
   let data = JSON.stringify({
     body: req.body.comment,
@@ -207,11 +195,7 @@ app.post('/addComment', async (req, res) => {
   }
 });
 
-
-
 app.get('/retrieveAllComments/', async (req, res) => {
-
-
   let config = {
     method: 'get',
     maxBodyLength: Infinity,
@@ -234,15 +218,14 @@ app.get('/retrieveAllComments/', async (req, res) => {
   }
 });
 
-
 app.post('/transitionIssue', async (req, res) => {
   const issueIdOrKey = req.body.issueIdOrKey;
   const transitionId = req.body.transitionId; // The ID of the transition. You can get this from the /rest/api/2/issue/{issueIdOrKey}/transitions endpoint.
 
   let data = JSON.stringify({
     transition: {
-      id: transitionId
-    }
+      id: transitionId,
+    },
   });
 
   let config = {
@@ -263,11 +246,62 @@ app.post('/transitionIssue', async (req, res) => {
   }
 });
 
+app.get('/retrieveAllComments/', async (req, res) => {
+  let config = {
+    method: 'get',
+    maxBodyLength: Infinity,
+    url: `https://jira.dev.signifyhealth.com/rest/api/2/issue/3658976/comment`,
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${devToken}`,
+    },
+  };
 
+  try {
+    console.log('Checking now......');
+    console.log(config);
+    console.log('after config');
+    const response = await axios.request(config);
+    console.log(response);
+    res.json(response.data);
+  } catch (error) {
+    console.log(error);
+  }
+});
 
-app.get('*', (req, res) =>
-  res.sendFile(path.join(__dirname, '../dist/index.html'))
-);
+app.post('/linkIssues', async (req, res) => {
+  let data = JSON.stringify({
+    inwardIssue: {
+      key: req.body.inwardIssueKey,
+    },
+    outwardIssue: {
+      key: req.body.outwardIssueKey,
+    },
+    type: {
+      name: req.body.linkType,
+    },
+  });
+
+  let config = {
+    method: 'post',
+    url: 'https://jira.dev.signifyhealth.com/rest/api/2/issueLink',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${devToken}`,
+    },
+    data: data,
+  };
+
+  try {
+    const response = await axios.request(config);
+    console.log(response.data);
+    res.json(response.data);
+  } catch (error) {
+    console.error(error);
+  }
+});
+
+app.get('*', (req, res) => res.sendFile(path.join(__dirname, '../dist/index.html')));
 
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);

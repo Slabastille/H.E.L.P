@@ -40,7 +40,7 @@ function AssignedToMeQueues() {
           className={`assignedToMeAllQueueTitles
           ${currentAssignedTable === 1 ? 'assignedToMeCurrentQueue' : ''}`}
         >
-          <div>All Assigned</div>
+          <div className='assignedToMeAllQueueTitleHeaders' >All Assigned</div>
           <div className="assignedQueueLength">{assignedIssues.length || 0}</div>
         </div>
         <div
@@ -48,7 +48,7 @@ function AssignedToMeQueues() {
           className={`assignedToMeAllQueueTitles
           ${currentAssignedTable === 2 ? 'assignedToMeCurrentQueue' : ''}`}
         >
-          <div>Assigned Supply</div>
+          <div className='assignedToMeAllQueueTitleHeaders'>Assigned Supply</div>
           <div className="assignedQueueLength">{assignedSupplyIssues.length || 0}</div>
         </div>
         <div
@@ -56,7 +56,7 @@ function AssignedToMeQueues() {
           className={`assignedToMeAllQueueTitles
           ${currentAssignedTable === 3 ? 'assignedToMeCurrentQueue' : ''}`}
         >
-          <div>All Assigned SLA</div>
+          <div className='assignedToMeAllQueueTitleHeaders'>All Assigned SLA</div>
           <div className="assignedQueueLength">{assignedIssues.length || 0}</div>
         </div>
       </div>

@@ -12,31 +12,38 @@ const CommentsPage = () => {
     const [loading, setLoading] = useState(false);
     const [buttonClicked, setButtonClicked] = useState(false);
     const {currentRequest, setCurrentRequest} = useContext(HelpContext);
-
-    const [linkedIssuesKey, setLinkedIssuesKey] = useState([]);
+    const [firstSelectorValue, setFirstSelectorValue] = useState('');
+    const [secondSelectorOptions, setSecondSelectorOptions] = useState([]);
+    const [linkedIssueKeys, setLinkedIssueKeys] = useState([]);
+    const {linkType, setLinkType} = useContext(HelpContext);
+    
 
     const handleRemoveValue = (index) => {
-      setLinkedIssuesKey(linkedIssuesKey.filter((_, i) => i !== index));
+      setLinkedIssueKeys(linkedIssueKeys.filter((_, i) => i !== index));
     };
 
     const handleAddValue = (value) => {
-      setLinkedIssuesKey([...linkedIssuesKey, value]);
+      setLinkedIssueKeys([...linkedIssueKeys, value]);
     };
     
     const fetchComments = async () => {
         try {
           const response = await axios.get('http://localhost:3001/retrieveAllComments',);
             setComments(response.data.comments);
-          //window.location.href = `https://jira.signifyhealth.com/projects/MS/queues/custom${response.data.key}`;
         } catch (error) {
           console.error('Error creating Jira issue:', error);
         }
     };
     
+    const changeFormValue = (setValue) => (event) => {
+      setValue(event.target.value);
+    }
 
     useEffect(() => {
       fetchComments();
     }, [comments]);
+
+
 
     // useEffect(() => {
     // const interval = setInterval(() => {
@@ -47,44 +54,73 @@ const CommentsPage = () => {
     // return () => clearInterval(interval);
     // }, []);
     
-    const [firstSelectorValue, setFirstSelectorValue] = useState('');
-    const [secondSelectorOptions, setSecondSelectorOptions] = useState([]);
+
 
     useEffect(() => {
         let options;
         switch (firstSelectorValue) {
             case 'None' : 
-                options = ['none'];
+                options = ['None'];
                 break;
-            case 'Access/Password':
-                options = ['Ad/Okta Account Locked', 'Option2', 'Option3'];
+            case 'Access/Software (Clinician)':
+                options = ['None', 'AirMD', 'Doximity', 'Lab Questions', 'Learning Community', 'Quantaflo', 'Schedule Optimization', 
+                          'Update iOS', 'V2 App Update', 'V2 Cancellations', 'V2 Clarifications', 'V2 DX Validation', 'V2 Freezing', 'V2 Medication field'
+                          ,'V2 Syncing' , 'V2 Training mode', 'V2 Unfinalized/ Past Due', 'V2 Update', 'vHRE'];
                 break;
-            case 'Access/Software/Services':
-                options = ['Option4', 'Option5', 'Option6'];
+            case 'Access/Software (Internal)':
+                options = ['None', 'Absolute', 'Ad Manager Plus', 'Adobe Creative Cloud', 'Adobe Standard' ,'ADP',  ];
                 break;
-            case 'AR/vendor':
-              options = ['Option4', 'Option5', 'Option6'];
-              break;
-            case 'Calendar':
-              options = ['Option4', 'Option5', 'Option6'];
+            case 'Applications With Approvals':
+              options = ['None'];
               break;
             case 'Department Transfer':
-              options = ['Option4', 'Option5', 'Option6'];
+              options = ['None'];
               break;
-            case 'Email':
-              options = ['Option4', 'Option5', 'Option6'];
+            case 'Gsuite':
+              options = ['None'];
               break;
-            case 'General Support':
-              options = ['Option4', 'Option5', 'Option6'];
+            case 'Hardware':
+              options = ['None'];
+              break;
+            case 'Information Services':
+              options = ['None'];
+              break;
+            case 'New Hire':
+              options = ['None'];
+              break;
+            case 'Password/Locked Accounts':
+              options = ['None'];
+              break;
+            case 'Termination':
+              options = ['None'];
               break;
             // ... other cases ...
             default:
-                options = [];
+                options = ['None'];
         }
         setSecondSelectorOptions(options);
         console.log("firstSelectorValue", firstSelectorValue)
     }, [firstSelectorValue]);
     
+
+    const linkIssues = async (outwardIssueKey) => {
+      setLoading(true);
+      try {
+        const response = await axios.post('http://localhost:3001/linkIssues', 
+        {
+          inwardIssueKey: currentRequest.key,
+          outwardIssueKey: outwardIssueKey,
+          linkType: linkType
+        });
+        setAssignedIssues(response.data);
+        setReporter({ name: '', email: '', npi: '' });
+      } catch (error) {
+        console.error('Error retrieving tickets:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
     const resolveIssue = (e) => {
       e.preventDefault();
       console.log("Pressed button")
@@ -151,16 +187,18 @@ const CommentsPage = () => {
                 </select>
               </div>
               <div className='ticketFormResolveItems'>
-                <div className='ticketFormResolveItemHeader'>Linked Issues </div>
-                <select className='ticketFormResolveItemBody'>
-                  <option value="relates to">relates to</option>
-                  <option value="is cloned">is cloned by</option>
-                </select>
+                <div className='ticketFormResolveItemHeader'>Linked Issues</div>
+                  <select className='ticketFormResolveItemBody' value={linkType} onChange={changeFormValue(setLinkType)}>
+                    <option value="relates to">relates to</option>
+                    <option value="is cloned">is cloned by</option>
+                    <option value="is duplicated by">is duplicated by</option>
+                    <option value="is blocked by">is blocked by</option>
+                  </select>
               </div>
               <div className='ticketFormResolveItems'>
                 <div className='ticketFormResolveItemHeader'>Issue </div>
                 <div className='ticketFormResolveItemBodyIssues'  >
-                  {linkedIssuesKey.length > 0 && linkedIssuesKey.map((value, index) => (
+                  {linkedIssueKeys.length > 0 && linkedIssueKeys.map((value, index) => (
                     <div key={index} className='ticketFormResolveItemBodyIssueKeys'>
 
                       <div>{value}</div>
@@ -179,15 +217,15 @@ const CommentsPage = () => {
               <div className='ticketFormResolveItems'>
                 <div className='ticketFormResolveItemHeader'>Resolved at Service Desk level</div>
                 <div className='ticketFormResolveItemBodylabel'>
-                  <label>
+                  <label className='ticketFormResolveItemBodylabels'>
                     <input type="radio" value="None" name="category" /> 
                     None
                   </label>
-                  <label>
+                  <label className='ticketFormResolveItemBodylabels'>
                     <input type="radio" value="Yes" name="category" /> 
                     Yes
                   </label>
-                  <label>
+                  <label className='ticketFormResolveItemBodylabels'>
                     <input type="radio" value="No" name="category" /> 
                     No
                   </label>
@@ -197,15 +235,18 @@ const CommentsPage = () => {
                 <div className='ticketFormResolveItemHeader'>Service Request Category </div>
                 <div className='ticketFormResolveItemBodyCategories'>
                   <select className='ticketFormResolveItemBodyCategorySelector' value={firstSelectorValue} onChange={(e) => setFirstSelectorValue(e.target.value)}>
-                  <option>Choose a Category</option>
                   <option>None</option>
-                  <option>Access/Password</option>
-                  <option>Access/Software/Services</option>
-                  <option>AR/vendor</option>
-                  <option>Calendar</option>
-                  <option>Department Transfer</option>
-                  <option>Email</option>
-                  <option>General Support</option>
+                  <option>Access/Software (Clinician) </option>
+                  <option>Access/Software (Internal) </option>
+                  <option>Applications With Approvals </option>
+                  <option>Department Transfer </option>
+                  <option>Gsuite </option>
+                  <option>Hardware </option>
+                  <option>Information Services </option>
+                  <option>New Hire </option>
+                  <option>Password/Locked Accounts </option>
+                  <option>Termination </option>
+
                   </select>
                   <select className='ticketFormResolveItemBodyCategorySelector'>
                     {secondSelectorOptions.map(option => <option key={option}>{option}</option>)}
