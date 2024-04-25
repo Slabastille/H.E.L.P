@@ -7,13 +7,15 @@ import axios from 'axios';
 
 const AssignedToMe = () => {
   const { assignedIssues, setAssignedIssues } = useContext(HelpContext);
+  const { assignedSupplyIssues, setAssignedSupplyIssues } = useContext(HelpContext);
   const { setCurrentPage } = useContext(HelpContext);
   const retrieveIssues = async () => {
     try {
       const response = await axios.post('http://localhost:3001/findTickets', {
-        jql: "assignee = 'slabastille@signifyhealth.com' AND resolution = Unresolved order by updated DESC",
+        jql: "assignee = 'slabastille@signifyhealth.com' AND project = 'Desktop Support' AND status not in (Closed, Cancelled, Canceled, Done, Resolved, 'Task Complete', 'Task Verified (Accepted)')",
       });
       setAssignedIssues(response.data);
+      setAssignedSupplyIssues(response.data.filter((issue) => issue.fields.summary.startsWith('New Supply Request For:') === true));
     } catch (error) {
       console.error('Error retrieving tickets:', error);
     }
@@ -26,6 +28,7 @@ const AssignedToMe = () => {
     };
     fetchData();
   }, []);
+
   //Print the current assigned issues
   useEffect(() => {
     console.log(assignedIssues);
@@ -43,7 +46,7 @@ const AssignedToMe = () => {
         </div>
       </div>
       <div className="assignedToMeRightSection">
-        <div className="assignedToMeTableContainer">
+        <div className="assignedMs">
           <AssignedMs />
         </div>
       </div>

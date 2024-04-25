@@ -1,3 +1,4 @@
+import extractTime from '../extractTime';
 const dateSorter = (allIssuesArray, sortKey, direction) => {
   let sortedDates;
   if (direction === 'ascending') {

@@ -5,7 +5,6 @@ const app = express();
 const port = 3001;
 const cors = require('cors');
 // const devToken = process.env.AUTH_TOKEN
-
 // const history = require('connect-history-api-fallback');
 // app.use(history());
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
