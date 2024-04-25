@@ -194,36 +194,41 @@ app.post('/addComment', async (req, res) => {
   }
 });
 
-app.get('/retrieveAllComments/', async (req, res) => {
-  let config = {
-    method: 'get',
-    maxBodyLength: Infinity,
-    url: `https://jira.dev.signifyhealth.com/rest/api/2/issue/3658976/comment`,
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${devToken}`,
-    },
-  };
+// app.get('/retrieveAllComments/', async (req, res) => {
+//   let config = {
+//     method: 'get',
+//     maxBodyLength: Infinity,
+//     url: `https://jira.dev.signifyhealth.com/rest/api/2/issue/3658976/comment`,
+//     headers: {
+//       'Content-Type': 'application/json',
+//       Authorization: `Bearer ${devToken}`,
+//     },
+//   };
 
-  try {
-    console.log('Checking now......');
-    console.log(config);
-    console.log('after config');
-    const response = await axios.request(config);
-    console.log(response);
-    res.json(response.data);
-  } catch (error) {
-    console.log(error);
-  }
-});
+//   try {
+//     console.log('Checking now......');
+//     console.log(config);
+//     console.log('after config');
+//     const response = await axios.request(config);
+//     console.log(response);
+//     res.json(response.data);
+//   } catch (error) {
+//     console.log(error);
+//   }
+// });
 
 app.post('/transitionIssue', async (req, res) => {
   const issueIdOrKey = req.body.issueIdOrKey;
   const transitionId = req.body.transitionId; // The ID of the transition. You can get this from the /rest/api/2/issue/{issueIdOrKey}/transitions endpoint.
-
+  const resolvedLevel = req.body.resolvedLevel;
   let data = JSON.stringify({
     transition: {
       id: transitionId,
+    },
+    fields: {
+      customfield_13301: {
+        id: resolvedLevel,
+      },
     },
   });
 
@@ -245,11 +250,11 @@ app.post('/transitionIssue', async (req, res) => {
   }
 });
 
-app.get('/retrieveAllComments/', async (req, res) => {
+app.get('/retrieveAllComments', async (req, res) => {
   let config = {
     method: 'get',
     maxBodyLength: Infinity,
-    url: `https://jira.dev.signifyhealth.com/rest/api/2/issue/3658976/comment`,
+    url: `https://jira.dev.signifyhealth.com/rest/api/2/issue/1799361/comment`,
     headers: {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${devToken}`,
@@ -261,7 +266,7 @@ app.get('/retrieveAllComments/', async (req, res) => {
     console.log(config);
     console.log('after config');
     const response = await axios.request(config);
-    console.log(response);
+    console.log(response.data);
     res.json(response.data);
   } catch (error) {
     console.log(error);

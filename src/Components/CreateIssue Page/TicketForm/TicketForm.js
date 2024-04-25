@@ -152,10 +152,10 @@ const TicketForm = () => {
               </div>
 
               <div className="ticketFormButtonContainer">
-                {/* <div className='ticketFormSecondButton'>
+                <div className="ticketFormSecondButton" onClick={() => history.push('/createIssue')}>
                   Cancel
                 </div>
-                 */}
+
                 <button onClick={handleSubmit2(2)} className="ticketFormButton">
                   {/* <button onClick={handleSubmit} className="ticketFormButton"> */}
                   Create Ticket

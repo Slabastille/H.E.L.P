@@ -4,6 +4,7 @@ import extractDate from '../../Ticket Tables/extractDate';
 import extractTime from '../../Ticket Tables/extractTime';
 import HelpContext from '../../../context/HelpContext';
 import axios from 'axios';
+import { useHistory } from 'react-router-dom';
 
 const CommentsPage = () => {
   const { comments, setComments } = useContext(HelpContext);
@@ -16,6 +17,8 @@ const CommentsPage = () => {
   const [secondSelectorOptions, setSecondSelectorOptions] = useState([]);
   const { linkedRequests, setLinkedRequests } = useContext(HelpContext);
   const { linkType, setLinkType } = useContext(HelpContext);
+  const [resolvedServiceLevel, setResolvedServiceLevel] = useState('None');
+  const history = useHistory();
 
   const handleRemoveValue = (index) => {
     // window.alert('Are you sure you want to remove this linked issue?');
@@ -30,9 +33,13 @@ const CommentsPage = () => {
   const fetchComments = async () => {
     try {
       const response = await axios.get('http://localhost:3001/retrieveAllComments');
+      console.log('Response on the front end');
+      console.log(response);
+
       setComments(response.data.comments);
     } catch (error) {
-      console.error('Error creating Jira issue:', error);
+      console.error('Error retrieving comments', error);
+    } finally {
     }
   };
 
@@ -41,17 +48,19 @@ const CommentsPage = () => {
   };
 
   useEffect(() => {
+    setLoading(true);
     fetchComments();
-  }, [comments]);
+    setLoading(false);
+  }, []);
 
-  // useEffect(() => {
-  // const interval = setInterval(() => {
-  //     fetchComments();
-  // }, 5000); // Fetches every 5 seconds
+  useEffect(() => {
+    const interval = setInterval(() => {
+      fetchComments();
+    }, 50000); // Fetches every 5 seconds
 
-  // // This is important, it clears the interval when the component is unmounted
-  // return () => clearInterval(interval);
-  // }, []);
+    // This is important, it clears the interval when the component is unmounted
+    return () => clearInterval(interval);
+  }, []);
 
   useEffect(() => {
     let options;
@@ -118,34 +127,63 @@ const CommentsPage = () => {
   }, [firstSelectorValue]);
 
   const linkIssues = async (outwardIssueKey) => {
-    setLoading(true);
+    // setLoading(true);
     try {
+      console.log('inward keyyyyy' + currentRequest.key);
+      console.log('outward keyyyyy' + outwardIssueKey);
       const response = await axios.post('http://localhost:3001/linkIssues', {
         inwardIssueKey: currentRequest.key,
         outwardIssueKey: outwardIssueKey,
-        linkType: linkType,
+        linkType: 'relates',
       });
-      setAssignedIssues(response.data);
-      setReporter({ name: '', email: '', npi: '' });
+      // setReporter({ name: '', email: '', npi: '' });
     } catch (error) {
       console.error('Error retrieving tickets:', error);
     } finally {
-      setLoading(false);
+      // setLoading(false);
     }
   };
 
-  const resolveIssue = (e) => {
+  const initResolveIssue = (e) => {
     e.preventDefault();
-    console.log('Pressed button');
-    setCurrentPage(1);
+
+    setCurrentPage(2);
+  };
+  const resolveIssue = async (e) => {
+    try {
+      await axios.post('http://localhost:3001/transitionIssue', {
+        issueIdOrKey: currentRequest.key,
+        transitionId: '761',
+        resolvedLevel: '13502',
+      });
+      // setReporter({ name: '', email: '', npi: '' });
+    } catch (error) {
+      console.error('Error resolving ticket:', error);
+    } finally {
+      // setLoading(false);
+    }
   };
 
+  const finalizeClick = async (e) => {
+    if (linkedRequests.length > 0) {
+      console.log('linkedRequests below');
+      console.log(linkedRequests);
+      await linkedRequests.forEach((issue) => {
+        linkIssues(issue);
+      });
+    }
+    await resolveIssue(e);
+    history.push('/createIssue');
+  };
+  useEffect(() => {
+    console.log('resolved service level', resolvedServiceLevel);
+  }, [resolvedServiceLevel]);
   return (
     <div className="currentTicketForm">
-      {!loading && currentPage === 2 && (
+      {!loading && currentPage === 1 && (
         <div>
           <div className="ticketFormHeader">
-            <h1>Comments</h1>
+            <h1>{currentRequest.key} Comments</h1>
           </div>
           <form className="ticketForm" action="/">
             <div className="ticketFormCommentSection">
@@ -155,7 +193,6 @@ const CommentsPage = () => {
                     <div>
                       <div className="commentHeader">
                         <div className="commentTitle">
-                          {' '}
                           <a style={{ fontWeight: '600', color: '#c4d600' }}>{loggedInUser.name}</a> added a Comment - {extractDate(comment.created)} {extractTime(comment.created)}
                         </div>
                         <div className="commentType"> {comment.type} </div>
@@ -175,15 +212,15 @@ const CommentsPage = () => {
             </div>
             <div className="ticketFormButtonContainer">
               <button className="ticketFormSecondButton">temp</button>
-              <button className="ticketFormButton" type="submit" onClick={(e) => resolveIssue(e)}>
-                Change Status
+              <button className="ticketFormButton" type="submit" onClick={(e) => initResolveIssue(e)}>
+                Resolve issue
               </button>
             </div>
           </form>
         </div>
       )}
 
-      {!loading && currentPage === 1 && (
+      {!loading && currentPage === 2 && (
         <div>
           <div className="ticketFormHeader">
             <h1>Current Status : {currentRequest.status}</h1>
@@ -234,15 +271,38 @@ const CommentsPage = () => {
                   <div className="ticketFormResolveItemHeader">Resolved at Service Desk level</div>
                   <div className="ticketFormResolveItemBodylabel">
                     <label className="ticketFormResolveItemBodylabels">
-                      <input type="radio" value="None" name="category" />
+                      <input
+                        type="radio"
+                        value="None"
+                        name="category"
+                        onClick={(e) => {
+                          setResolvedServiceLevel(e.target.value);
+                        }}
+                      />
                       None
                     </label>
                     <label className="ticketFormResolveItemBodylabels">
-                      <input type="radio" value="Yes" name="category" />
+                      <input
+                        type="radio"
+                        //Jira value for Yes
+                        value="13502"
+                        name="category"
+                        onClick={(e) => {
+                          setResolvedServiceLevel(e.target.value);
+                        }}
+                      />
                       Yes
                     </label>
                     <label className="ticketFormResolveItemBodylabels">
-                      <input type="radio" value="No" name="category" />
+                      <input
+                        type="radio"
+                        //Jira value for No
+                        value="13503"
+                        name="category"
+                        onClick={(e) => {
+                          setResolvedServiceLevel(e.target.value);
+                        }}
+                      />
                       No
                     </label>
                   </div>
@@ -275,10 +335,15 @@ const CommentsPage = () => {
                 <CommentSection />
               </div>
             </div>
-            <div className="ticketFormButtonContainer">
-              <div>cancel</div>
 
-              <button onClick={() => setCurrentPage(2)}> SUBMIT </button>
+            <div className="ticketFormButtonContainer">
+              <div className="ticketFormSecondButton" onClick={() => history.push('/createIssue')}>
+                Cancel
+              </div>
+
+              <button className="ticketFormButton" onClick={(e) => finalizeClick(e)}>
+                Resolve
+              </button>
             </div>
           </div>
         </div>
