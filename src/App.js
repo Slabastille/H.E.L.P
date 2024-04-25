@@ -22,8 +22,10 @@ const App = () => {
             <Route exact path="/" component={Landing} />
             <Route path="/landing" component={Landing} />
             <Route path="/assignedToMe" component={AssignedToMe} />
-            <Route path="/ticketForm" component={MSRequestPage} />
             <Route path="/createIssue" component={ReporterInfo} />
+            <Route path="/ticketForm" component={MSRequestPage} />
+            {/* <Route path="/createIssue" component={MSRequestPage} /> */}
+
             <Route path="/supplyPage" component={SupplyPage} />
             <Route path="/supplyPreviewPage" component={SupplyPreviewPage} />
             {/* <Route path="/MSRequestPage" component={MSRequestPage} />

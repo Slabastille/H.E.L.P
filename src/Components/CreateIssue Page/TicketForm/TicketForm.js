@@ -9,7 +9,7 @@ import extractDate from '../../Ticket Tables/extractDate';
 import extractTime from '../../Ticket Tables/extractTime';
 import CommentsPage from './CommentsPage';
 
-import loadingGif from '../../../../public/img/loading.gif'
+import loadingGif from '../../../../public/img/loading.gif';
 
 const TicketForm = () => {
   const history = useHistory();
@@ -18,191 +18,160 @@ const TicketForm = () => {
   const { reporter } = useContext(HelpContext);
 
   //Variables for the api body
-  const [ summary, setSummary ] = useState('');
+  const [summary, setSummary] = useState('');
   const [issueType, setIssueType] = useState('Service Request');
-  const [ description, setDescription ] = useState('');
-  const { requestType, setRequestType } = useContext(HelpContext);
+  const [description, setDescription] = useState('');
+  const { issueSupplies, setIssueSupplies } = useContext(HelpContext);
   const [verifiedAssets, setVerifiedAssets] = useState('');
   const [supplies, setSupplies] = useState([]);
-  const [address, setAddress] = useState(''); 
-  const {comments, setComments} = useContext(HelpContext); 
-  const {loggedInUser} = useContext(HelpContext);
+  const [address, setAddress] = useState('');
+  const { comments, setComments } = useContext(HelpContext);
+  const { loggedInUser } = useContext(HelpContext);
   const [loading, setLoading] = useState(false);
-  const {currentRequest, setCurrentRequest} = useContext(HelpContext);
-  const {linkedRequests , setLinkedRequests} = useContext(HelpContext);
-
+  const { currentRequest, setCurrentRequest } = useContext(HelpContext);
+  const { linkedRequests, setLinkedRequests } = useContext(HelpContext);
 
   //Shows the supply request form if true
   const { showSupplyRequest, setShowSupplyRequest } = useContext(HelpContext);
   //Updates the showSupplyRequest state based on the request type
   useEffect(() => {
-    if (requestType === 'Support Request') {
-      setShowSupplyRequest(false)
-    } else if (requestType === 'Supply Request') {
+    if (issueSupplies === false) {
+      setShowSupplyRequest(false);
+    } else if (issueSupplies === true) {
       setShowSupplyRequest(true);
-    }}, [requestType]);
-  
+    }
+  }, [issueSupplies]);
 
-
-  
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
       setLoading(true);
-      if(requestType === 'Support Request'){
-      const response = await axios.post(
-        'http://localhost:3001/createJiraIssue',
-        {
-          projectName: 'TI',  
+      if (issueSupplies === false) {
+        const response = await axios.post('http://localhost:3001/createJiraIssue', {
+          projectName: 'TI',
           summary: summary,
           description: description,
-          issueType: issueType
-        }
-      );
-      setCurrentRequest({id: response.data.id, key:response.data.key, status: 'Waiting for Support'});
-      console.log('Jira issue created:', response);
-      //window.location.href = `https://jira.signifyhealth.com/projects/MS/queues/custom${response.data.key}`;
-    }
-    setCurrentPage(2);
-    setLoading(false);
+          issueType: issueType,
+        });
+        setCurrentRequest({ id: response.data.id, key: response.data.key, status: 'Waiting for Support' });
+        console.log('Jira issue created:', response);
+        //window.location.href = `https://jira.signifyhealth.com/projects/MS/queues/custom${response.data.key}`;
+      }
+      setCurrentPage(2);
+      setLoading(false);
     } catch (error) {
-      console.log("Failed to create Jira issue")
+      console.log('Failed to create Jira issue');
     }
   };
   const handleSubmit2 = (a) => (e) => {
     e.preventDefault();
-    console.log("Going to page " + a)
-    setCurrentRequest({id: '1799361', key:'TI-241132', status: 'Waiting For Support'})
-    setCurrentPage(a)
+    console.log('Going to page ' + a);
+    setCurrentRequest({ id: '1799361', key: 'TI-241132', status: 'Waiting For Support' });
+    setCurrentPage(a);
 
     //alert(`Ticket Submitted for Review`);
   };
 
   const changeFormValue = (setValue) => (event) => {
     setValue(event.target.value);
-  }
-
-
+  };
 
   useEffect(() => {
-    console.log("des below")
-    console.log(description)
-    console.log(summary)
-    console.log(issueType)
+    console.log('des below');
+    console.log(description);
+    console.log(summary);
+    console.log(issueType);
   }, [issueType]);
-
 
   return (
     <div className="ticketContainer">
       <div className="ticketFormPage">
-        
-      
-         {!loading && currentPage === 1 && ( 
-        <div className='currentTicketForm'> 
-          <div className="ticketFormHeader">
-            <h1>Create Issue</h1>
-          </div>
-
-          <form className="ticketForm">
-            <div className='ticketFormItemsContainer'>
-              <div className='ticketFormItems'>
-                <div className='ticketFormItemIdentifier'>Summary</div>
-                <input
-                  className="ticketFormSummary"
-                  type="text"
-                  name="name"
-                  value={summary}
-                  placeholder="Summary"
-                  onChange={changeFormValue(setSummary)}
-                />
-              </div>
-
-              <div className='ticketFormItems'>
-                <div className='ticketFormItemIdentifier'>Issue Type</div>
-                <select className="ticketFormRequestType" onChange={changeFormValue(setIssueType)} type="select">
-                  <option>Choose an Issue Type</option>
-                  <option value={'Service Request'}>Service Request</option>
-                  <option value={'Task'}>Task</option>
-                  {/* <option value={'Incident'}>Incident</option> */}
-
-                </select>
-              </div>
-
-              <div className='ticketFormItems'>
-                <div className='ticketFormItemIdentifier'>Description</div>
-                <textarea
-                  className="ticketFormDescription"
-                  placeholder="Description"
-                  value={description}
-                  rows="6"
-                  onChange={changeFormValue(setDescription)}
-                />
-              </div>
-
-              <div className='ticketFormItems'>
-                <div className='ticketFormItemIdentifier'>Request Type</div>
-                <select className="ticketFormRequestType" value={requestType} onChange={changeFormValue(setRequestType)} type="select">
-                  <option>Choose a Request Type</option>
-                  <option value={'Support Request'}>Support Request</option>
-                  <option value={'Supply Request'}>Supply Request</option>
-                </select>
-              </div>
-
-              
-
-              <div className='ticketFormItems'>
-                <div className='ticketFormItemIdentifier'>Address</div>
-                <textarea
-                  className="ticketFormAddress"
-                  placeholder="Provider address will auto populate here -> 1234 Street City State Zip"
-                  rows="6"
-                  onChange={changeFormValue(setAddress)}
-                  disabled={!showSupplyRequest}
-                />
-              </div>
-
-              <div className='ticketFormItems'>
-                <div className='ticketFormItemIdentifier'>Verified Existing Assets?</div>
-                <select className='ticketFormVerifyAssets' disabled={!showSupplyRequest}>
-                  <option>Select...</option>
-                  <option value="Yes">Yes</option>
-                  <option value="No">No</option>
-                </select>
-              </div>
-
-              <div className='ticketFormItems'>
-                <div className='ticketFormItemIdentifier'>Choose Your Supplies</div>
-                <select multiple size="6" className="ticketFormSupplies" disabled={!showSupplyRequest}>
-                  <option value="American">Lightning to USB-A</option>
-                  <option value="Andean">Lightning to USB-C</option>
-                  <option value="Chilean">Car Charger</option>
-                  <option value="Greater">Wall Charger</option>
-                  <option value="James's">iPad Case/Keyboard</option>
-                  <option value="Lesser">iPad Only</option>
-                </select>
-              </div>
-              
+        {!loading && currentPage === 1 && (
+          <div className="currentTicketForm">
+            <div className="ticketFormHeader">
+              <h1>Create Issue</h1>
             </div>
 
-            <div className='ticketFormButtonContainer'>
+            <form className="ticketForm">
+              <div className="ticketFormItemsContainer">
+                <div className="ticketFormItems">
+                  <div className="ticketFormItemIdentifier">Summary</div>
+                  <input className="ticketFormSummary" type="text" name="name" value={summary} placeholder="Summary" onChange={changeFormValue(setSummary)} />
+                </div>
+
+                <div className="ticketFormItems">
+                  <div className="ticketFormItemIdentifier">Issue Type</div>
+                  <select className="ticketFormRequestType" onChange={changeFormValue(setIssueType)} type="select">
+                    <option>Choose an Issue Type</option>
+                    <option value={'Service Request'}>Service Request</option>
+                    <option value={'Task'}>Task</option>
+                    {/* <option value={'Incident'}>Incident</option> */}
+                  </select>
+                </div>
+
+                <div className="ticketFormItems">
+                  <div className="ticketFormItemIdentifier">Description</div>
+                  <textarea className="ticketFormDescription" placeholder="Description" value={description} rows="6" onChange={changeFormValue(setDescription)} />
+                </div>
+
+                <div className="ticketFormItems">
+                  <div className="ticketFormItemIdentifier">Ordering Supplies?</div>
+                  <select className="ticketFormRequestType" value={issueSupplies} onChange={changeFormValue(setIssueSupplies)} type="select">
+                    {/* <option>Choose a Request Type</option> */}
+                    <option value={true}>Yes</option>
+                    <option value={false}>No</option>
+                  </select>
+                </div>
+
+                <div className="ticketFormItems">
+                  <div className="ticketFormItemIdentifier">Address</div>
+                  <textarea className="ticketFormAddress" placeholder="Provider address will auto populate here -> 1234 Street City State Zip" rows="6" onChange={changeFormValue(setAddress)} disabled={!issueSupplies} />
+                </div>
+
+                <div className="ticketFormItems">
+                  <div className="ticketFormItemIdentifier">Verified Existing Assets?</div>
+                  <select className="ticketFormVerifyAssets" disabled={!issueSupplies}>
+                    <option>Select...</option>
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+                  </select>
+                </div>
+
+                <div className="ticketFormItems">
+                  <div className="ticketFormItemIdentifier">Choose Your Supplies</div>
+                  <select multiple size="6" className="ticketFormSupplies" disabled={!issueSupplies}>
+                    <option value="American">Lightning to USB-A</option>
+                    <option value="Andean">Lightning to USB-C</option>
+                    <option value="Chilean">Car Charger</option>
+                    <option value="Greater">Wall Charger</option>
+                    <option value="James's">iPad Case/Keyboard</option>
+                    <option value="Lesser">iPad Only</option>
+                  </select>
+                </div>
+              </div>
+
+              <div className="ticketFormButtonContainer">
                 {/* <div className='ticketFormSecondButton'>
                   Cancel
                 </div>
                  */}
-                <button onClick={handleSubmit2(2)} className="ticketFormButton" >
+                <button onClick={handleSubmit2(2)} className="ticketFormButton">
+                  {/* <button onClick={handleSubmit} className="ticketFormButton"> */}
                   Create Ticket
                 </button>
-            </div>
-          </form>
+              </div>
+            </form>
+          </div>
+        )}
 
-        </div>)}
+        {loading && (
+          <div className="loading">
+            <img className="loadingGif" src={loadingGif} alt="loading..." />
+          </div>
+        )}
 
-        {loading && <img src={loadingGif} alt="loading..." />}
-        
-        {!loading && currentPage === 2 && <CommentsPage/>}
-
-
+        {!loading && currentPage === 2 && <CommentsPage />}
       </div>
     </div>
   );

@@ -8,36 +8,38 @@ export const HelpProvider = ({ children }) => {
   // const [summary, setSummary] = useState('');
   // const [description, setDescription] = useState('');
   // const [verifiedAssets, setVerifiedAssets] = useState(false);
-  
-  
-  const [requestType, setRequestType] = useState('');
+
+  const [issueSupplies, setIssueSupplies] = useState(false);
   const [modal, setModal] = useState(false);
   const [assignedIssues, setAssignedIssues] = useState([]);
+  const [assignedSupplyIssues, setAssignedSupplyIssues] = useState([]); // [{}
+  const [slaAssignedIssues, setSlaAssignedIssues] = useState([]);
   const [currentAssignedTable, setCurrentAssignedTable] = useState(1);
-  const [assignedSupplyIssues, setAssignedSupplyIssues] = useState([]);
   const [msTriage, setMsTriage] = useState([]);
   const [dsTriage, setDsTriage] = useState([]);
-  const [reporter, setReporter] = useState({ name: '', phone:'', email: '', npi: '' });
+  const [reporter, setReporter] = useState({ name: '', phone: '', email: 'slabastille@signifyhealth.com', npi: '' });
+  const [reporterPastIssues, setReporterPastIssues] = useState([]);
   const [supplyRequestReporter, setSupplyRequestReporter] = useState([]);
   //Used to track the current page in the header subcomponent
   const [currentPage, setCurrentPage] = useState(1);
   const [clinicianStatus, setClinicianStatus] = useState('Pending Review');
   const [showSupplyRequest, setShowSupplyRequest] = useState(false);
   const [comments, setComments] = useState([]);
-  const [currentRequest, setCurrentRequest] = useState({ id : "", key : "", status : "Waiting for Support", });
+  const [currentRequest, setCurrentRequest] = useState({ id: '', key: '', status: 'Waiting for Support' });
   const [linkedRequests, setLinkedRequests] = useState([]);
   const [linkType, setLinkType] = useState('');
+
   return (
     <HelpContext.Provider
       value={{
         loggedInUser,
-        setLoggedInUser,   
+        setLoggedInUser,
         // summary,
         // setSummary,
         // description,
         // setDescription,
-        requestType,
-        setRequestType,
+        issueSupplies,
+        setIssueSupplies,
         comments,
         setComments,
         // verifiedAssets,
@@ -46,6 +48,8 @@ export const HelpProvider = ({ children }) => {
         setModal,
         assignedIssues,
         setAssignedIssues,
+        slaAssignedIssues,
+        setSlaAssignedIssues,
         clinicianStatus,
         setClinicianStatus,
         msTriage,
@@ -70,6 +74,8 @@ export const HelpProvider = ({ children }) => {
         setLinkedRequests,
         linkType,
         setLinkType,
+        reporterPastIssues,
+        setReporterPastIssues,
       }}
     >
       {children}

@@ -836,10 +836,6 @@ CSS for all the TicketForms above here
   padding: 10px;
   width: 100%;
   height: 80%;
-  flex: 4;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   /* border: 1px solid rgb(0, 0, 0); 1px wide, solid style, black color */
   position: static;
   overflow: hidden;
@@ -851,54 +847,111 @@ CSS for all the TicketForms above here
   padding: 15px;
   display: flex;
   flex-direction: column;
+  overflow: hidden;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
   border: 1px solid #e4e2e2;
   background-color: white;
 }
 
+.reporter-pastTickets-Title {
+  width: 100%;
+  height: 8%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 0.5%;
+  position: sticky;
+  font-size: 2rem;
+}
+
+.reporter-pastTickets-Title > div:nth-child(2) {
+  height: 50%;
+  width: 3%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1rem;
+  border-radius: 10px;
+  background-color: #ebebea;
+}
+.full-ticket-table-container {
+  width: 100%;
+  height: 100%;
+  padding: 10px;
+  overflow-y: scroll;
+}
 .full-ticket-table {
-  height: 90%;
   width: 100%;
   table-layout: fixed;
-  display: block;
-  overflow: auto;
 }
 .clicked {
   background-color: #4caf50; /* Green */
   border: none;
   color: white;
-  padding: 15px 32px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
   transition-duration: 0.4s;
-  cursor: pointer;
 }
-.full-ticket-table th {
-  text-align: start;
-  /* vertical-align: middle; */
+.notClicked {
+  background-color: #f44336; /* Red */
+  border: none;
+  color: white;
+  transition-duration: 0.4s;
+}
+.full-ticket-table table {
+  height: 93%;
+  width: 100%;
+  overflow: hidden;
 }
 .full-ticket-table td {
   text-align: start;
-  /* vertical-align: middle; */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 100%;
+  height: 100%;
+  vertical-align: middle;
 }
-.full-ticket-table thead {
-  position: sticky;
-  top: 0;
-  /* background: white; */
-}
-
 .full-ticket-table tbody {
   display: block;
   max-height: 100%; /* Set this to the desired height */
-  overflow-y: auto;
 }
-
 .full-ticket-table tr {
   display: table;
   width: 100%;
+  height: 5%;
   table-layout: fixed;
+  /* padding-top: 15px; */
+  /* padding-bottom: 15px; */
+}
+.full-ticket-table-header {
+  width: 100%;
+  height: 7%;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  overflow: hidden;
+  text-align: start;
+  background-color: #ebebea;
+}
+
+.full-ticket-table-header tr {
+  height: 100%;
+  width: 100%;
+  border-bottom: 2px solid rgb(223, 225, 230);
+}
+.full-ticket-table-body {
+  width: 100%;
+  max-height: 93%;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  z-index: 100;
+  overflow: auto;
+}
+.full-ticket-table-body::-webkit-scrollbar {
+  display: none;
+}
+
+.full-ticket-table-body tr:hover {
+  background-color: #f5f5f5;
 }
 
 .clinicianStatus {
@@ -938,6 +991,7 @@ CSS for all the TicketForms above here
   background-color: white;
   color: green;
 }
+
 /*Request page styling above*/
 
 .supplyFormContainer {
@@ -1143,10 +1197,14 @@ CSS for all the TicketForms above here
   border-radius: 10px;
   background-color: #ebebea;
 }
+.triage-ticket-table-container {
+  width: 100%;
+  height: 92%;
+  overflow-y: scroll;
+}
 
 .triage-ticket-table {
   width: 100%;
-  height: 500px;
   table-layout: fixed;
   /* background-color: lightblue; */
 }
@@ -1157,8 +1215,9 @@ CSS for all the TicketForms above here
   position: sticky;
   top: 0;
   z-index: 100;
-  /* background-color: aqua; */
   overflow: hidden;
+  text-align: start;
+  background-color: #ebebea;
 }
 .triage-ticket-table-header tr {
   height: 100%;
@@ -1166,22 +1225,12 @@ CSS for all the TicketForms above here
   border-bottom: 2px solid rgb(223, 225, 230);
 }
 
-.triage-ticket-table-header {
-  text-align: start;
-  background-color: #ebebea;
-  width: 50%;
-}
-.triage-ticket-table-header th:hover {
-}
-
 .triage-ticket-table-headerItems {
   display: flex;
   align-items: center;
   width: fit-content;
   height: 100%;
-  padding-left: 2%;
-  padding-right: 2%;
-  padding-top: 1%;
+  padding: 5px;
   overflow: hidden;
   border-radius: 5px;
 }
@@ -1193,14 +1242,9 @@ CSS for all the TicketForms above here
   height: 20px;
   width: 20px;
 }
-.triage-ticket-table-container {
-  width: 100%;
-  height: 92%;
-  overflow-y: scroll;
-}
+
 .triage-ticket-table-body {
   width: 100%;
-  overflow: scroll;
 }
 
 .triage-ticket-table-body::-webkit-scrollbar {
@@ -1235,7 +1279,7 @@ CSS for all the TicketForms above here
 .triage-ticket-table tbody {
   display: block;
   max-height: 100%; /* Set this to the desired height */
-  overflow-y: auto;
+  /* overflow-y: auto; */
 }
 
 .triage-ticket-table tr {
@@ -1337,29 +1381,34 @@ CSS for all the AssignedToMe page below here
 .assignedToMeCurrentQueue:hover {
   background-color: #d0cfce;
 }
-.assignedToMeTableContainer {
+.assignedMs {
   height: 100%;
   width: 100%;
   padding: 10px;
 }
-.assignedToMeTable {
+.assignedToMeTableContainer {
   width: 100%;
   height: 100%;
   padding: 10px;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
   border: 1px solid #e4e2e2;
-
-  /* background-color: white; */
+  overflow-y: auto;
+  background-color: white;
   /* background-color: #000000; */
 }
 
-.assignedToMeTable table {
+.assignedToMeTable {
+  width: 100%;
+  table-layout: fixed;
+}
+
+/* .assignedToMeTableContainer table {
   width: 100%;
   height: 100%;
   table-layout: fixed;
   background-color: lightcyan;
-}
-.assignedToMeTable tr {
+} */
+.assignedToMeTableContainer tr {
   display: table;
   width: 100%;
   height: 5%;
@@ -1367,13 +1416,8 @@ CSS for all the AssignedToMe page below here
   padding-top: 15px;
   padding-bottom: 15px;
 }
-.assignedToMeTable th {
+.assignedToMeTableContainer th {
   text-align: start;
-}
-.assignedToMeTable tbody {
-  display: block;
-  max-height: 100%; /* Set this to the desired height */
-  overflow-y: auto;
 }
 
 .assignedHeadersContainer {
@@ -1381,8 +1425,12 @@ CSS for all the AssignedToMe page below here
   position: sticky;
   top: 0;
   z-index: 100;
+  text-align: start;
+  background-color: #ebebea;
 }
 .assignedHeadersContainer tr {
+  height: 100%;
+  width: 100%;
   border-bottom: 2px solid rgb(223, 225, 230);
 }
 
@@ -1394,13 +1442,13 @@ CSS for all the AssignedToMe page below here
 }
 
 .assignedHeadersContainer th:nth-child(1) {
-  width: 2%;
+  width: 7%;
 }
 .assignedHeadersContainer th:nth-child(2) {
   width: 8%;
 }
 .assignedHeadersContainer th:nth-child(3) {
-  width: 55%;
+  width: 50%;
 }
 .assignedHeadersContainer th:nth-child(4) {
   width: 15%;
@@ -1416,13 +1464,13 @@ CSS for all the AssignedToMe page below here
 }
 
 .assignedBody td:nth-child(1) {
-  width: 2%;
+  width: 7%;
 }
 .assignedBody td:nth-child(2) {
   width: 8%;
 }
 .assignedBody td:nth-child(3) {
-  width: 55%;
+  width: 50%;
 }
 .assignedBody td:nth-child(4) {
   width: 15%;

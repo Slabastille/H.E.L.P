@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, { useEffect } from 'react';
 import ReporterPastTickets from './ReporterPastTickets';
 import ClinicianStatus from './ClinicianStatus';
 import TicketForm from '../CreateIssue Page/TicketForm/TicketForm';
@@ -18,8 +18,7 @@ const MSRequestPage = () => {
   //   };
   // }, []);
   return (
-    <div className='pageContainer'>
-
+    <div className="pageContainer">
       <div className="request-container">
         <div className="request-left-box">
           <div className="request-left-box-container">
@@ -37,7 +36,7 @@ const MSRequestPage = () => {
         </div>
       </div>
     </div>
-  )
-} 
+  );
+};
 
 export default MSRequestPage;

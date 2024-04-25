@@ -5,19 +5,18 @@ import HelpContext from '../../context/HelpContext';
 function AssignedToMeQueues() {
   const { assignedIssues } = useContext(HelpContext);
   const { assignedSupplyIssues, setAssignedSupplyIssues } = useContext(HelpContext);
-
   const { currentAssignedTable, setCurrentAssignedTable } = useContext(HelpContext);
 
+  //Sets the assignedSupplyIssues
   useEffect(() => {
-    const supplyIssues = assignedIssues.filter(
-      (issue) => issue.fields.summary.startsWith('New Supply Request For:') === true
-    );
+    const supplyIssues = assignedSupplyIssues.filter((issue) => issue.fields.summary.startsWith('New Supply Request For:') === true);
     setAssignedSupplyIssues(supplyIssues);
-  }, [assignedIssues]);
-  useEffect(() => {
-    console.log('Here are the assigned supply issues');
-    console.log(assignedSupplyIssues);
-  }, [assignedSupplyIssues]);
+  }, []);
+
+  // useEffect(() => {
+  //   console.log('Here are the assigned supply issues');
+  //   console.log(assignedSupplyIssues);
+  // }, []);
 
   // if (assignedSupplyIssues.length > 0) {
   //   //     history.push('/supplyPage');
@@ -40,7 +39,7 @@ function AssignedToMeQueues() {
           className={`assignedToMeAllQueueTitles
           ${currentAssignedTable === 1 ? 'assignedToMeCurrentQueue' : ''}`}
         >
-          <div className='assignedToMeAllQueueTitleHeaders' >All Assigned</div>
+          <div className="assignedToMeAllQueueTitleHeaders">All Assigned</div>
           <div className="assignedQueueLength">{assignedIssues.length || 0}</div>
         </div>
         <div
@@ -48,7 +47,7 @@ function AssignedToMeQueues() {
           className={`assignedToMeAllQueueTitles
           ${currentAssignedTable === 2 ? 'assignedToMeCurrentQueue' : ''}`}
         >
-          <div className='assignedToMeAllQueueTitleHeaders'>Assigned Supply</div>
+          <div className="assignedToMeAllQueueTitleHeaders">Assigned Supply</div>
           <div className="assignedQueueLength">{assignedSupplyIssues.length || 0}</div>
         </div>
         <div
@@ -56,7 +55,7 @@ function AssignedToMeQueues() {
           className={`assignedToMeAllQueueTitles
           ${currentAssignedTable === 3 ? 'assignedToMeCurrentQueue' : ''}`}
         >
-          <div className='assignedToMeAllQueueTitleHeaders'>All Assigned SLA</div>
+          <div className="assignedToMeAllQueueTitleHeaders">All Assigned SLA</div>
           <div className="assignedQueueLength">{assignedIssues.length || 0}</div>
         </div>
       </div>
