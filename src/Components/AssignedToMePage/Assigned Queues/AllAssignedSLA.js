@@ -4,8 +4,7 @@ import createAssignedSlaRows from './CreateAssignedSlaRows';
 import extractDate from '../../Ticket Tables/extractDate';
 import extractTime from '../../Ticket Tables/extractTime';
 const AllAssignedSLA = () => {
-  const { assignedIssues } = useContext(HelpContext);
-  const slaAssignedIssues = [...assignedIssues];
+  const { slaAssignedIssues } = useContext(HelpContext);
 
   return (
     <table className="assignedToMeTable">
@@ -80,7 +79,7 @@ const AllAssignedSLA = () => {
       </thead>
 
       <tbody className="assignedBody">
-        {assignedIssues.map((value) => (
+        {slaAssignedIssues.map((value) => (
           <tr key={value.key}>
             <td>
               <a>

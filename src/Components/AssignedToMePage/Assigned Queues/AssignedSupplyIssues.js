@@ -1,19 +1,31 @@
 import React, { useContext, useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import HelpContext from '../../../context/HelpContext';
 import createAssignedSupplyRows from './CreateAssignedSupplyRows';
 import extractDate from '../../Ticket Tables/extractDate';
 import extractTime from '../../Ticket Tables/extractTime';
+import extractValues from '../SupplyPage/supplyTranslator';
 
 const AssignedSupplyIssues = () => {
-  const { assignedIssues, setAssignedIssues } = useContext(HelpContext);
-  const { assignedSupplyIssues, setAssignedSupplyIssues } = useContext(HelpContext);
-  const { loading, setLoading } = useState(false);
+  const { supplyAssignedIssues, setSupplyAssignedIssues } = useContext(HelpContext);
+  const { supplyreporter, setSupplyReporter } = useContext(HelpContext);
+  const { loading, setLoading } = useState(true);
+  const history = useHistory();
+  useEffect(() => {
+    console.log(supplyAssignedIssues);
+  }),
+    [supplyAssignedIssues];
 
-  if (loading) {
-    return <div className="assignedToMe">Loading...</div>;
-  }
-
-  return (
+  const fulfillRequest = (key) => {
+    const issue = supplyAssignedIssues.find((item) => item.key === key);
+    const supplyTicketInfo = issue.fields.description;
+    const infoValues = extractValues(supplyTicketInfo);
+    setSupplyReporter({ name: infoValues.Name, email: infoValues.Email, phone: infoValues.PhoneNumber, npi: infoValues.Npi });
+    history.push(`/fulfill-request/${key}/preview`);
+  };
+  return loading ? (
+    <div>Loading...</div>
+  ) : (
     <table className="assignedToMeTable">
       <thead className="assignedHeadersContainer">
         <tr>
@@ -91,11 +103,11 @@ const AssignedSupplyIssues = () => {
       </thead>
 
       <tbody className="assignedBody">
-        {assignedSupplyIssues.map((value) => (
+        {supplyAssignedIssues.map((value) => (
           <tr key={value.key}>
             <td>
               <a>
-                <input type="button" onClick={() => alert('Hello World!')} value="Fulfill" />
+                <input type="button" onClick={() => fulfillRequest(value.key)} value="Fulfill" />
               </a>
             </td>
             <td>

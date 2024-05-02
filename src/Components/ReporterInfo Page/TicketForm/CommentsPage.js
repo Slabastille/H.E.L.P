@@ -173,7 +173,7 @@ const CommentsPage = () => {
       });
     }
     await resolveIssue(e);
-    history.push('/createIssue');
+    history.push('/reporterInfo');
   };
   useEffect(() => {
     console.log('resolved service level', resolvedServiceLevel);
@@ -337,7 +337,7 @@ const CommentsPage = () => {
             </div>
 
             <div className="ticketFormButtonContainer">
-              <div className="ticketFormSecondButton" onClick={() => history.push('/createIssue')}>
+              <div className="ticketFormSecondButton" onClick={() => history.push('/reporterInfo')}>
                 Cancel
               </div>
 

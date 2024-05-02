@@ -11,8 +11,6 @@ const ReporterInfo = () => {
   const history = useHistory();
   const { setCurrentPage } = useContext(HelpContext);
   const { reporter, setReporter } = useContext(HelpContext);
-  const { setShowSupplyRequest } = useContext(HelpContext);
-  const { requestType, setRequestType } = useContext(HelpContext);
 
   //Updates the current page for the header subcomponent
   useEffect(() => {
@@ -24,22 +22,8 @@ const ReporterInfo = () => {
     setReporter({ ...reporter, [field]: event.target.value });
   };
 
-  const selectChange = (event) => {
-    setRequestType(event.target.value);
-  };
-
-  const handleClick = (event) => {
-    event.preventDefault();
-    if (requestType === 'Support Request') {
-      history.push('/ticketForm');
-    } else if (requestType === 'Supply Request') {
-      setShowSupplyRequest(true);
-      history.push('/ticketForm');
-    } else {
-      history.push('/ticketForm');
-
-      //window.alert('Choose a request Type');
-    }
+  const handleClick = () => {
+    history.push('/ticketForm');
   };
 
   return (
@@ -58,25 +42,17 @@ const ReporterInfo = () => {
               <input className="clinicianInfo" onChange={(event) => handleChange('name', event)} />
             </div>
             <div className="clinicianInfoContainer">
-              <div className="clinicianInfoTypes"> Reporter phone </div>
-              <input className="clinicianInfo" onChange={(event) => handleChange('phone', event)} />
-            </div>
-            <div className="clinicianInfoContainer">
               <div className="clinicianInfoTypes"> Reporter npi </div>
               <input className="clinicianInfo" onChange={(event) => handleChange('npi', event)} />
             </div>
             <div className="clinicianInfoContainer">
-              <div className="clinicianInfoTypes"> Reporter email </div>
-              <input className="clinicianInfo" onChange={(event) => handleChange('email', event)} />
+              <div className="clinicianInfoTypes"> Reporter phone </div>
+              <input className="clinicianInfo" onChange={(event) => handleChange('phone', event)} />
             </div>
 
             <div className="clinicianInfoContainer">
-              <div className="clinicianInfoTypes">Choose a Request Type</div>
-              <select className="clinicianRequestType" onChange={selectChange} type="select">
-                <option value={''}></option>
-                <option value={'Support Request'}>Support Request</option>
-                <option value={'Supply Request'}>Supply Request</option>
-              </select>
+              <div className="clinicianInfoTypes"> Reporter email </div>
+              <input className="clinicianInfo" onChange={(event) => handleChange('email', event)} />
             </div>
 
             <button onClick={handleClick} className="clinicianButton" type="submit">

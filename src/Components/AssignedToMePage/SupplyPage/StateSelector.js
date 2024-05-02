@@ -59,6 +59,8 @@ const options = usStates.map((state) => ({
 }));
 
 function StateSelector({ name, onChange, defaultValue }) {
+  // console.log('default value');
+  // console.log(defaultValue);
   const defaultOption = options.find((option) => option.value === defaultValue);
   const customStyles = {
     option: (provided, state) => ({
@@ -78,15 +80,7 @@ function StateSelector({ name, onChange, defaultValue }) {
     onChange(event);
   };
 
-  return (
-    <Select
-      options={options}
-      styles={customStyles}
-      name={name}
-      onChange={handleChange}
-      defaultValue={defaultOption}
-    />
-  );
+  return <Select className="stateSelector" options={options} styles={customStyles} name={name} onChange={handleChange} defaultValue={defaultOption} />;
 }
 
 export default StateSelector;

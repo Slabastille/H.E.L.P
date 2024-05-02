@@ -4,27 +4,9 @@ import HelpContext from '../../context/HelpContext';
 
 function AssignedToMeQueues() {
   const { assignedIssues } = useContext(HelpContext);
-  const { assignedSupplyIssues, setAssignedSupplyIssues } = useContext(HelpContext);
+  const { supplyAssignedIssues, setSupplyAssignedIssues } = useContext(HelpContext);
+  const { slaAssignedIssues, setSlaAssignedIssues } = useContext(HelpContext);
   const { currentAssignedTable, setCurrentAssignedTable } = useContext(HelpContext);
-
-  //Sets the assignedSupplyIssues
-  useEffect(() => {
-    const supplyIssues = assignedSupplyIssues.filter((issue) => issue.fields.summary.startsWith('New Supply Request For:') === true);
-    setAssignedSupplyIssues(supplyIssues);
-  }, []);
-
-  // useEffect(() => {
-  //   console.log('Here are the assigned supply issues');
-  //   console.log(assignedSupplyIssues);
-  // }, []);
-
-  // if (assignedSupplyIssues.length > 0) {
-  //   //     history.push('/supplyPage');
-  //   //   } else {
-  //   //     alert('You have no supply requests assigned to you');
-  // }
-
-  // <div onClick={setSupplies}>Supply Request Page</div>
 
   useEffect(() => {
     console.log(currentAssignedTable);
@@ -48,7 +30,7 @@ function AssignedToMeQueues() {
           ${currentAssignedTable === 2 ? 'assignedToMeCurrentQueue' : ''}`}
         >
           <div className="assignedToMeAllQueueTitleHeaders">Assigned Supply</div>
-          <div className="assignedQueueLength">{assignedSupplyIssues.length || 0}</div>
+          <div className="assignedQueueLength">{supplyAssignedIssues.length || 0}</div>
         </div>
         <div
           onClick={() => setCurrentAssignedTable(3)}
@@ -56,7 +38,7 @@ function AssignedToMeQueues() {
           ${currentAssignedTable === 3 ? 'assignedToMeCurrentQueue' : ''}`}
         >
           <div className="assignedToMeAllQueueTitleHeaders">All Assigned SLA</div>
-          <div className="assignedQueueLength">{assignedIssues.length || 0}</div>
+          <div className="assignedQueueLength">{slaAssignedIssues.length || 0}</div>
         </div>
       </div>
     </div>

@@ -7,15 +7,6 @@ import extractDate from '../../Ticket Tables/extractDate';
 import extractTime from '../../Ticket Tables/extractTime';
 
 const AllAssignedIssues = () => {
-  const handleSort2 = (key) => {
-    setSortConfigAllAssigned((prevState) => {
-      let direction = 'ascending';
-      if (prevState.key === key && prevState.direction === 'ascending') {
-        direction = 'descending';
-      }
-      return { key, direction };
-    });
-  };
   const { assignedIssues, setAssignedIssues } = useContext(HelpContext);
   const [sortConfigAllAssigned, setSortConfigAllAssigned] = useState({
     key: 'key',
@@ -31,12 +22,13 @@ const AllAssignedIssues = () => {
     let sortedassignedIssues = tableSorter([...assignedIssues], sortConfigAllAssigned.key, sortConfigAllAssigned.direction);
     setAssignedIssues(sortedassignedIssues);
   }, [sortConfigAllAssigned]);
+
   return (
     <table className="assignedToMeTable">
       <thead className="assignedHeadersContainer">
         <tr>
           <th>
-            <input type="checkbox" disabled="true" />
+            <input type="checkbox" disabled={true} />
           </th>
           <th>
             <div>
@@ -102,7 +94,7 @@ const AllAssignedIssues = () => {
           <tr key={value.key}>
             <td>
               <a>
-                <input type="checkbox" disabled="true" />
+                <input type="checkbox" disabled={true} />
               </a>
             </td>
             <td>

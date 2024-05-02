@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Select from 'react-select';
 
 const supplies = [
@@ -37,50 +37,40 @@ const matchSupplies = (arr) => {
       newArr.push({ value: 'SH205: Cable - Lightning USB-C to USB-C' });
     }
     if (i === 'iPad Return Label') {
-      newArr.push(
-        { value: 'SH002: Shipping - Return Box iPad' },
-        { value: 'SH011: Shipping - Return Label iPad - Physical in Box' }
-      );
+      newArr.push({ value: 'SH002: Shipping - Return Box iPad' }, { value: 'SH011: Shipping - Return Label iPad - Physical in Box' });
     }
   }
   return newArr;
 };
-const handleChange1 = (newValue) => {
-  console.log(newValue);
-};
+
 function providerSupplies({ name, onChange, defaultValue }) {
-  const defaultSupplies = matchSupplies(defaultValue);
-  const customStyles = {
-    option: (provided, state) => ({
-      ...provided,
-      color: state.isFocused ? 'white' : 'black',
-      backgroundColor: state.isFocused ? 'rgb(100, 89, 245)' : 'white',
-      padding: 20,
-    }),
-  };
-  console.log('defaultValue');
-  console.log(defaultSupplies);
+  const [defaultSupplies, setDefaultSupplies] = useState(null);
+
+  useEffect(() => {
+    if (defaultValue) {
+      setDefaultSupplies(matchSupplies(defaultValue));
+    }
+  }, [defaultValue]);
+  // const customStyles = {
+  //   option: (provided, state) => ({
+  //     ...provided,
+  //     color: state.isFocused ? 'white' : 'black',
+  //     backgroundColor: state.isFocused ? 'rgb(100, 89, 245)' : 'white',
+  //     padding: 20,
+  //   }),
+  // };
 
   const handleChange = (selectedOptions) => {
+    selectedOptions = Array.isArray(selectedOptions) ? selectedOptions : [selectedOptions];
     const event = {
       target: {
         name: name,
-        value: selectedOptions
-          ? selectedOptions.map((option) => ({ value: option.value }))
-          : [],
+        value: selectedOptions ? selectedOptions.map((option) => ({ value: option.value })) : [],
       },
     };
     onChange(event);
   };
-  return (
-    <Select
-      options={options}
-      isMulti
-      styles={customStyles}
-      defaultValue={defaultSupplies}
-      onChange={handleChange}
-    />
-  );
+  return <Select className="stateSelector" options={options} defaultValue={defaultSupplies} onChange={handleChange} isMulti />;
 }
-
+// isMulti styles={customStyles}
 export default providerSupplies;

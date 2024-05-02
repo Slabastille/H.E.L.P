@@ -19,7 +19,7 @@ const TicketForm = () => {
 
   //Variables for the api body
   const [summary, setSummary] = useState('');
-  const [issueType, setIssueType] = useState('Service Request');
+  const { issueType, setIssueType } = useContext(HelpContext);
   const [description, setDescription] = useState('');
   const { issueSupplies, setIssueSupplies } = useContext(HelpContext);
   const [verifiedAssets, setVerifiedAssets] = useState('');
@@ -30,17 +30,6 @@ const TicketForm = () => {
   const [loading, setLoading] = useState(false);
   const { currentRequest, setCurrentRequest } = useContext(HelpContext);
   const { linkedRequests, setLinkedRequests } = useContext(HelpContext);
-
-  //Shows the supply request form if true
-  const { showSupplyRequest, setShowSupplyRequest } = useContext(HelpContext);
-  //Updates the showSupplyRequest state based on the request type
-  useEffect(() => {
-    if (issueSupplies === false) {
-      setShowSupplyRequest(false);
-    } else if (issueSupplies === true) {
-      setShowSupplyRequest(true);
-    }
-  }, [issueSupplies]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -85,7 +74,7 @@ const TicketForm = () => {
   }, [issueType]);
 
   return (
-    <div className="ticketContainer">
+    <div className="request-left">
       <div className="ticketFormPage">
         {!loading && currentPage === 1 && (
           <div className="currentTicketForm">
@@ -152,7 +141,7 @@ const TicketForm = () => {
               </div>
 
               <div className="ticketFormButtonContainer">
-                <div className="ticketFormSecondButton" onClick={() => history.push('/createIssue')}>
+                <div className="ticketFormSecondButton" onClick={() => history.push('/reporterInfo')}>
                   Cancel
                 </div>
 

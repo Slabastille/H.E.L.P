@@ -1,5 +1,5 @@
 import React from 'react';
-import AssignedMs from '../AssignedToMe Page/AssignedMs';
+import AssignedMs from '../AssignedToMePage/AssignedMs';
 import LandingStats from './LandingStats';
 import MsTriage from './MsTriage';
 import DsTriage from './DsTriage';
