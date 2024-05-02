@@ -12,19 +12,11 @@ const HeaderSub = () => {
           <div>Home</div>
         </Link>
 
-        <Link
-          to="/assignedToMe"
-          className="nav-link"
-          style={currentPage === 2 ? { borderBottom: '7px solid #c4d600' } : {}}
-        >
+        <Link to="/assignedToMe" className="nav-link" style={currentPage === 2 ? { borderBottom: '7px solid #c4d600' } : {}}>
           <div>My Issues</div>
         </Link>
 
-        <Link
-          to="/createIssue"
-          className="nav-link"
-          style={currentPage === 3 ? { borderBottom: '7px solid #c4d600' } : {}}
-        >
+        <Link to="/reporterInfo" className="nav-link" style={currentPage === 3 ? { borderBottom: '7px solid #c4d600' } : {}}>
           <div>Create Issue</div>
         </Link>
       </div>

@@ -1,16 +1,16 @@
 import React, { useState } from 'react';
-import TicketForm from './Components/CreateIssue Page/TicketForm/TicketForm';
-import ReporterInfo from './Components/CreateIssue Page/reporterInfo';
+import TicketForm from './Components/ReporterInfo Page/TicketForm/TicketForm';
+import ReporterInfo from './Components/ReporterInfo Page/ReporterInfo';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { HelpProvider } from './context/HelpContext';
-import SupplyForm from './SupplyForm';
 import Header from './Components/Header/Header';
-import Landing from './Components/Landing Page/Landing';
+import Landing from './Components/LandingPage/Landing';
 import MSRequestPage from './Components/Request Page/serviceRequest';
-import AssignedToMe from './Components/AssignedToMe Page/AssignedToMe';
-import SupplyPage from './Components/AssignedToMe Page/SupplyPage/SupplyPage';
-import SupplyPreviewPage from './Components/AssignedToMe Page/SupplyPage/SupplyPreviewPage';
+import AssignedToMe from './Components/AssignedToMePage/AssignedToMe';
+import SupplyPage from './Components/AssignedToMePage/SupplyPage/SupplyFulfiller/SupplyPage';
+import SupplyPreviewPage from './Components/AssignedToMePage/SupplyPage/SupplyFulfiller/SupplyPreviewPage';
+import SupplyRequestFulfillerPage from './Components/AssignedToMePage/SupplyPage/SupplyFulfiller/SupplyRequestFulfillerPage';
 
 const App = () => {
   return (
@@ -19,17 +19,19 @@ const App = () => {
         <Header />
         <div id="container">
           <Switch>
-            <Route exact path="/" component={Landing} />
+            {/* Landing Page below */}
+            <Route exact path="/" component={AssignedToMe} />
             <Route path="/landing" component={Landing} />
+            {/* Landing Page above */}
+            {/* Assigned Issues below */}
             <Route path="/assignedToMe" component={AssignedToMe} />
-            <Route path="/createIssue" component={ReporterInfo} />
+            <Route path="/fulfill-request/:key" component={SupplyRequestFulfillerPage} />
+            {/* Assigned Issues above */}
+            <Route path="/reporterInfo" component={ReporterInfo} />
             <Route path="/ticketForm" component={MSRequestPage} />
-            {/* <Route path="/createIssue" component={MSRequestPage} /> */}
 
-            <Route path="/supplyPage" component={SupplyPage} />
-            <Route path="/supplyPreviewPage" component={SupplyPreviewPage} />
-            {/* <Route path="/MSRequestPage" component={MSRequestPage} />
-            <Route path="/supplyForm" component={SupplyForm} /> */}
+            {/* <Route path="/supplyPage" component={SupplyPage} /> */}
+            {/* <Route path="/supplyPreviewPage" component={SupplyPreviewPage} /> */}
           </Switch>
           {/* WORK ON FOOTER LATER<div className="footer">Footer this was created by Samuel</div> */}
         </div>

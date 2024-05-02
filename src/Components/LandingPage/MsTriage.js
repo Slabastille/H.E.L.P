@@ -5,11 +5,10 @@ import tableSorter from '../Ticket Tables/TableSorter/tableSorter';
 import handleSort from '../Ticket Tables/handleSort';
 import extractDate from '../Ticket Tables/extractDate';
 import extractTime from '../Ticket Tables/extractTime';
-
-const DsTriage = () => {
+const MsTriage = () => {
+  const [msTriage, setMsTriage] = useState([]);
   const [loading, setLoading] = useState(false);
-  const { dsTriage, setDsTriage } = useContext(HelpContext);
-  const [sortConfigDs, setSortConfigDs] = useState({
+  const [sortConfigMs, setSortConfigMs] = useState({
     key: '',
     direction: '',
   });
@@ -19,7 +18,7 @@ const DsTriage = () => {
   const handleHeaderCheckboxClick = () => {
     setIsAllChecked(!isAllChecked);
     if (!isAllChecked) {
-      setSelected(dsTriage.map((item) => item.key));
+      setSelected(msTriage.map((item) => item.key));
     } else {
       setSelected([]);
     }
@@ -37,9 +36,9 @@ const DsTriage = () => {
     setLoading(true);
     try {
       const response = await axios.post('http://localhost:3001/findTickets', {
-        jql: "project = 'TI' AND status in (Created, 'In Progress', Reopened, 'Waiting for Customer', 'Waiting For Support', Open, 'Waiting for approval') AND assignee is EMPTY AND (labels is EMPTY OR labels != ServiceDesk)",
+        jql: "summary !~ 'WorkspaceOne iPad Transition' AND status in (Created, 'In Progress', Reopened, 'Waiting for Customer', 'Waiting For Support', Open, 'Waiting for approval', 'In Development') AND labels in (ServiceDesk, TheLastMile) AND assignee in (EMPTY)",
       });
-      setDsTriage(response.data);
+      setMsTriage(response.data);
     } catch (error) {
       console.error('Error retrieving tickets:', error);
     } finally {
@@ -60,16 +59,16 @@ const DsTriage = () => {
   }, []);
 
   useEffect(() => {
-    // console.log('DsTriage');
-    // console.log(dsTriage);
-    // console.log(dsTriage.length);
-  }, [dsTriage]);
+    // console.log('MsTriage');
+    // console.log(msTriage);
+    // console.log(msTriage.length);
+  }, [msTriage]);
 
   useEffect(() => {
-    let sortedDsTriage = tableSorter([...dsTriage], sortConfigDs.key, sortConfigDs.direction);
-    console.log(sortConfigDs.key);
-    setDsTriage(sortedDsTriage);
-  }, [sortConfigDs]);
+    let sortedMsTriage = tableSorter([...msTriage], sortConfigMs.key, sortConfigMs.direction);
+    console.log(sortConfigMs.key);
+    setMsTriage(sortedMsTriage);
+  }, [sortConfigMs]);
 
   if (loading) {
     return (
@@ -82,8 +81,8 @@ const DsTriage = () => {
   return (
     <div className="triage-container">
       <div className="triage-ticket-table-title">
-        <div>DS Triage</div>
-        <div>{dsTriage.length}</div>
+        <div>MS Triage</div>
+        <div>{msTriage.length}</div>
       </div>
       <div className="triage-ticket-table-container">
         <table className="triage-ticket-table">
@@ -97,56 +96,56 @@ const DsTriage = () => {
                 </div>
               </th>
               <th style={{ width: '8%' }}>
-                <div className="triage-ticket-table-headerItems" onClick={() => handleSort('key', setSortConfigDs)}>
+                <div className="triage-ticket-table-headerItems" onClick={() => handleSort('key', setSortConfigMs)}>
                   <div> Key </div>
                   <div>
-                    {sortConfigDs.key === 'key' && sortConfigDs.direction === 'ascending' && <img className="triage-ticket-table-headerItemsImg" src="/img/upArrow.png" alt="^" />}
-                    {sortConfigDs.key === 'key' && sortConfigDs.direction === 'descending' && <img className="triage-ticket-table-headerItemsImg" src="/img/downArrow.png" alt="^" />}
+                    {sortConfigMs.key === 'key' && sortConfigMs.direction === 'ascending' && <img className="triage-ticket-table-headerItemsImg" src="/img/upArrow.png" alt="^" />}
+                    {sortConfigMs.key === 'key' && sortConfigMs.direction === 'descending' && <img className="triage-ticket-table-headerItemsImg" src="/img/downArrow.png" alt="^" />}
                   </div>
                 </div>
               </th>
               <th style={{ width: '40%' }}>
-                <div className="triage-ticket-table-headerItems" onClick={() => handleSort('fields.summary', setSortConfigDs)}>
+                <div className="triage-ticket-table-headerItems" onClick={() => handleSort('fields.summary', setSortConfigMs)}>
                   <div> Summary </div>
                   <div>
-                    {sortConfigDs.key === 'fields.summary' && sortConfigDs.direction === 'ascending' && <img className="triage-ticket-table-headerItemsImg" src="/img/upArrow.png" alt="^" />}
-                    {sortConfigDs.key === 'fields.summary' && sortConfigDs.direction === 'descending' && <img className="triage-ticket-table-headerItemsImg" src="/img/downArrow.png" alt="^" />}
+                    {sortConfigMs.key === 'fields.summary' && sortConfigMs.direction === 'ascending' && <img className="triage-ticket-table-headerItemsImg" src="/img/upArrow.png" alt="^" />}
+                    {sortConfigMs.key === 'fields.summary' && sortConfigMs.direction === 'descending' && <img className="triage-ticket-table-headerItemsImg" src="/img/downArrow.png" alt="^" />}
                   </div>
                 </div>
               </th>
               <th style={{ width: '20%' }}>
-                <div className="triage-ticket-table-headerItems" onClick={() => handleSort('fields.reporter.name', setSortConfigDs)}>
+                <div className="triage-ticket-table-headerItems" onClick={() => handleSort('fields.reporter.name', setSortConfigMs)}>
                   <div>Reporter</div>
                   <div>
-                    {sortConfigDs.key === 'fields.reporter.name' && sortConfigDs.direction === 'ascending' && <img className="triage-ticket-table-headerItemsImg" src="/img/upArrow.png" alt="^" />}
-                    {sortConfigDs.key === 'fields.reporter.name' && sortConfigDs.direction === 'descending' && <img className="triage-ticket-table-headerItemsImg" src="/img/downArrow.png" alt="^" />}
+                    {sortConfigMs.key === 'fields.reporter.name' && sortConfigMs.direction === 'ascending' && <img className="triage-ticket-table-headerItemsImg" src="/img/upArrow.png" alt="^" />}
+                    {sortConfigMs.key === 'fields.reporter.name' && sortConfigMs.direction === 'descending' && <img className="triage-ticket-table-headerItemsImg" src="/img/downArrow.png" alt="^" />}
                   </div>
                 </div>
               </th>
               <th style={{ width: '14%' }}>
-                <div className="triage-ticket-table-headerItems" onClick={() => handleSort('fields.status.name', setSortConfigDs)}>
+                <div className="triage-ticket-table-headerItems" onClick={() => handleSort('fields.status.name', setSortConfigMs)}>
                   <div> Status </div>
                   <div>
-                    {sortConfigDs.key === 'fields.status.name' && sortConfigDs.direction === 'ascending' && <img className="triage-ticket-table-headerItemsImg" src="/img/upArrow.png" alt="^" />}
-                    {sortConfigDs.key === 'fields.status.name' && sortConfigDs.direction === 'descending' && <img className="triage-ticket-table-headerItemsImg" src="/img/downArrow.png" alt="^" />}
+                    {sortConfigMs.key === 'fields.status.name' && sortConfigMs.direction === 'ascending' && <img className="triage-ticket-table-headerItemsImg" src="/img/upArrow.png" alt="^" />}
+                    {sortConfigMs.key === 'fields.status.name' && sortConfigMs.direction === 'descending' && <img className="triage-ticket-table-headerItemsImg" src="/img/downArrow.png" alt="^" />}
                   </div>
                 </div>
               </th>
               <th style={{ width: '8%' }}>
-                <div className="triage-ticket-table-headerItems" onClick={() => handleSort('fields.created', setSortConfigDs)}>
+                <div className="triage-ticket-table-headerItems" onClick={() => handleSort('fields.created', setSortConfigMs)}>
                   <div> Created </div>
                   <div>
-                    {sortConfigDs.key === 'fields.created' && sortConfigDs.direction === 'ascending' && <img className="triage-ticket-table-headerItemsImg" src="/img/upArrow.png" alt="^" />}
-                    {sortConfigDs.key === 'fields.created' && sortConfigDs.direction === 'descending' && <img className="triage-ticket-table-headerItemsImg" src="/img/downArrow.png" alt="^" />}
+                    {sortConfigMs.key === 'fields.created' && sortConfigMs.direction === 'ascending' && <img className="triage-ticket-table-headerItemsImg" src="/img/upArrow.png" alt="^" />}
+                    {sortConfigMs.key === 'fields.created' && sortConfigMs.direction === 'descending' && <img className="triage-ticket-table-headerItemsImg" src="/img/downArrow.png" alt="^" />}
                   </div>
                 </div>
               </th>
               <th style={{ width: '8%' }}>
-                <div className="triage-ticket-table-headerItems" onClick={() => handleSort('fields.updated', setSortConfigDs)}>
+                <div className="triage-ticket-table-headerItems" onClick={() => handleSort('fields.updated', setSortConfigMs)}>
                   <div> Updated </div>
                   <div>
-                    {sortConfigDs.key === 'fields.updated' && sortConfigDs.direction === 'ascending' && <img className="triage-ticket-table-headerItemsImg" src="/img/upArrow.png" alt="^" />}
-                    {sortConfigDs.key === 'fields.updated' && sortConfigDs.direction === 'descending' && <img className="triage-ticket-table-headerItemsImg" src="/img/downArrow.png" alt="^" />}
+                    {sortConfigMs.key === 'fields.updated' && sortConfigMs.direction === 'ascending' && <img className="triage-ticket-table-headerItemsImg" src="/img/upArrow.png" alt="^" />}
+                    {sortConfigMs.key === 'fields.updated' && sortConfigMs.direction === 'descending' && <img className="triage-ticket-table-headerItemsImg" src="/img/downArrow.png" alt="^" />}
                   </div>
                 </div>
               </th>
@@ -154,7 +153,7 @@ const DsTriage = () => {
           </thead>
 
           <tbody className="triage-ticket-table-body">
-            {dsTriage.map((value) => (
+            {msTriage.map((value) => (
               <tr key={value.key}>
                 <td style={{ width: '2%' }}>
                   <a>
@@ -187,4 +186,4 @@ const DsTriage = () => {
   );
 };
 
-export default DsTriage;
+export default MsTriage;

@@ -1,16 +1,16 @@
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import React, { useState, useEffect, useContext } from 'react';
-import HelpContext from '../../context/HelpContext';
-import extractDate from '../Ticket Tables/extractDate';
-import handleSort from '../Ticket Tables/handleSort';
-import tableSorter from '../Ticket Tables/TableSorter/tableSorter';
+import HelpContext from '../../../../context/HelpContext';
+import extractDate from '../../../Ticket Tables/extractDate';
+import handleSort from '../../../Ticket Tables/handleSort';
+import tableSorter from '../../../Ticket Tables/TableSorter/tableSorter';
 
-const ReporterPastTickets = () => {
+const SupplyReporterPastIssues = () => {
   const [loading, setLoading] = useState(false);
-  const { reporter, setReporter } = useContext(HelpContext);
-  const { reporterPastIssues, setReporterPastIssues } = useContext(HelpContext);
-  const { linkedRequests, setLinkedRequests } = useContext(HelpContext);
+  const { supplyReporter } = useContext(HelpContext);
+  const { supplyReporterPastIssues, setSupplyReporterPastIssues } = useContext(HelpContext);
+  const { linkedSupplyRequests, setLinkedSupplyRequests } = useContext(HelpContext);
   const [clickedButtons, setClickedButtons] = useState({});
   const [sortConfigReporter, setSortConfigReporter] = useState({
     key: '',
@@ -19,7 +19,7 @@ const ReporterPastTickets = () => {
 
   const toggleLinkedRequest = (key) => {
     setClickedButtons((prev) => ({ ...prev, [key]: !prev[key] }));
-    setLinkedRequests((prevLinkedRequests) => {
+    setLinkedSupplyRequests((prevLinkedRequests) => {
       if (prevLinkedRequests.includes(key)) {
         return prevLinkedRequests.filter((requestKey) => requestKey !== key);
       } else {
@@ -27,18 +27,22 @@ const ReporterPastTickets = () => {
       }
     });
   };
+  useEffect(() => {
+    console.log('supply reporter');
+    console.log(supplyReporter);
+  }, [supplyReporter]);
 
   const retrieveIssues = async () => {
     //e.preventDefault();
-    const reporterEmail = reporter.email;
+    const reporterEmail = supplyReporter.email;
     setLoading(true);
     try {
       const response = await axios.post('http://localhost:3001/findTickets', {
-        //jql: `reporter = '${reporterEmail}' AND project = 'Desktop Support' AND status not in (Canceled, Closed, Done, Resolved, 'Task Complete', 'Task Verified (Accepted)')`,
+        // jql: `reporter = '${reporterEmail}' AND project = 'Desktop Support' AND status not in (Canceled, Closed, Done, Resolved, 'Task Complete', 'Task Verified (Accepted)')`,
         jql: `reporter = '${reporterEmail}' AND project = 'Desktop Support'`,
       });
-      setReporterPastIssues(response.data);
-      setReporter({ name: '', email: '', npi: '' });
+
+      setSupplyReporterPastIssues(response.data);
     } catch (error) {
       console.error('Error retrieving tickets:', error);
     } finally {
@@ -48,30 +52,36 @@ const ReporterPastTickets = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      await retrieveIssues();
+      if (supplyReporter.email !== null && supplyReporter.email !== undefined) {
+        await retrieveIssues();
+      }
     };
     fetchData();
-  }, []);
+  }, [supplyReporter]);
 
-  useEffect(() => {
-    console.log('linked requests below');
-    console.log(linkedRequests);
-  }, [linkedRequests]);
+  //   useEffect(() => {
+  //     console.log('supply reporter past issues below');
+  //     console.log(supplyReporterPastIssues);
+  //   }, [supplyReporterPastIssues]);
+  //   useEffect(() => {
+  //     console.log('linked requests below');
+  //     console.log(linkedRequests);
+  //   }, [linkedRequests]);
 
-  useEffect(() => {
-    let sortedIssues = tableSorter([...reporterPastIssues], sortConfigReporter.key, sortConfigReporter.direction);
-    console.log(sortConfigReporter.key);
-    setReporterPastIssues(sortedIssues);
-  }, [sortConfigReporter]);
+  //   useEffect(() => {
+  //     let sortedIssues = tableSorter([...reporterPastIssues], sortConfigReporter.key, sortConfigReporter.direction);
+  //     console.log(sortConfigReporter.key);
+  //     setReporterPastIssues(sortedIssues);
+  //   }, [sortConfigReporter]);
 
   if (loading) {
     return <div>Loading...</div>;
   }
   return (
-    <div className="reporter-pastTickets">
+    <div className="supplyReporter-pastTickets">
       <div className="reporter-pastTickets-Title">
         <div>Reporter Past Tickets</div>
-        <div>{reporterPastIssues.length}</div>
+        {/* <div>{reporterPastIssues.length}</div> */}
       </div>
 
       <div className="full-ticket-table-container">
@@ -80,64 +90,70 @@ const ReporterPastTickets = () => {
             <tr>
               <th style={{ width: '4%' }}>Link</th>
               <th style={{ width: '8%' }}>
-                <div className="triage-ticket-table-headerItems" onClick={() => handleSort('key', setSortConfigReporter)}>
+                {/* <div className="triage-ticket-table-headerItems" onClick={() => handleSort('key', setSortConfigReporter)}> */}
+                <div className="triage-ticket-table-headerItems">
                   <div> Key </div>
-                  <div>
+                  {/* <div>
                     {sortConfigReporter.key === 'key' && sortConfigReporter.direction === 'ascending' && <img className="triage-ticket-table-headerItemsImg" src="/img/upArrow.png" alt="^" />}
                     {sortConfigReporter.key === 'key' && sortConfigReporter.direction === 'descending' && <img className="triage-ticket-table-headerItemsImg" src="/img/downArrow.png" alt="^" />}
-                  </div>
+                  </div> */}
                 </div>
               </th>
               <th style={{ width: '32%' }}>
-                <div className="triage-ticket-table-headerItems" onClick={() => handleSort('fields.summary', setSortConfigReporter)}>
+                {/* <div className="triage-ticket-table-headerItems" onClick={() => handleSort('fields.summary', setSortConfigReporter)}> */}
+                <div className="triage-ticket-table-headerItems">
                   <div> Summary </div>
-                  <div>
+                  {/* <div>
                     {sortConfigReporter.key === 'fields.summary' && sortConfigReporter.direction === 'ascending' && <img className="triage-ticket-table-headerItemsImg" src="/img/upArrow.png" alt="^" />}
                     {sortConfigReporter.key === 'fields.summary' && sortConfigReporter.direction === 'descending' && <img className="triage-ticket-table-headerItemsImg" src="/img/downArrow.png" alt="^" />}
-                  </div>
+                  </div> */}
                 </div>
               </th>
               <th style={{ width: '20%' }}>
-                <div className="triage-ticket-table-headerItems" onClick={() => handleSort('fields.reporter.name', setSortConfigReporter)}>
+                {/* <div className="triage-ticket-table-headerItems" onClick={() => handleSort('fields.reporter.name', setSortConfigReporter)}> */}
+                <div className="triage-ticket-table-headerItems">
                   <div>Reporter</div>
-                  <div>
+                  {/* <div>
                     {sortConfigReporter.key === 'fields.reporter.name' && sortConfigReporter.direction === 'ascending' && <img className="triage-ticket-table-headerItemsImg" src="/img/upArrow.png" alt="^" />}
                     {sortConfigReporter.key === 'fields.reporter.name' && sortConfigReporter.direction === 'descending' && <img className="triage-ticket-table-headerItemsImg" src="/img/downArrow.png" alt="^" />}
-                  </div>
+                  </div> */}
                 </div>
               </th>
               <th style={{ width: '14%' }}>
-                <div className="triage-ticket-table-headerItems" onClick={() => handleSort('fields.status.name', setSortConfigReporter)}>
+                {/* <div className="triage-ticket-table-headerItems" onClick={() => handleSort('fields.status.name', setSortConfigReporter)}> */}
+                <div className="triage-ticket-table-headerItems">
                   <div> Status </div>
-                  <div>
+                  {/* <div>
                     {sortConfigReporter.key === 'fields.status.name' && sortConfigReporter.direction === 'ascending' && <img className="triage-ticket-table-headerItemsImg" src="/img/upArrow.png" alt="^" />}
                     {sortConfigReporter.key === 'fields.status.name' && sortConfigReporter.direction === 'descending' && <img className="triage-ticket-table-headerItemsImg" src="/img/downArrow.png" alt="^" />}
-                  </div>
+                  </div> */}
                 </div>
               </th>
               <th style={{ width: '8%' }}>
-                <div className="triage-ticket-table-headerItems" onClick={() => handleSort('fields.created', setSortConfigReporter)}>
+                {/* <div className="triage-ticket-table-headerItems" onClick={() => handleSort('fields.created', setSortConfigReporter)}> */}
+                <div className="triage-ticket-table-headerItems">
                   <div> Created </div>
-                  <div>
+                  {/* <div>
                     {sortConfigReporter.key === 'fields.created' && sortConfigReporter.direction === 'ascending' && <img className="triage-ticket-table-headerItemsImg" src="/img/upArrow.png" alt="^" />}
                     {sortConfigReporter.key === 'fields.created' && sortConfigReporter.direction === 'descending' && <img className="triage-ticket-table-headerItemsImg" src="/img/downArrow.png" alt="^" />}
-                  </div>
+                  </div> */}
                 </div>
               </th>
               <th style={{ width: '8%' }}>
-                <div className="triage-ticket-table-headerItems" onClick={() => handleSort('fields.updated', setSortConfigReporter)}>
+                {/* <div className="triage-ticket-table-headerItems" onClick={() => handleSort('fields.updated', setSortConfigReporter)}> */}
+                <div className="triage-ticket-table-headerItems">
                   <div> Updated </div>
-                  <div>
+                  {/* <div>
                     {sortConfigReporter.key === 'fields.updated' && sortConfigReporter.direction === 'ascending' && <img className="triage-ticket-table-headerItemsImg" src="/img/upArrow.png" alt="^" />}
                     {sortConfigReporter.key === 'fields.updated' && sortConfigReporter.direction === 'descending' && <img className="triage-ticket-table-headerItemsImg" src="/img/downArrow.png" alt="^" />}
-                  </div>
+                  </div> */}
                 </div>
               </th>
             </tr>
           </thead>
 
           <tbody className="full-ticket-table-body">
-            {reporterPastIssues.map((value) => {
+            {supplyReporterPastIssues.map((value) => {
               return (
                 <tr key={value.key}>
                   <td style={{ width: '4%' }}>
@@ -170,4 +186,4 @@ const ReporterPastTickets = () => {
   );
 };
 
-export default ReporterPastTickets;
+export default SupplyReporterPastIssues;

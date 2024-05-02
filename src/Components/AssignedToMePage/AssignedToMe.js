@@ -7,15 +7,18 @@ import axios from 'axios';
 
 const AssignedToMe = () => {
   const { assignedIssues, setAssignedIssues } = useContext(HelpContext);
-  const { assignedSupplyIssues, setAssignedSupplyIssues } = useContext(HelpContext);
+  const { supplyAssignedIssues, setSupplyAssignedIssues } = useContext(HelpContext);
+  const { slaAssignedIssues, setSlaAssignedIssues } = useContext(HelpContext);
   const { setCurrentPage } = useContext(HelpContext);
+
   const retrieveIssues = async () => {
     try {
       const response = await axios.post('http://localhost:3001/findTickets', {
         jql: "assignee = 'slabastille@signifyhealth.com' AND project = 'Desktop Support' AND status not in (Closed, Cancelled, Canceled, Done, Resolved, 'Task Complete', 'Task Verified (Accepted)')",
       });
       setAssignedIssues(response.data);
-      setAssignedSupplyIssues(response.data.filter((issue) => issue.fields.summary.startsWith('New Supply Request For:') === true));
+      setSupplyAssignedIssues(response.data.filter((issue) => issue.fields.summary.startsWith('New Supply Request For:') === true));
+      setSlaAssignedIssues(response.data.filter((issue) => !issue.fields.summary.startsWith('New Supply Request For:') === true));
     } catch (error) {
       console.error('Error retrieving tickets:', error);
     }
@@ -30,9 +33,10 @@ const AssignedToMe = () => {
   }, []);
 
   //Print the current assigned issues
-  useEffect(() => {
-    console.log(assignedIssues);
-  }, [assignedIssues]);
+  // useEffect(() => {
+  //   console.log(assignedIssues);
+  // }, [assignedIssues]);
+
   //Set the current page to 2 (for the header)
   useEffect(() => {
     setCurrentPage(2);

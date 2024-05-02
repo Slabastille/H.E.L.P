@@ -27,16 +27,10 @@ function extractValues(str) {
   const Zip = (zipMatch && zipMatch[1]) || '***';
 
   const requestedReturnLabelsMatch = str.match(/RequestedReturnLabels: (.*)\n/);
-  const RequestedReturnLabels = requestedReturnLabelsMatch
-    ? requestedReturnLabelsMatch[1].split(', ')
-    : [];
+  const RequestedReturnLabels = requestedReturnLabelsMatch ? requestedReturnLabelsMatch[1].split(', ') : [];
 
-  const requestedIpadAccessoriesMatch = str.match(
-    /Requested iPad\/Accessories: (.*)\n/
-  );
-  const RequestedIpadAccessories = requestedIpadAccessoriesMatch
-    ? requestedIpadAccessoriesMatch[1].split(', ')
-    : [];
+  const requestedIpadAccessoriesMatch = str.match(/Requested iPad\/Accessories: (.*)\n/);
+  const RequestedIpadAccessories = requestedIpadAccessoriesMatch ? requestedIpadAccessoriesMatch[1].split(', ') : [];
 
   // ... repeat for other fields ...
   const Deliverables = [...RequestedReturnLabels, ...RequestedIpadAccessories];
